@@ -1,0 +1,746 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>About Us | BIC Community Preschool and Kindergarten</title>
+    <meta name="description" content="Learn about BIC Community Preschool and Kindergarten - our history, mission, teachers, values, careers, and church affiliation."/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="canonical" href="https://www.biccommunitypreschool.org/about"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet"/>
+
+    <style>
+        /* =====================================================
+           COLOR RULES:
+           BACKGROUNDS / FILLS  → #F22226 (red) | #FFC21A (yellow) | #2AABE3 (blue)
+           TEXT / FOREGROUND    → #24201F (dark body text)  |  #666665 (secondary/muted text)
+           White (#fff) used for text on colored backgrounds and for card surfaces.
+        ===================================================== */
+        :root {
+            /* Used as BACKGROUNDS and fills */
+            --red:    #F22226;
+            --yellow: #FFC21A;
+            --blue:   #2AABE3;
+
+            /* Used as TEXT colors only */
+            --dark:   #24201F;
+            --gray:   #666665;
+
+            /* Neutrals */
+            --white:      #FFFFFF;
+            --off-white:  #F8F7F5;
+            --border-col: rgba(36,32,31,.1);
+
+            --font-display: 'Fredoka', sans-serif;
+            --font-body:    'Nunito', sans-serif;
+
+            --radius-lg: 22px;
+            --radius-md: 14px;
+            --radius-sm: 8px;
+            --shadow-sm:   0 2px 12px rgba(36,32,31,.08);
+            --shadow-card: 0 6px 28px rgba(36,32,31,.11);
+            --shadow-pop:  0 16px 48px rgba(36,32,31,.16);
+            --max-width:   1200px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); color: var(--dark); background: var(--white); overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+        ul { list-style: none; }
+        button { cursor: pointer; border: none; background: none; font: inherit; }
+        .sr-only { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
+        .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+        .text-center { text-align: center; }
+
+        /* ── BUTTONS ── colored bg fills, white text ── */
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 14px 30px; border-radius: 50px;
+            font-family: var(--font-display); font-size: 1rem; font-weight: 600;
+            border: 2px solid transparent;
+            transition: transform .18s, box-shadow .18s, filter .18s;
+            letter-spacing: .01em;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-pop); filter: brightness(1.08); }
+        .btn-red    { background: var(--red);    color: var(--white); border-color: var(--red);    }
+        .btn-blue   { background: var(--blue);   color: var(--white); border-color: var(--blue);   }
+        .btn-yellow { background: var(--yellow); color: var(--dark);  border-color: var(--yellow); }
+        .btn-white  { background: var(--white);  color: var(--dark);  border-color: var(--white);  }
+        .btn-white:hover { background: var(--off-white); }
+        .btn-outline-white { background: transparent; color: var(--white); border-color: var(--white); }
+        .btn-outline-white:hover { background: var(--white); color: var(--dark); }
+
+        /* ── NAV ── white bg, dark text, dropdown on Programs ── */
+        .site-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: var(--white); border-bottom: 1px solid var(--border-col);
+            box-shadow: var(--shadow-sm);
+        }
+        .nav-inner {
+            max-width: 1600px; margin: 0 auto; padding: 0 32px 0 40px;
+            display: flex; align-items: center; justify-content: space-between;
+            height: 72px; gap: 16px;
+        }
+        @media (max-width: 1200px) { .nav-inner { padding: 0 24px 0 32px; } }
+        @media (max-width: 768px) { .nav-inner { padding: 0 16px 0 20px; } }
+
+        /* Logo — image placeholder on the left */
+        .nav-brand {
+            display: flex; align-items: center; gap: 10px;
+            flex-shrink: 0; text-decoration: none;
+        }
+        .nav-logo-img {
+            height: 56px; width: auto;
+            display: flex; align-items: center; justify-content: center;
+        }
+        /* Placeholder logo box shown until a real image is provided */
+        .nav-logo-placeholder {
+            height: 56px; width: 56px; border-radius: 12px;
+            background: var(--red);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .nav-logo-placeholder svg { width: 30px; height: 30px; }
+        .nav-brand-name { font-family: var(--font-display); font-weight: 700; line-height: 1.15; }
+        .nav-brand-name .l1 { display: block; font-size: 1.15rem; color: var(--dark); }
+        .nav-brand-name .l2 { display: block; font-size: .82rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--gray); }
+
+        /* Center links */
+        .nav-links {
+            display: flex; align-items: center; gap: 0;
+            flex: 1; justify-content: center;
+            padding-top: 8px;
+        }
+        /* Top-level nav item wrapper (needed for dropdown positioning) */
+        .nav-item {
+            position: relative;
+        }
+        .nav-item > a,
+        .nav-item > button {
+            display: flex; align-items: center; gap: 5px;
+            padding: 8px 16px; border-radius: var(--radius-sm);
+            font-weight: 700; font-size: 1.05rem; color: var(--gray);
+            background: none; cursor: pointer;
+            transition: background .15s, color .15s;
+            white-space: nowrap;
+        }
+        .nav-item > a:hover,
+        .nav-item > button:hover {
+            color: var(--red);
+        }
+        .nav-item.open > a,
+        .nav-item.open > button {
+            background: var(--red); color: var(--white);
+        }
+        /* Caret icon */
+        .nav-caret {
+            width: 10px; height: 10px; flex-shrink: 0;
+            transition: transform .2s;
+        }
+        .nav-item.open .nav-caret { transform: rotate(180deg); }
+
+        /* Dropdown panel */
+        .nav-dropdown {
+            display: none;
+            position: absolute; top: calc(100% + 6px); left: 50%;
+            transform: translateX(-50%);
+            background: var(--white);
+            border: 1px solid var(--border-col);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-pop);
+            min-width: 210px;
+            padding: 8px 0;
+            z-index: 200;
+        }
+        .nav-item.open .nav-dropdown { display: block; }
+        .nav-dropdown a {
+            display: block; padding: 9px 18px;
+            font-size: .86rem; font-weight: 700; color: var(--gray);
+            transition: background .12s, color .12s;
+            white-space: nowrap;
+        }
+        .nav-dropdown a:hover { color: var(--red); }
+        /* Thin colored left border for each item on hover */
+        .nav-dropdown li { position: relative; }
+        .nav-dropdown-divider {
+            height: 1px; background: var(--border-col); margin: 6px 12px;
+        }
+
+        /* Right side CTA */
+        .nav-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+
+        /* Mobile toggle */
+        .nav-toggle {
+            display: none; flex-direction: column; gap: 5px;
+            width: 36px; height: 36px; justify-content: center; align-items: center;
+            flex-shrink: 0;
+        }
+        .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--dark); border-radius: 2px; transition: .2s; }
+
+        @media (max-width: 960px) {
+            .nav-links { display: none; }
+            .nav-toggle { display: flex; }
+        }
+
+        /* Mobile nav open state */
+        .nav-links.mobile-open {
+            display: flex; flex-direction: column; align-items: stretch;
+            position: absolute; top: 72px; left: 0; right: 0;
+            background: var(--white);
+            border-top: 1px solid var(--border-col);
+            box-shadow: 0 12px 32px rgba(36,32,31,.12);
+            padding: 12px 0; z-index: 999;
+        }
+        .nav-links.mobile-open .nav-item { width: 100%; }
+        .nav-links.mobile-open .nav-item > a,
+        .nav-links.mobile-open .nav-item > button {
+            width: 100%; border-radius: 0; padding: 12px 24px; justify-content: space-between;
+        }
+        .nav-links.mobile-open .nav-dropdown {
+            position: static; transform: none; box-shadow: none;
+            border: none; border-top: 1px solid var(--border-col);
+            border-radius: 0; min-width: 0;
+            background: var(--off-white); padding: 4px 0;
+        }
+        .nav-links.mobile-open .nav-dropdown a { padding-left: 40px; }
+
+        /* ── ENROLLMENT BANNER ── red background, white text ── */
+        .enrollment-banner {
+            background: var(--red);
+            padding: 10px 24px;
+            text-align: center;
+            margin-top: 72px;
+        }
+        .enrollment-text {
+            color: var(--white);
+            font-weight: 600;
+            font-size: 1.2rem;
+            letter-spacing: .03em;
+        }
+
+        /* ── SHARED SECTION ── */
+        section { position: relative; }
+        .section-eyebrow {
+            display: inline-block; font-weight: 800; font-size: .76rem;
+            text-transform: uppercase; letter-spacing: .09em; margin-bottom: 12px;
+            padding: 5px 14px; border-radius: 50px; color: var(--white);
+        }
+        .ey-red    { background: var(--red);    }
+        .ey-yellow { background: var(--yellow); color: var(--dark); }
+        .ey-blue   { background: var(--blue);   }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+            font-weight: 700; line-height: 1.18; color: var(--dark); margin-bottom: 14px;
+        }
+        .section-title.on-dark { color: var(--white); }
+        .section-desc { font-size: 1.02rem; line-height: 1.74; color: var(--gray); max-width: 600px; margin: 0 auto 40px; }
+        .section-desc.on-dark { color: rgba(255,255,255,.75); }
+
+        /* ── PAGE HEADER ── */
+        .page-header {
+            background: var(--off-white);
+            padding: 120px 24px 80px;
+            text-align: center;
+        }
+        .page-header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700; color: var(--dark);
+            margin-bottom: 16px;
+        }
+        .page-header p {
+            font-size: 1.1rem; color: var(--gray);
+            max-width: 700px; margin: 0 auto;
+        }
+
+        /* ── SECTIONS ── */
+        .about-section { padding: 88px 24px; background: var(--white); }
+        .about-section-alt { padding: 88px 24px; background: var(--off-white); }
+
+        .section-content {
+            max-width: var(--max-width); margin: 0 auto;
+        }
+
+        .content-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+            align-items: center;
+        }
+
+        .content-text { flex: 1; }
+        .content-text p {
+            font-size: 1.02rem; line-height: 1.74; color: var(--gray);
+            margin-bottom: 20px;
+        }
+        .content-text h3 {
+            font-family: var(--font-display); font-weight: 700;
+            font-size: 1.5rem; color: var(--dark); margin-bottom: 16px;
+        }
+
+        .content-media {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-col);
+            aspect-ratio: 16/10;
+            background: var(--off-white);
+            display: flex; align-items: center; justify-content: center;
+            position: relative;
+        }
+        .content-media::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px;
+            background: var(--yellow);
+        }
+
+        .video-placeholder {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 14px; width: 100%; height: 100%;
+        }
+        .play-btn {
+            width: 62px; height: 62px; border-radius: 50%;
+            background: var(--blue); color: var(--white);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; box-shadow: var(--shadow-card);
+            transition: transform .2s, filter .2s;
+        }
+        .play-btn:hover { transform: scale(1.1); filter: brightness(1.1); }
+
+        /* ── VALUES GRID ── */
+        .values-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+            margin-top: 40px;
+        }
+        .value-card {
+            background: var(--white); border-radius: var(--radius-lg);
+            padding: 32px 28px; text-align: center;
+            border: 1px solid var(--border-col);
+            transition: transform .2s, box-shadow .2s;
+        }
+        .value-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+        .value-icon {
+            width: 64px; height: 64px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px; font-size: 1.8rem;
+        }
+        .vi-red    { background: var(--red);    color: var(--white); }
+        .vi-yellow { background: var(--yellow); color: var(--dark); }
+        .vi-blue   { background: var(--blue);   color: var(--white); }
+        .value-card h4 {
+            font-family: var(--font-display); font-weight: 700; font-size: 1.1rem;
+            color: var(--dark); margin-bottom: 12px;
+        }
+        .value-card p {
+            font-size: .9rem; color: var(--gray); line-height: 1.6;
+        }
+
+        /* ── TEACHERS GRID ── */
+        .teachers-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+            margin-top: 40px;
+        }
+        .teacher-card {
+            background: var(--white); border-radius: var(--radius-lg);
+            overflow: hidden; border: 1px solid var(--border-col);
+            transition: transform .2s, box-shadow .2s;
+        }
+        .teacher-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+        .teacher-photo {
+            height: 200px; background: var(--off-white);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--gray); font-size: .9rem;
+        }
+        .teacher-info { padding: 24px; }
+        .teacher-info h4 {
+            font-family: var(--font-display); font-weight: 700; font-size: 1.1rem;
+            color: var(--dark); margin-bottom: 4px;
+        }
+        .teacher-info p {
+            font-size: .88rem; color: var(--gray); margin-bottom: 12px;
+        }
+        .teacher-bio {
+            font-size: .85rem; color: var(--gray); line-height: 1.5;
+        }
+
+        /* ── CAREERS CTA ── */
+        .careers-cta {
+            background: var(--blue);
+            border-radius: var(--radius-lg);
+            padding: 48px;
+            text-align: center;
+            color: var(--white);
+        }
+        .careers-cta h3 {
+            font-family: var(--font-display); font-weight: 700;
+            font-size: 1.8rem; margin-bottom: 16px;
+        }
+        .careers-cta p {
+            font-size: 1.05rem; margin-bottom: 24px;
+            opacity: .9;
+        }
+
+        @media (max-width: 860px) {
+            .content-grid { grid-template-columns: 1fr; }
+            .values-grid { grid-template-columns: 1fr; }
+            .teachers-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ── FOOTER ── dark bg ── */
+        .site-footer { background: var(--dark); color: rgba(255,255,255,.65); padding: 60px 24px 32px; }
+        .footer-top {
+            max-width: var(--max-width); margin: 0 auto;
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px;
+        }
+        .footer-logo-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+        .footer-logo-mark { width: 34px; height: 34px; border-radius: 9px; background: var(--red); display: flex; align-items: center; justify-content: center; }
+        .footer-logo-mark svg { width: 16px; height: 16px; }
+        .footer-brand-n { font-family: var(--font-display); font-weight: 700; color: var(--white); font-size: .95rem; }
+        .footer-brand > p { font-size: .88rem; line-height: 1.65; margin-bottom: 20px; }
+        .footer-col h4 { font-family: var(--font-display); font-weight: 700; font-size: .95rem; color: var(--white); margin-bottom: 14px; }
+        .footer-col ul { display: flex; flex-direction: column; gap: 9px; }
+        .footer-col ul a { font-size: .85rem; transition: color .15s; }
+        .footer-col ul a:hover { color: var(--white); }
+        .footer-bottom { max-width: var(--max-width); margin: 0 auto; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+        .footer-bottom p { font-size: .8rem; color: rgba(255,255,255,.35); }
+        @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; } }
+    </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+
+        <!-- Logo left -->
+        <a class="nav-brand" href="index.html" aria-label="BIC Community Preschool home">
+            <img class="nav-logo-img" src="BIC logo.png" alt="BIC Community Preschool logo" />
+            <div class="nav-brand-name">
+                <span class="l1">BIC Community</span>
+                <span class="l2">Preschool &amp; Kindergarten</span>
+            </div>
+        </a>
+
+        <!-- Center links -->
+        <ul class="nav-links" id="navLinks" role="list">
+            <li class="nav-item">
+                <a href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="about.html" style="color: var(--red);">About</a>
+            </li>
+            <!-- Programs with dropdown -->
+            <li class="nav-item" id="programsNavItem">
+                <button aria-haspopup="true" aria-expanded="false" aria-controls="programsDropdown">
+                    Programs
+                    <svg class="nav-caret" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                        <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <ul class="nav-dropdown" id="programsDropdown" role="menu">
+                    <li role="none"><a href="parent-info.html" role="menuitem">Parent Info</a></li>
+                    <li role="none"><a href="toddler.html" role="menuitem">Toddler</a></li>
+                    <li role="none"><a href="preschool.html" role="menuitem">Preschool</a></li>
+                    <li role="none"><a href="kindergarten.html" role="menuitem">Kindergarten</a></li>
+                    <li role="none"><a href="summer.html" role="menuitem">Summer</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="https://www.procaresoftware.com" target="_blank" rel="noopener noreferrer">ProCare</a>
+            </li>
+        </ul>
+
+        <!-- Right: Schedule a Tour button + mobile hamburger -->
+        <div class="nav-actions">
+            <a href="index.html#schedule" class="btn btn-red" style="padding:10px 48px;font-size:1rem;">Schedule a Tour</a>
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" id="navToggle">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+
+    </div>
+</nav>
+
+<!-- ═══ ENROLLMENT BANNER ═══ -->
+<div class="enrollment-banner">
+    <div class="container text-center">
+        <span class="enrollment-text">Now enrolling!</span>
+    </div>
+</div>
+
+<!-- ═══ PAGE HEADER ═══ -->
+<header class="page-header">
+    <div class="container">
+        <span class="section-eyebrow ey-red">Get to Know Us</span>
+        <h1>About BIC Community Preschool</h1>
+        <p>Discover our history, mission, and the dedicated team that makes our school a special place for children to learn and grow.</p>
+    </div>
+</header>
+
+<!-- ═══ WELCOME VIDEO ═══ -->
+<section class="about-section" id="welcome-video">
+    <div class="section-content">
+        <div class="container text-center" style="margin-bottom: 48px;">
+            <span class="section-eyebrow ey-yellow">Welcome</span>
+            <h2 class="section-title">Welcome to Our School</h2>
+            <p class="section-desc">Take a virtual tour and see what makes BIC Community Preschool a nurturing environment for your child.</p>
+        </div>
+        <div class="content-grid">
+            <div class="content-media">
+                <div class="video-placeholder">
+                    <button class="play-btn" aria-label="Play welcome video">&#9654;</button>
+                    <p style="	color: var(--gray); font-size: .88rem; font-style: italic;">Welcome video coming soon</p>
+                </div>
+            </div>
+            <div class="content-text">
+                <h3>A Warm Welcome</h3>
+                <p>We're delighted you're considering BIC Community Preschool for your child's early education journey. Our school has been serving families in the community for years, providing a safe, loving, and Christ-centered environment where children can thrive.</p>
+                <p>Our dedicated team of educators is committed to nurturing each child's unique gifts and helping them develop a strong foundation for lifelong learning.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ HISTORY ═══ -->
+<section class="about-section-alt" id="history">
+    <div class="section-content">
+        <div class="container text-center" style="margin-bottom: 48px;">
+            <span class="section-eyebrow ey-blue">Our Story</span>
+            <h2 class="section-title">Our History</h2>
+            <p class="section-desc">Learn about our journey and how we've grown to serve our community.</p>
+        </div>
+        <div class="content-grid">
+            <div class="content-text">
+                <h3>Founded on Faith and Community</h3>
+                <p>BIC Community Preschool was established with a vision to provide exceptional early childhood education rooted in Christian values. Over the years, we have grown from a small program to a comprehensive preschool and kindergarten serving families throughout our community.</p>
+                <p>Our commitment to excellence in education, combined with our focus on spiritual development, has made us a trusted choice for families seeking a nurturing environment for their children.</p>
+                <p>Today, we continue to honor our founding principles while embracing innovative teaching methods that prepare children for success in school and in life.</p>
+            </div>
+            <div class="content-media" style="background: var(--blue);">
+                <div class="video-placeholder">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+                        <path d="M2 17L12 22L22 17"/>
+                        <path d="M2 12L12 17L22 12"/>
+                    </svg>
+                    <p style="color: rgba(255,255,255,.7); font-size: .88rem; font-style: italic;">Historical photos coming soon</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ MISSION ═══ -->
+<section class="about-section" id="mission">
+    <div class="section-content">
+        <div class="container text-center" style="margin-bottom: 48px;">
+            <span class="section-eyebrow ey-red">Our Purpose</span>
+            <h2 class="section-title">Our Mission</h2>
+            <p class="section-desc">The driving force behind everything we do at BIC Community Preschool.</p>
+        </div>
+        <div class="content-grid">
+            <div class="content-media" style="background: var(--yellow);">
+                <div class="video-placeholder">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--dark)" stroke-width="1.5">
+                        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                    </svg>
+                    <p style="color: var(--dark); font-size: .88rem; font-style: italic;">Our mission in action</p>
+                </div>
+            </div>
+            <div class="content-text">
+                <h3>Nurturing Minds, Touching Hearts</h3>
+                <p>Our mission is to provide a high-quality, Christ-centered early childhood education that nurtures the whole child—spiritually, academically, socially, emotionally, and physically.</p>
+                <p>We believe every child is a unique creation with God-given potential. Our goal is to partner with families to help each child develop a love for learning, a strong moral foundation, and the confidence to succeed.</p>
+                <p>Through play-based learning, intentional teaching, and a supportive community, we prepare children not just for kindergarten, but for a lifetime of learning and growth.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ TEACHERS ═══ -->
+<section class="about-section-alt" id="teachers">
+    <div class="section-content">
+        <div class="container text-center" style="margin-bottom: 48px;">
+            <span class="section-eyebrow ey-yellow">Our Team</span>
+            <h2 class="section-title">Our Teachers</h2>
+            <p class="section-desc">Meet the dedicated educators who make our school special.</p>
+        </div>
+        <div class="teachers-grid">
+            <div class="teacher-card">
+                <div class="teacher-photo">Teacher Photo</div>
+                <div class="teacher-info">
+                    <h4>Director Name</h4>
+                    <p>School Director</p>
+                    <p class="teacher-bio">Our director brings over 20 years of early childhood education experience and a passion for creating nurturing learning environments.</p>
+                </div>
+            </div>
+            <div class="teacher-card">
+                <div class="teacher-photo">Teacher Photo</div>
+                <div class="teacher-info">
+                    <h4>Lead Teacher Name</h4>
+                    <p>Lead Teacher - Pre-K</p>
+                    <p class="teacher-bio">Specializing in kindergarten readiness, our lead teacher creates engaging activities that build foundational skills.</p>
+                </div>
+            </div>
+            <div class="teacher-card">
+                <div class="teacher-photo">Teacher Photo</div>
+                <div class="teacher-info">
+                    <h4>Teacher Name</h4>
+                    <p>Teacher - Threes</p>
+                    <p class="teacher-bio">With a focus on social-emotional development, this teacher helps children build confidence and friendships.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ VALUES ═══ -->
+<section class="about-section" id="values">
+    <div class="section-content">
+        <div class="container text-center" style="margin-bottom: 48px;">
+            <span class="section-eyebrow ey-blue">What We Believe</span>
+            <h2 class="section-title">Our Values</h2>
+            <p class="section-desc">The core principles that guide our approach to education and care.</p>
+        </div>
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon vi-red">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61C20.3292 4.099 19.7228 3.69365 19.0554 3.41708C18.3879 3.14052 17.6725 2.99817 16.95 2.99817C16.2275 2.99817 15.5121 3.14052 14.8446 3.41708C14.1772 3.69365 13.5708 4.099 13.06 4.61L12 5.67L10.94 4.61C9.9083 3.57831 8.50903 2.99871 7.05 2.99871C5.59096 2.99871 4.19169 3.57831 3.16 4.61C2.12831 5.64169 1.54871 7.04096 1.54871 8.5C1.54871 9.95904 2.12831 11.3583 3.16 12.39L4.22 13.45L12 21.23L19.78 13.45L20.84 12.39C21.3509 11.8792 21.7563 11.2728 22.0329 10.6054C22.3095 9.93789 22.4518 9.22248 22.4518 8.5C22.4518 7.77752 22.3095 7.0621 22.0329 6.39464C21.7563 5.72718 21.3509 5.12075 20.84 4.61Z"/></svg>
+                </div>
+                <h4>Love</h4>
+                <p>We create a loving environment where every child feels valued, safe, and supported.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon vi-yellow">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7L12 12L22 7L12 2Z"/><path d="M2 17L12 22L22 17"/><path d="M2 12L12 17L22 12"/></svg>
+                </div>
+                <h4>Excellence</h4>
+                <p>We maintain high standards in education, safety, and care to provide the best experience for families.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon vi-blue">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7V10C2 16 12 22 12 22C12 22 22 16 22 10V7L12 2Z"/><path d="M12 8V16M8 12H16"/></svg>
+                </div>
+                <h4>Faith</h4>
+                <p>We integrate Christian values and teachings into our curriculum to nurture spiritual growth.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon vi-yellow">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6V12L16 14"/></svg>
+                </div>
+                <h4>Play-Based Learning</h4>
+                <p>We believe children learn best through play, exploration, and hands-on experiences.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon vi-blue">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21V19C17 16.7909 15.2091 15 13 15H5C2.79086 15 1 16.7909 1 19V21"/><path d="M9 7C9 9.20914 7.20914 11 5 11C2.79086 11 1 9.20914 1 7C1 4.79086 2.79086 3 5 3C7.20914 3 9 4.79086 9 7Z"/><path d="M23 21V19C22.9993 17.1814 21.7797 15.5025 19.89 14.5"/><path d="M16 3.13C17.9386 3.51442 19.3827 5.12794 19.3827 7.13C19.3827 9.13206 17.9386 10.7456 16 11.13"/></svg>
+                </div>
+                <h4>Community</h4>
+                <p>We foster strong partnerships with families and build a supportive community for all.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon vi-red">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                </div>
+                <h4>Growth</h4>
+                <p>We support each child's individual development and celebrate their unique milestones.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ CAREERS ═══ -->
+<section class="about-section-alt" id="careers">
+    <div class="section-content">
+        <div class="container text-center" style="margin-bottom: 48px;">
+            <span class="section-eyebrow ey-red">Join Our Team</span>
+            <h2 class="section-title">Careers</h2>
+            <p class="section-desc">Make a difference in children's lives by joining our dedicated team.</p>
+        </div>
+        <div class="careers-cta">
+            <h3>We're Always Looking for Passionate Educators</h3>
+            <p>If you love working with children and share our commitment to excellence in early childhood education, we'd love to hear from you. We offer competitive salaries, professional development opportunities, and a supportive work environment.</p>
+            <a href="mailto:careers@biccommunitypreschool.org" class="btn btn-white">Apply Today</a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ CHURCH BIO ═══ -->
+<section class="about-section" id="church-bio">
+    <div class="section-content">
+        <div class="container text-center" style="margin-bottom: 48px;">
+            <span class="section-eyebrow ey-yellow">Our Foundation</span>
+            <h2 class="section-title">Church Affiliation</h2>
+            <p class="section-desc">Learn about our connection to BIC Church and our shared mission.</p>
+        </div>
+        <div class="content-grid">
+            <div class="content-text">
+                <h3>Rooted in Faith</h3>
+                <p>BIC Community Preschool is a ministry of BIC Church, reflecting our shared commitment to serving families in our community. Our church has been a pillar of the community for decades, providing spiritual guidance, support, and outreach programs.</p>
+                <p>As a church-affiliated preschool, we incorporate biblical teachings into our daily activities, including weekly chapel services where children learn age-appropriate Bible stories, songs, and verses. This spiritual foundation complements our academic curriculum, helping children develop strong character and moral values.</p>
+                <p>We welcome families of all faith backgrounds and strive to create an inclusive environment where every child feels loved and valued.</p>
+            </div>
+            <div class="content-media" style="background: var(--red);">
+                <div class="video-placeholder">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                        <path d="M12 2L2 7V10C2 16 12 22 12 22C12 22 22 16 22 10V7L12 2Z"/>
+                        <path d="M12 6V18"/>
+                        <path d="M8 10H16"/>
+                    </svg>
+                    <p style="color: rgba(255,255,255,.7); font-size: .88rem; font-style: italic;">Church photos coming soon</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer">
+    <div class="footer-top">
+        <div class="footer-brand">
+            <div class="footer-logo-row">
+                <div class="footer-logo-mark">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+                        <path d="M2 17L12 22L22 17"/>
+                        <path d="M2 12L12 17L22 12"/>
+                    </svg>
+                </div>
+                <span class="footer-brand-n">BIC Community Preschool</span>
+            </div>
+            <p>Nurturing curious minds through play-based learning, community connection, and joyful early childhood education.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="index.html#programs">Programs</a></li>
+                <li><a href="index.html#schedule">Schedule a Tour</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Programs</h4>
+            <ul>
+                <li><a href="index.html#twos">Twos</a></li>
+                <li><a href="index.html#threes">Threes</a></li>
+                <li><a href="index.html#pre-k">Pre-K</a></li>
+                <li><a href="index.html#kindergarten">Kindergarten</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <ul>
+                <li><a href="tel:+15551234567">(555) 123-4567</a></li>
+                <li><a href="mailto:info@biccommunitypreschool.org">info@biccommunitypreschool.org</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 BIC Community Preschool. All rights reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>
