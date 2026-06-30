@@ -1,0 +1,1109 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Preschool &amp; Kindergarten | BIC Community Preschool and Kindergarten</title>
+    <meta name="description" content="BIC Community Preschool and Kindergarten — nurturing curious minds through play-based learning, community connection, and joyful early childhood education."/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="canonical" href="https://www.biccommunitypreschool.org/"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet"/>
+
+    <style>
+        /* =====================================================
+           COLOR RULES:
+           BACKGROUNDS / FILLS  → #F22226 (red) | #FFC21A (yellow) | #2AABE3 (blue)
+           TEXT / FOREGROUND    → #24201F (dark body text)  |  #666665 (secondary/muted text)
+           White (#fff) used for text on colored backgrounds and for card surfaces.
+        ===================================================== */
+        :root {
+            /* Used as BACKGROUNDS and fills */
+            --red:    #F22226;
+            --yellow: #FFC21A;
+            --blue:   #2AABE3;
+
+            /* Used as TEXT colors only */
+            --dark:   #24201F;
+            --gray:   #666665;
+
+            /* Neutrals */
+            --white:      #FFFFFF;
+            --off-white:  #F8F7F5;
+            --border-col: rgba(36,32,31,.1);
+
+            --font-display: 'Fredoka', sans-serif;
+            --font-body:    'Nunito', sans-serif;
+
+            --radius-lg: 22px;
+            --radius-md: 14px;
+            --radius-sm: 8px;
+            --shadow-sm:   0 2px 12px rgba(36,32,31,.08);
+            --shadow-card: 0 6px 28px rgba(36,32,31,.11);
+            --shadow-pop:  0 16px 48px rgba(36,32,31,.16);
+            --max-width:   1200px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); color: var(--dark); background: var(--white); overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+        ul { list-style: none; }
+        button { cursor: pointer; border: none; background: none; font: inherit; }
+        .sr-only { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
+        .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+        .text-center { text-align: center; }
+
+        /* ── BUTTONS ── colored bg fills, white text ── */
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 14px 30px; border-radius: 50px;
+            font-family: var(--font-display); font-size: 1rem; font-weight: 600;
+            border: 2px solid transparent;
+            transition: transform .18s, box-shadow .18s, filter .18s;
+            letter-spacing: .01em;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-pop); filter: brightness(1.08); }
+        .btn-red    { background: var(--red);    color: var(--white); border-color: var(--red);    }
+        .btn-blue   { background: var(--blue);   color: var(--white); border-color: var(--blue);   }
+        .btn-yellow { background: var(--yellow); color: var(--dark);  border-color: var(--yellow); }
+        .btn-white  { background: var(--white);  color: var(--dark);  border-color: var(--white);  }
+        .btn-white:hover { background: var(--off-white); }
+        .btn-outline-white { background: transparent; color: var(--white); border-color: var(--white); }
+        .btn-outline-white:hover { background: var(--white); color: var(--dark); }
+
+        /* ── NAV ── white bg, dark text, dropdown on Programs ── */
+        .site-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: var(--white); border-bottom: 1px solid var(--border-col);
+            box-shadow: var(--shadow-sm);
+        }
+        .nav-inner {
+            max-width: 1600px; margin: 0 auto; padding: 0 32px 0 40px;
+            display: flex; align-items: center; justify-content: space-between;
+            height: 72px; gap: 16px;
+        }
+        @media (max-width: 1200px) { .nav-inner { padding: 0 24px 0 32px; } }
+        @media (max-width: 768px) { .nav-inner { padding: 0 16px 0 20px; } }
+
+        /* Logo — image placeholder on the left */
+        .nav-brand {
+            display: flex; align-items: center; gap: 10px;
+            flex-shrink: 0; text-decoration: none;
+        }
+        .nav-logo-img {
+            height: 56px; width: auto;
+            display: flex; align-items: center; justify-content: center;
+        }
+        /* Placeholder logo box shown until a real image is provided */
+        .nav-logo-placeholder {
+            height: 56px; width: 56px; border-radius: 12px;
+            background: var(--red);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .nav-logo-placeholder svg { width: 30px; height: 30px; }
+        .nav-brand-name { font-family: var(--font-display); font-weight: 700; line-height: 1.15; }
+        .nav-brand-name .l1 { display: block; font-size: 1.15rem; color: var(--dark); }
+        .nav-brand-name .l2 { display: block; font-size: .82rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--gray); }
+
+        /* Center links */
+        .nav-links {
+            display: flex; align-items: center; gap: 0;
+            flex: 1; justify-content: center;
+            padding-top: 8px;
+        }
+        /* Top-level nav item wrapper (needed for dropdown positioning) */
+        .nav-item {
+            position: relative;
+        }
+        .nav-item > a,
+        .nav-item > button {
+            display: flex; align-items: center; gap: 5px;
+            padding: 8px 16px; border-radius: var(--radius-sm);
+            font-weight: 700; font-size: 1.05rem; color: var(--gray);
+            background: none; cursor: pointer;
+            transition: background .15s, color .15s;
+            white-space: nowrap;
+        }
+        .nav-item > a:hover,
+        .nav-item > button:hover {
+            color: var(--red);
+        }
+        .nav-item.open > a,
+        .nav-item.open > button {
+            background: var(--red); color: var(--white);
+        }
+        /* Caret icon */
+        .nav-caret {
+            width: 10px; height: 10px; flex-shrink: 0;
+            transition: transform .2s;
+        }
+        .nav-item.open .nav-caret { transform: rotate(180deg); }
+
+        /* Dropdown panel */
+        .nav-dropdown {
+            display: none;
+            position: absolute; top: calc(100% + 6px); left: 50%;
+            transform: translateX(-50%);
+            background: var(--white);
+            border: 1px solid var(--border-col);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-pop);
+            min-width: 210px;
+            padding: 8px 0;
+            z-index: 200;
+        }
+        .nav-item.open .nav-dropdown { display: block; }
+        .nav-dropdown a {
+            display: block; padding: 9px 18px;
+            font-size: .86rem; font-weight: 700; color: var(--gray);
+            transition: background .12s, color .12s;
+            white-space: nowrap;
+        }
+        .nav-dropdown a:hover { color: var(--red); }
+        /* Thin colored left border for each item on hover */
+        .nav-dropdown li { position: relative; }
+        .nav-dropdown-divider {
+            height: 1px; background: var(--border-col); margin: 6px 12px;
+        }
+
+        /* Right side CTA */
+        .nav-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+
+        /* Mobile toggle */
+        .nav-toggle {
+            display: none; flex-direction: column; gap: 5px;
+            width: 36px; height: 36px; justify-content: center; align-items: center;
+            flex-shrink: 0;
+        }
+        .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--dark); border-radius: 2px; transition: .2s; }
+
+        @media (max-width: 960px) {
+            .nav-links { display: none; }
+            .nav-toggle { display: flex; }
+        }
+
+        /* Mobile nav open state */
+        .nav-links.mobile-open {
+            display: flex; flex-direction: column; align-items: stretch;
+            position: absolute; top: 72px; left: 0; right: 0;
+            background: var(--white);
+            border-top: 1px solid var(--border-col);
+            box-shadow: 0 12px 32px rgba(36,32,31,.12);
+            padding: 12px 0; z-index: 999;
+        }
+        .nav-links.mobile-open .nav-item { width: 100%; }
+        .nav-links.mobile-open .nav-item > a,
+        .nav-links.mobile-open .nav-item > button {
+            width: 100%; border-radius: 0; padding: 12px 24px; justify-content: space-between;
+        }
+        .nav-links.mobile-open .nav-dropdown {
+            position: static; transform: none; box-shadow: none;
+            border: none; border-top: 1px solid var(--border-col);
+            border-radius: 0; min-width: 0;
+            background: var(--off-white); padding: 4px 0;
+        }
+        .nav-links.mobile-open .nav-dropdown a { padding-left: 40px; }
+
+        /* ── HERO ── white bg left, blue bg right panel ── */
+        .hero {
+            min-height: 100vh;
+            display: grid; grid-template-columns: 1fr 1fr;
+            padding-top: 0;
+        }
+        .hero-left {
+            background: var(--white);
+            display: flex; flex-direction: column; justify-content: center;
+            padding: 60px 48px 60px 40px;
+        }
+        .hero-right {
+            background: var(--blue);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            padding: 60px 40px; position: relative; overflow: hidden;
+        }
+        /* Decorative circles on the blue side */
+        .hero-right::before {
+            content: ''; position: absolute; top: -80px; right: -80px;
+            width: 400px; height: 400px; border-radius: 50%;
+            background: rgba(255,255,255,.08); pointer-events: none;
+        }
+        .hero-right::after {
+            content: ''; position: absolute; bottom: -60px; left: -60px;
+            width: 300px; height: 300px; border-radius: 50%;
+            background: rgba(255,255,255,.06); pointer-events: none;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--yellow); border-radius: 50px;
+            padding: 6px 16px; margin-bottom: 22px;
+            font-size: .78rem; font-weight: 800; letter-spacing: .07em;
+            color: var(--dark); text-transform: uppercase;
+            animation: fadeUp .5s ease both;
+        }
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+            font-weight: 700; line-height: 1.1; color: var(--dark);
+            margin-bottom: 20px; animation: fadeUp .5s .1s ease both;
+        }
+        .hero-desc { font-size: 1.05rem; line-height: 1.72; color: var(--gray); margin-bottom: 32px; animation: fadeUp .5s .2s ease both; }
+        .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; animation: fadeUp .5s .28s ease both; }
+
+        /* Right side content — white text on blue */
+        .hero-photo-frame {
+            width: 100%; max-width: 400px; aspect-ratio: 4/3.5;
+            border-radius: var(--radius-lg);
+            background: rgba(255,255,255,.15);
+            border: 2px solid rgba(255,255,255,.25);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center; gap: 12px;
+            position: relative; z-index: 1;
+        }
+        .hero-photo-frame svg { opacity: .35; }
+        .hero-photo-frame p { color: rgba(255,255,255,.6); font-size: .88rem; font-style: italic; }
+
+        .hero-stats {
+            position: absolute; bottom: 28px; left: 28px; right: 28px;
+            display: flex; gap: 12px; z-index: 1; flex-wrap: wrap;
+        }
+        .hero-stat {
+            background: var(--white); border-radius: var(--radius-md);
+            padding: 12px 16px; flex: 1; min-width: 140px;
+            box-shadow: var(--shadow-card);
+        }
+        .hero-stat-label { font-size: .7rem; color: var(--gray); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 2px; }
+        .hero-stat-value { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--dark); }
+
+        .hero-badge {
+            position: absolute; top: 24px; right: 24px; z-index: 1;
+            width: 80px; height: 80px; border-radius: 50%;
+            background: var(--yellow);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            font-family: var(--font-display); text-align: center; line-height: 1.1;
+            box-shadow: var(--shadow-pop);
+        }
+        .hero-badge .big   { font-size: 1.5rem; font-weight: 700; color: var(--dark); }
+        .hero-badge .small { font-size: .5rem;  font-weight: 800; text-transform: uppercase; letter-spacing: .04em; color: var(--dark); }
+
+        @media (max-width: 860px) {
+            .hero { grid-template-columns: 1fr; }
+            .hero-right { min-height: 320px; }
+            .hero-left { padding: 48px 24px; }
+        }
+
+        /* ── PROMISE STRIP ── red background, white text ── */
+        .promise-strip { background: var(--red); padding: 18px 24px; }
+        .promise-inner {
+            max-width: var(--max-width); margin: 0 auto;
+            display: flex; align-items: center; justify-content: center;
+            gap: 36px; flex-wrap: wrap;
+        }
+        .promise-item {
+            display: flex; align-items: center; gap: 10px;
+            color: var(--white); font-weight: 700; font-size: .92rem;
+        }
+        .promise-item .picon { font-size: 1.1rem; }
+        .promise-divider { width: 1px; height: 24px; background: rgba(255,255,255,.3); }
+        @media (max-width: 600px) { .promise-divider { display: none; } }
+
+        /* ── ENROLLMENT BANNER ── red background, white text ── */
+        .enrollment-banner {
+            background: var(--red);
+            padding: 10px 24px;
+            text-align: center;
+            margin-top: 72px;
+        }
+        .enrollment-text {
+            color: var(--white);
+            font-weight: 600;
+            font-size: 1.2rem;
+            letter-spacing: .03em;
+        }
+        .enrollment-link {
+            color: var(--white);
+            text-decoration: underline;
+            font-weight: 800;
+            margin-left: 8px;
+            transition: opacity .15s;
+        }
+        .enrollment-link:hover { opacity: .8; }
+
+        /* ── SHARED SECTION ── */
+        section { position: relative; }
+        .section-eyebrow {
+            display: inline-block; font-weight: 800; font-size: .76rem;
+            text-transform: uppercase; letter-spacing: .09em; margin-bottom: 12px;
+            padding: 5px 14px; border-radius: 50px; color: var(--white);
+        }
+        .ey-red    { background: var(--red);    }
+        .ey-yellow { background: var(--yellow); color: var(--dark); }
+        .ey-blue   { background: var(--blue);   }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+            font-weight: 700; line-height: 1.18; color: var(--dark); margin-bottom: 14px;
+        }
+        .section-title.on-dark { color: var(--white); }
+        .section-desc { font-size: 1.02rem; line-height: 1.74; color: var(--gray); max-width: 600px; margin: 0 auto 40px; }
+        .section-desc.on-dark { color: rgba(255,255,255,.75); }
+
+        /* ── ABOUT ── white bg ── */
+        .about-section { padding: 88px 24px; background: var(--white); }
+        .about-grid {
+            max-width: var(--max-width); margin: 0 auto;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+        }
+        .about-video-wrap {
+            border-radius: var(--radius-lg); overflow: hidden;
+            border: 1px solid var(--border-col);
+            aspect-ratio: 16/10; background: var(--off-white);
+            display: flex; align-items: center; justify-content: center; position: relative;
+        }
+        /* Yellow top bar */
+        .about-video-wrap::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px;
+            background: var(--yellow);
+        }
+        .video-inner { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; width: 100%; height: 100%; }
+        .play-btn {
+            width: 62px; height: 62px; border-radius: 50%;
+            background: var(--blue); color: var(--white);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; box-shadow: var(--shadow-card);
+            transition: transform .2s, filter .2s;
+        }
+        .play-btn:hover { transform: scale(1.1); filter: brightness(1.1); }
+        .video-inner p { color: var(--gray); font-size: .88rem; font-style: italic; }
+
+        .about-checklist { margin: 26px 0 30px; display: flex; flex-direction: column; gap: 16px; }
+        .about-check { display: flex; align-items: flex-start; gap: 14px; }
+        .check-icon {
+            width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; margin-top: 2px;
+            font-size: .8rem; font-weight: 800;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--white);
+        }
+        .ci-red    { background: var(--red);    }
+        .ci-yellow { background: var(--yellow); color: var(--dark); }
+        .ci-blue   { background: var(--blue);   }
+        .ci-gray   { background: var(--gray);   }
+        .check-text strong { display: block; font-weight: 800; color: var(--dark); margin-bottom: 2px; }
+        .check-text span   { font-size: .88rem; color: var(--gray); line-height: 1.5; }
+
+        /* ── ENRICHMENT GRID ── 3x4 grid with icons ── */
+        .enrichment-grid {
+            max-width: var(--max-width); margin: 0 auto;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+        }
+        .enrichment-card {
+            background: var(--white); border-radius: var(--radius-lg);
+            padding: 28px 24px; text-align: center;
+            border: 1px solid var(--border-col);
+            transition: transform .2s, box-shadow .2s;
+        }
+        .enrichment-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+        .enrichment-icon {
+            width: 64px; height: 64px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 1.8rem;
+        }
+        .ei-red    { background: var(--red);    color: var(--white); }
+        .ei-yellow { background: var(--yellow); color: var(--dark); }
+        .ei-blue   { background: var(--blue);   color: var(--white); }
+        .ei-gray   { background: var(--gray);   color: var(--white); }
+        .enrichment-card h4 {
+            font-family: var(--font-display); font-weight: 600; font-size: 1.05rem;
+            color: var(--dark); margin-bottom: 8px; line-height: 1.3;
+        }
+        .enrichment-card p {
+            font-size: .82rem; color: var(--gray); line-height: 1.5;
+        }
+
+        @media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; } .about-video-wrap { max-width: 500px; margin: 0 auto; } }
+        @media (max-width: 768px) { .enrichment-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 480px) { .enrichment-grid { grid-template-columns: 1fr; } }
+
+        /* ── PROGRAMS ── off-white bg ── */
+        .program-section { padding: 88px 24px; background: var(--off-white); }
+
+        .program-cards {
+            max-width: var(--max-width); margin: 0 auto;
+            display: grid; grid-template-columns: repeat(3,1fr); gap: 20px;
+        }
+        .program-card {
+            background: var(--white); border-radius: var(--radius-lg);
+            padding: 32px 28px; position: relative; overflow: hidden;
+            transition: transform .2s, box-shadow .2s;
+            border: 1px solid var(--border-col);
+        }
+        .program-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-pop); }
+        .pc-top { height: 5px; position: absolute; top: 0; left: 0; right: 0; }
+        .pc-red    { background: var(--red);    }
+        .pc-yellow { background: var(--yellow); }
+        .pc-blue   { background: var(--blue);   }
+        .program-icon { font-size: 2.2rem; margin-bottom: 16px; display: block; }
+        .program-card h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; color: var(--dark); margin-bottom: 10px; }
+        .program-card p { font-size: .9rem; color: var(--gray); line-height: 1.62; margin-bottom: 20px; }
+        .program-ages {
+            display: inline-block; font-size: .75rem; font-weight: 800;
+            text-transform: uppercase; letter-spacing: .05em;
+            padding: 5px 14px; border-radius: 50px; color: var(--white);
+        }
+        .pa-red    { background: var(--red);    }
+        .pa-yellow { background: var(--yellow); color: var(--dark); }
+        .pa-blue   { background: var(--blue);   }
+
+        .program-enrichment {
+            max-width: var(--max-width); margin: 28px auto 0;
+            background: var(--white); border: 1px solid var(--border-col);
+            border-radius: var(--radius-lg); padding: 24px 28px;
+            display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+        }
+        .enrichment-label { font-family: var(--font-display); font-weight: 700; color: var(--dark); font-size: 1rem; flex-shrink: 0; }
+        .enrichment-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+        .pill { background: var(--off-white); border: 1px solid var(--border-col); border-radius: 50px; padding: 5px 14px; font-size: .82rem; color: var(--gray); font-weight: 600; }
+
+        @media (max-width: 860px) { .program-cards { grid-template-columns: 1fr; } }
+
+        /* ── CLASSROOMS ── off-white bg ── */
+        .classrooms-section { padding: 88px 24px; background: var(--off-white); }
+        .classrooms-grid {
+            max-width: var(--max-width); margin: 0 auto;
+            display: grid; grid-template-columns: repeat(2,1fr); gap: 20px;
+        }
+        .classroom-card {
+            background: var(--white); border-radius: var(--radius-lg);
+            padding: 28px; box-shadow: var(--shadow-sm);
+            display: flex; gap: 18px; align-items: flex-start;
+            transition: transform .2s, box-shadow .2s;
+        }
+        .classroom-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-card); }
+        .classroom-icon {
+            width: 54px; height: 54px; border-radius: var(--radius-md);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.7rem; flex-shrink: 0; color: var(--white);
+        }
+        .ci-bg-red    { background: var(--red);    }
+        .ci-bg-yellow { background: var(--yellow); }
+        .ci-bg-blue   { background: var(--blue);   }
+        .ci-bg-gray   { background: var(--gray);   }
+        .classroom-info .ages { font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; display: block; margin-bottom: 6px; color: var(--gray); }
+        .classroom-info h4 { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--dark); margin-bottom: 8px; }
+        .classroom-info p { font-size: .88rem; color: var(--gray); line-height: 1.56; margin-bottom: 12px; }
+        .classroom-info a { font-size: .87rem; font-weight: 800; color: var(--blue); display: inline-flex; align-items: center; gap: 4px; transition: gap .15s; }
+        .classroom-info a:hover { gap: 8px; }
+        @media (max-width: 700px) { .classrooms-grid { grid-template-columns: 1fr; } }
+
+        /* ── TESTIMONIALS ── yellow bg ── */
+        .community-section { padding: 88px 24px; background: var(--yellow); }
+        .community-inner {
+            max-width: var(--max-width); margin: 0 auto;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+        }
+        .big-quote { font-size: 5rem; line-height: .7; font-family: Georgia,serif; color: var(--dark); margin-bottom: 8px; opacity: .35; }
+        .testimonial-text { font-size: 1.12rem; line-height: 1.78; color: var(--dark); font-style: italic; margin-bottom: 20px; }
+        .testimonial-byline { font-weight: 800; font-size: .88rem; color: var(--dark); display: flex; align-items: center; gap: 10px; opacity: .7; }
+        .byline-dash { width: 28px; height: 3px; background: var(--dark); border-radius: 2px; opacity: .4; }
+        .testimonial-nav { display: flex; gap: 8px; margin-top: 24px; }
+        .t-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(36,32,31,.2); cursor: pointer; transition: background .2s, transform .2s; }
+        .t-dot.active { background: var(--dark); transform: scale(1.3); }
+
+        .community-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 28px 0; }
+        .stat-box { background: var(--white); border-radius: var(--radius-md); padding: 20px; text-align: center; box-shadow: var(--shadow-sm); }
+        .stat-box .stat-number { font-family: var(--font-display); font-size: 2rem; font-weight: 700; line-height: 1; margin-bottom: 4px; color: var(--dark); }
+        .stat-box .stat-label  { font-size: .78rem; color: var(--gray); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+
+        @media (max-width: 860px) { .community-inner { grid-template-columns: 1fr; } }
+
+        /* ── LOCATOR ── blue bg ── */
+        .locator-section {
+            padding: 80px 24px; background: var(--blue); position: relative; overflow: hidden;
+        }
+        .locator-section::before {
+            content: ''; position: absolute; top: -120px; right: -80px;
+            width: 450px; height: 450px; border-radius: 50%;
+            background: rgba(255,255,255,.08); pointer-events: none;
+        }
+        .locator-section::after {
+            content: ''; position: absolute; bottom: -80px; left: -60px;
+            width: 320px; height: 320px; border-radius: 50%;
+            background: rgba(255,255,255,.06); pointer-events: none;
+        }
+        .locator-inner { max-width: 680px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+        .search-form {
+            display: flex; max-width: 460px; margin: 0 auto 18px;
+            background: var(--white); border-radius: 50px; overflow: hidden; box-shadow: var(--shadow-pop);
+        }
+        .search-form input {
+            flex: 1; border: none; outline: none; padding: 15px 22px;
+            font-family: var(--font-body); font-size: .95rem; color: var(--dark); background: transparent;
+        }
+        .search-form input::placeholder { color: var(--gray); }
+        .search-form button {
+            background: var(--red); color: var(--white);
+            padding: 14px 24px; font-family: var(--font-display); font-weight: 700; font-size: .95rem;
+            border-radius: 0 50px 50px 0; transition: filter .18s;
+        }
+        .search-form button:hover { filter: brightness(1.1); }
+        .locator-links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+        .locator-links a { color: rgba(255,255,255,.85); font-size: .9rem; font-weight: 700; display: flex; align-items: center; gap: 6px; transition: color .15s; }
+        .locator-links a:hover { color: var(--white); }
+
+        /* ── VILLAGE / BLOG ── white bg ── */
+        .village-section { padding: 88px 24px; background: var(--white); }
+        .blog-grid {
+            max-width: var(--max-width); margin: 0 auto;
+            display: grid; grid-template-columns: repeat(3,1fr); gap: 20px;
+        }
+        .blog-card {
+            background: var(--white); border: 1px solid var(--border-col);
+            border-radius: var(--radius-lg); overflow: hidden;
+            box-shadow: var(--shadow-sm); transition: transform .2s, box-shadow .2s;
+            display: flex; flex-direction: column;
+        }
+        .blog-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+        .blog-card-img { height: 170px; display: flex; align-items: center; justify-content: center; font-size: 2.8rem; }
+        .bci-red    { background: var(--red);    }
+        .bci-yellow { background: var(--yellow); }
+        .bci-blue   { background: var(--blue);   }
+        .blog-card-body { padding: 22px; flex: 1; display: flex; flex-direction: column; }
+        .blog-tag { font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; margin-bottom: 8px; color: var(--gray); }
+        .blog-card-body h4 { font-family: var(--font-display); font-weight: 700; font-size: 1.02rem; color: var(--dark); line-height: 1.35; margin-bottom: 10px; }
+        .blog-card-body p { font-size: .86rem; color: var(--gray); line-height: 1.55; margin-bottom: 18px; flex: 1; }
+        .blog-card-body a { font-size: .86rem; font-weight: 800; color: var(--blue); display: inline-flex; align-items: center; gap: 4px; transition: gap .15s; }
+        .blog-card-body a:hover { gap: 8px; }
+        @media (max-width: 900px) { .blog-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 600px) { .blog-grid { grid-template-columns: 1fr; } }
+
+        /* ── REVIEWS GRID ── */
+        .reviews-section { padding: 88px 24px; background: var(--yellow); }
+        .reviews-grid {
+            max-width: var(--max-width); margin: 0 auto;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+        }
+        .review-card {
+            background: var(--white); border-radius: var(--radius-lg);
+            padding: 32px; border: 1px solid var(--border-col);
+        }
+        .review-stars {
+            font-size: 1.2rem; color: var(--yellow);
+            margin-bottom: 16px;
+        }
+        .review-text {
+            font-size: 1rem; line-height: 1.7; color: var(--dark);
+            margin-bottom: 20px; font-style: italic;
+        }
+        .review-author {
+            display: flex; flex-direction: column; gap: 4px;
+        }
+        .review-name {
+            font-weight: 700; color: var(--dark); font-size: .95rem;
+        }
+        .review-role {
+            font-size: .85rem; color: var(--gray);
+        }
+        @media (max-width: 900px) { .reviews-grid { grid-template-columns: 1fr; } }
+
+        /* ── LEARN MORE ── */
+        .learn-more-section { padding: 88px 24px; background: var(--blue); }
+        .learn-more-actions {
+            display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+        }
+
+        /* ── FOOTER ── dark bg ── */
+        .site-footer { background: var(--dark); color: rgba(255,255,255,.65); padding: 60px 24px 32px; }
+        .footer-top {
+            max-width: var(--max-width); margin: 0 auto;
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px;
+        }
+        .footer-logo-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+        .footer-logo-mark { width: 34px; height: 34px; border-radius: 9px; background: var(--red); display: flex; align-items: center; justify-content: center; }
+        .footer-logo-mark svg { width: 16px; height: 16px; }
+        .footer-brand-n { font-family: var(--font-display); font-weight: 700; color: var(--white); font-size: .95rem; }
+        .footer-brand > p { font-size: .88rem; line-height: 1.65; margin-bottom: 20px; }
+        .footer-newsletter { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: var(--radius-md); padding: 18px; }
+        .footer-newsletter p { font-size: .82rem; margin-bottom: 12px; }
+        .email-row { display: flex; background: rgba(255,255,255,.1); border-radius: var(--radius-sm); overflow: hidden; }
+        .email-row input { flex: 1; background: transparent; border: none; outline: none; padding: 9px 12px; font-size: .85rem; color: var(--white); font-family: var(--font-body); }
+        .email-row input::placeholder { color: rgba(255,255,255,.35); }
+        .email-row button { background: var(--yellow); color: var(--dark); padding: 9px 14px; font-weight: 800; font-size: .82rem; font-family: var(--font-display); transition: filter .15s; }
+        .email-row button:hover { filter: brightness(1.1); }
+        .footer-col h4 { font-family: var(--font-display); font-weight: 700; font-size: .95rem; color: var(--white); margin-bottom: 14px; }
+        .footer-col ul { display: flex; flex-direction: column; gap: 9px; }
+        .footer-col ul a { font-size: .85rem; transition: color .15s; }
+        .footer-col ul a:hover { color: var(--white); }
+        .footer-social { display: flex; gap: 8px; margin-top: 20px; }
+        .social-btn { width: 36px; height: 36px; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; font-size: .9rem; transition: background .15s; }
+        .social-btn:hover { background: var(--red); border-color: var(--red); color: var(--white); }
+        .footer-bottom { max-width: var(--max-width); margin: 0 auto; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+        .footer-bottom p { font-size: .8rem; color: rgba(255,255,255,.35); }
+        .footer-legal { display: flex; gap: 18px; flex-wrap: wrap; }
+        .footer-legal a { font-size: .8rem; color: rgba(255,255,255,.35); transition: color .15s; }
+        .footer-legal a:hover { color: var(--white); }
+        @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; } }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
+        .reveal { opacity:0; transform:translateY(24px); transition: opacity .5s ease, transform .5s ease; }
+        .reveal.visible { opacity:1; transform:translateY(0); }
+        .reveal-delay-1 { transition-delay:.1s; }
+        .reveal-delay-2 { transition-delay:.2s; }
+        .reveal-delay-3 { transition-delay:.3s; }
+    </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+
+        <!-- Logo left -->
+        <a class="nav-brand" href="/" aria-label="BIC Community Preschool home">
+            <img class="nav-logo-img" src="BIC logo.png" alt="BIC Community Preschool logo" />
+            <div class="nav-brand-name">
+                <span class="l1">BIC Community</span>
+                <span class="l2">Preschool &amp; Kindergarten</span>
+            </div>
+        </a>
+
+        <!-- Center links -->
+        <ul class="nav-links" id="navLinks" role="list">
+            <li class="nav-item">
+                <a href="#home">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="about.html">About</a>
+            </li>
+            <!-- Programs with dropdown -->
+            <li class="nav-item" id="programsNavItem">
+                <button aria-haspopup="true" aria-expanded="false" aria-controls="programsDropdown">
+                    Programs
+                    <svg class="nav-caret" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                        <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <ul class="nav-dropdown" id="programsDropdown" role="menu">
+                    <li role="none"><a href="parent-info.html" role="menuitem">Parent Info</a></li>
+                    <li role="none"><a href="toddler.html" role="menuitem">Toddler</a></li>
+                    <li role="none"><a href="preschool.html" role="menuitem">Preschool</a></li>
+                    <li role="none"><a href="kindergarten.html" role="menuitem">Kindergarten</a></li>
+                    <li role="none"><a href="summer.html" role="menuitem">Summer</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="https://www.procaresoftware.com" target="_blank" rel="noopener noreferrer">ProCare</a>
+            </li>
+        </ul>
+
+        <!-- Right: Schedule a Tour button + mobile hamburger -->
+        <div class="nav-actions">
+            <a href="#schedule" class="btn btn-red" style="padding:10px 48px;font-size:1rem;">Schedule a Tour</a>
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" id="navToggle">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+
+    </div>
+</nav>
+
+<!-- ═══ ENROLLMENT BANNER ═══ -->
+<div class="enrollment-banner">
+    <div class="container text-center">
+        <span class="enrollment-text">Now enrolling!</span>
+    </div>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="home" aria-labelledby="heroTitle">
+    <!-- Left: white bg, dark text -->
+    <div class="hero-left">
+        <h1 class="hero-title" id="heroTitle">
+            BIC Community<br>Preschool &amp; Kindergarten
+        </h1>
+        <p class="hero-desc">
+            BIC Community Preschool and Kindergarten nurtures each child's unique potential through play-based learning, caring teachers, and a warm, inclusive community spirit.
+        </p>
+        <div class="hero-actions">
+            <a href="#programs" class="btn btn-blue">Explore Programs</a>
+        </div>
+    </div>
+
+    <!-- Right: blue bg, white elements -->
+    <div class="hero-right" aria-hidden="true">
+        <div class="hero-photo-frame">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                <circle cx="32" cy="32" r="30" stroke="white" stroke-width="1.5"/>
+                <path d="M18 48C18 36 24 26 32 26C40 26 46 36 46 48" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                <circle cx="32" cy="20" r="7" stroke="white" stroke-width="1.5" fill="none"/>
+            </svg>
+            <p>School photo here</p>
+        </div>
+
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="hero-stat-label">Curriculum</div>
+                <div class="hero-stat-value">Award-Winning Program</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-label">Staff Ratio</div>
+                <div class="hero-stat-value">1:4 Infants · 1:8 Pre-K</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ PROMISE STRIP — red bg, white text ═══ -->
+<div class="promise-strip" role="list" aria-label="Key commitments">
+    <div class="promise-inner">
+        <div class="promise-item" role="listitem"><span class="picon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Play-Based Learning</div>
+        <div class="promise-divider" aria-hidden="true"></div>
+        <div class="promise-item" role="listitem"><span class="picon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61C20.3292 4.099 19.7228 3.69365 19.0554 3.41708C18.3879 3.14052 17.6725 2.99817 16.95 2.99817C16.2275 2.99817 15.5121 3.14052 14.8446 3.41708C14.1772 3.69365 13.5708 4.099 13.06 4.61L12 5.67L10.94 4.61C9.9083 3.57831 8.50903 2.99871 7.05 2.99871C5.59096 2.99871 4.19169 3.57831 3.16 4.61C2.12831 5.64169 1.54871 7.04096 1.54871 8.5C1.54871 9.95904 2.12831 11.3583 3.16 12.39L4.22 13.45L12 21.23L19.78 13.45L20.84 12.39C21.3509 11.8792 21.7563 11.2728 22.0329 10.6054C22.3095 9.93789 22.4518 9.22248 22.4518 8.5C22.4518 7.77752 22.3095 7.0621 22.0329 6.39464C21.7563 5.72718 21.3509 5.12075 20.84 4.61Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Experienced Teachers</div>
+        <div class="promise-divider" aria-hidden="true"></div>
+        <div class="promise-item" role="listitem"><span class="picon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M23 19C23 19.5304 22.7893 20.0391 22.4142 20.4142C22.0391 20.7893 21.5304 21 21 21H3C2.46957 21 1.96086 20.7893 1.58579 20.4142C1.21071 20.0391 1 19.5304 1 19V8C1 7.46957 1.21071 6.96086 1.58579 6.58579C1.96086 6.21071 2.46957 6 3 6H7L9 3H15L17 6H21C21.5304 6 22.0391 6.21071 22.4142 6.58579C22.7893 6.96086 23 7.46957 23 8V19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="13" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Daily Photos &amp; Updates</div>
+        <div class="promise-divider" aria-hidden="true"></div>
+        <div class="promise-item" role="listitem"><span class="picon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7V10C2 16 12 22 12 22C12 22 22 16 22 10V7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 8V16M8 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Rigorous Health &amp; Safety</div>
+    </div>
+</div>
+
+<!-- ═══ ABOUT — white bg ═══ -->
+<section class="about-section" id="about" aria-labelledby="aboutTitle">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-eyebrow ey-red">Our Promise to Families</span>
+            <h2 class="section-title" id="aboutTitle">Enrichment Activities</h2>
+            <p style="color:var(--gray);line-height:1.72;margin-bottom:26px;">
+                At B.I.C. Community Preschool, we believe children learn best through hands-on experiences, exploration, and play. Our enrichment activities are thoughtfully designed to support every child's social, emotional, physical, and cognitive development while making learning fun and engaging.
+            </p>
+            <p style="color:var(--dark);font-weight:700;font-size:1.02rem;margin-bottom:24px;">Our enrichment opportunities may include:</p>
+            <div class="enrichment-grid" role="list">
+                <div class="enrichment-card" role="listitem">
+                    <div class="enrichment-icon ei-red" aria-hidden="true">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5L12 2L15 5V18"/><path d="M6 15L12 19L18 15"/><path d="M6 8L12 12L18 8"/></svg>
+                    </div>
+                    <h4>Music &amp; Movement</h4>
+                    <p>Singing, dancing, rhythm instruments, and creative movement that build coordination and self-expression.</p>
+                </div>
+                <div class="enrichment-card" role="listitem">
+                    <div class="enrichment-icon ei-yellow" aria-hidden="true">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19C13.6569 19 15 17.6569 15 16C15 14.3431 13.6569 13 12 13C10.3431 13 9 14.3431 9 16C9 17.6569 10.3431 19 12 19Z"/><path d="M12 13V5"/><path d="M12 5L9 8"/><path d="M12 5L15 8"/><path d="M5.5 19C4.5 18 4 16.5 4 15C4 10 7.5 6 12 6C16.5 6 20 10 20 15C20 16.5 19.5 18 18.5 19"/></svg>
+                    </div>
+                    <h4>Art &amp; Creativity</h4>
+                    <p>Painting, drawing, crafts, and sensory art experiences that encourage imagination and fine motor development.</p>
+                </div>
+                <div class="enrichment-card" role="listitem">
+                    <div class="enrichment-icon ei-blue" aria-hidden="true">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14S9.5 16 12 16S16 14 16 14"/><path d="M9 9H9.01M15 9H15.01"/></svg>
+                    </div>
+                    <h4>STEM Exploration</h4>
+                    <p>Age-appropriate science, technology, engineering, and math activities that inspire curiosity and problem-solving.</p>
+                </div>
+                <div class="enrichment-card" role="listitem">
+                    <div class="enrichment-icon ei-blue" aria-hidden="true">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5C4 18.837 4.26339 18.2011 4.73223 17.7322C5.20107 17.2634 5.83696 17 6.5 17H20"/><path d="M6.5 2H20V22H6.5C5.83696 22 5.20107 21.7366 4.73223 21.2678C4.26339 20.7989 4 20.163 4 19.5V4.5C4 3.83696 4.26339 3.20107 4.73223 2.73223C5.20107 2.26339 5.83696 2 6.5 2Z"/></svg>
+                    </div>
+                    <h4>Literacy &amp; Story Time</h4>
+                    <p>Interactive reading, storytelling, phonics, and language activities that foster a lifelong love of books.</p>
+                </div>
+                <div class="enrichment-card" role="listitem">
+                    <div class="enrichment-icon ei-red" aria-hidden="true">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7V10C2 16 12 22 12 22C12 22 22 16 22 10V7L12 2Z"/><path d="M12 8V16M8 12H16"/></svg>
+                    </div>
+                    <h4>Outdoor Learning</h4>
+                    <p>Nature exploration, gardening, gross motor play, and outdoor discovery that promote healthy development.</p>
+                </div>
+                <div class="enrichment-card" role="listitem">
+                    <div class="enrichment-icon ei-yellow" aria-hidden="true">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L12 8M12 8L8 4M12 8L16 4"/><path d="M12 22C16 18 20 14 20 10C20 7.79086 18.2091 6 16 6C14.9 6 13.9 6.4 13.1 7.1L12 8L10.9 7.1C10.1 6.4 9.1 6 8 6C5.79086 6 4 7.79086 4 10C4 14 8 18 12 22Z"/></svg>
+                    </div>
+                    <h4>Sensory Play</h4>
+                    <p>Engaging experiences with textures, water, sand, and other sensory materials to encourage exploration and learning.</p>
+                </div>
+                <div class="enrichment-card" role="listitem">
+                    <div class="enrichment-icon ei-blue" aria-hidden="true">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8H17V6C17 3.79086 15.2091 2 13 2H11C8.79086 2 7 3.79086 7 6V8H6C4.89543 8 4 8.89543 4 10V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V10C20 8.89543 19.1046 8 18 8Z"/><path d="M10 14V18"/><path d="M14 14V18"/></svg>
+                    </div>
+                    <h4>Cooking &amp; Nutrition</h4>
+                    <p>Simple cooking activities that introduce healthy foods, following directions, and teamwork.</p>
+                </div>
+                <div class="enrichment-card" role="listitem">
+                    <div class="enrichment-icon ei-red" aria-hidden="true">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7V10C2 16 12 22 12 22C12 22 22 16 22 10V7L12 2Z"/><path d="M8 11H16"/><path d="M12 7V15"/></svg>
+                    </div>
+                    <h4>Dramatic Play</h4>
+                    <p>Imaginative play centers that develop communication, creativity, and social skills.</p>
+                </div>
+                <div class="enrichment-card" role="listitem">
+                    <div class="enrichment-icon ei-red" aria-hidden="true">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10V6C22 4.89543 21.1046 4 20 4H4C2.89543 4 2 4.89543 2 6V10"/><path d="M22 10V20C22 21.1046 21.1046 22 20 22H4C2.89543 22 2 21.1046 2 20V10"/><path d="M12 15V22"/><path d="M8 15H16"/></svg>
+                    </div>
+                    <h4>Kindergarten Readiness</h4>
+                    <p>Activities that build early literacy, math, critical thinking, independence, and confidence to prepare children for a successful transition to kindergarten.</p>
+                </div>
+                <div class="enrichment-card" role="listitem">
+                    <div class="enrichment-icon ei-yellow" aria-hidden="true">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                    </div>
+                    <h4>Special Events &amp; Celebrations</h4>
+                    <p>Seasonal activities, community helpers, family events, themed learning days, and special guests that enrich the preschool experience.</p>
+                </div>
+                <div class="enrichment-card" role="listitem">
+                    <div class="enrichment-icon ei-blue" aria-hidden="true">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7V10C2 16 12 22 12 22C12 22 22 16 22 10V7L12 2Z"/><path d="M12 6V18"/><path d="M8 10H16"/></svg>
+                    </div>
+                    <h4>Bible Based Curriculum and Weekly Chapels</h4>
+                    <p>Designed for age-appropriate learning, children learn bible stories, praise/worship and learn simple bible verses.</p>
+                </div>
+            </div>
+            <p style="color:var(--gray);line-height:1.72;margin-bottom:0;">
+                Every enrichment activity is planned with each child's developmental stage in mind, creating meaningful opportunities to learn, discover, and grow in a safe, nurturing, and Christ-centered environment.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ PROGRAMS — dark bg ═══ -->
+<section class="program-section" id="programs" aria-labelledby="programsTitle">
+    <div class="container text-center" style="margin-bottom:48px;">
+        <span class="section-eyebrow ey-yellow">Education Programs</span>
+        <h2 class="section-title reveal" id="programsTitle">Designed for Every Stage of Childhood</h2>
+        <p class="section-desc reveal reveal-delay-1">
+            Our programs embrace how children learn best — through curiosity, connection, and joyful exploration tailored to each age group.
+        </p>
+    </div>
+
+    <div class="program-cards">
+        <div class="program-card reveal">
+            <div class="pc-top pc-red" aria-hidden="true"></div>
+            <span class="program-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M12 2C10.8181 2 9.64778 2.23279 8.55585 2.68454C7.46392 3.13628 6.47177 3.79836 5.635 4.63004C4.79773 5.46172 4.13102 6.44771 3.67605 7.53285C3.22108 8.61798 2.98635 9.78184 2.98635 10.9567C2.98635 12.1316 3.22108 13.2955 3.67605 14.3806C4.13102 15.4658 4.79773 16.4517 5.635 17.2834C6.47177 18.1151 7.46392 18.7772 8.55585 19.2289C9.64778 19.6807 10.8181 19.9135 12 19.9135C14.3913 19.9135 16.6878 18.9693 18.365 17.2834C20.0422 15.5975 21 13.3116 21 10.9567C21 8.60182 20.0422 6.31593 18.365 4.63004C16.6878 2.94415 14.3913 2 12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <h3>Infant &amp; Toddler Care</h3>
+            <p>Warm, responsive care during the most sensitive developmental window. We build trust, attachment, and early language skills through gentle daily routines.</p>
+            <span class="program-ages pa-red">6 weeks – 24 months</span>
+        </div>
+        <div class="program-card reveal reveal-delay-1">
+            <div class="pc-top pc-yellow" aria-hidden="true"></div>
+            <span class="program-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 22V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 12L2 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 12L22 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <h3>Preschool Program</h3>
+            <p>Hands-on exploration, storytelling, creative arts, and social skills set the stage for a lifelong love of learning in our vibrant preschool classrooms.</p>
+            <span class="program-ages pa-yellow">2 – 4 years</span>
+        </div>
+        <div class="program-card reveal reveal-delay-2">
+            <div class="pc-top pc-blue" aria-hidden="true"></div>
+            <span class="program-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M4 19.5C4 18.837 4.26339 18.2011 4.73223 17.7322C5.20107 17.2634 5.83696 17 6.5 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 2H20V22H6.5C5.83696 22 5.20107 21.7366 4.73223 21.2678C4.26339 20.7989 4 20.163 4 19.5V4.5C4 3.83696 4.26339 3.20107 4.73223 2.73223C5.20107 2.26339 5.83696 2 6.5 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <h3>Kindergarten</h3>
+            <p>A full-day program blending foundational literacy, numeracy, and social-emotional learning to prepare children for a confident start in elementary school.</p>
+            <span class="program-ages pa-blue">5 – 6 years</span>
+        </div>
+    </div>
+
+    <div class="text-center" style="margin-top:36px;">
+        <a href="#wonder" class="btn btn-yellow">Learn More About Our Curriculum</a>
+    </div>
+</section>
+
+
+<!-- ═══ REVIEWS — yellow bg ═══ -->
+<section class="reviews-section" id="reviews" aria-labelledby="reviewsTitle">
+    <div class="container text-center" style="margin-bottom:48px;">
+        <span class="section-eyebrow ey-red">Testimonials</span>
+        <h2 class="section-title reveal" id="reviewsTitle">What Families Say</h2>
+        <p class="section-desc reveal reveal-delay-1">
+            Hear from parents who have experienced the BIC Community difference.
+        </p>
+    </div>
+
+    <div class="reviews-grid">
+        <div class="review-card reveal">
+            <div class="review-stars" aria-hidden="true">★★★★★</div>
+            <p class="review-text">"The teachers at BIC Community Preschool genuinely know my daughter — her quirks, her passions, her fears. She skips to school every morning. That tells me everything I need to know."</p>
+            <div class="review-author">
+                <span class="review-name">Sarah M.</span>
+                <span class="review-role">Parent since 2022</span>
+            </div>
+        </div>
+        <div class="review-card reveal reveal-delay-1">
+            <div class="review-stars" aria-hidden="true">★★★★★</div>
+            <p class="review-text">"We've been part of the BIC family for three years now. The play-based approach has helped our son develop a love for learning that we know will last a lifetime."</p>
+            <div class="review-author">
+                <span class="review-name">Michael &amp; Jennifer</span>
+                <span class="review-role">Parents since 2021</span>
+            </div>
+        </div>
+        <div class="review-card reveal reveal-delay-2">
+            <div class="review-stars" aria-hidden="true">★★★★★</div>
+            <p class="review-text">"The kindergarten program exceeded our expectations. Small class sizes, caring teachers, and a curriculum that prepared our daughter perfectly for first grade."</p>
+            <div class="review-author">
+                <span class="review-name">Lisa T.</span>
+                <span class="review-role">Parent since 2023</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ LEARN MORE — blue bg ═══ -->
+<section class="learn-more-section" id="learn-more" aria-labelledby="learnMoreTitle">
+    <div class="container text-center">
+        <h2 class="section-title on-dark reveal" id="learnMoreTitle">Ready to Join Our Family?</h2>
+        <p class="section-desc on-dark reveal reveal-delay-1" style="margin-bottom:32px;">
+            Schedule a tour to see our classrooms, meet our teachers, and experience the BIC Community difference firsthand.
+        </p>
+        <div class="learn-more-actions reveal reveal-delay-2">
+            <a href="parent-info.html" class="btn btn-white" style="margin-right:16px;">View Enrollment Info</a>
+            <a href="#schedule" class="btn btn-yellow">Schedule a Tour</a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ FOOTER — dark bg ═══ -->
+<footer class="site-footer" id="footer">
+    <div class="footer-top">
+        <div class="footer-brand">
+            <div class="footer-logo-row">
+                <div class="footer-logo-mark" aria-hidden="true">
+                    <svg viewBox="0 0 22 22" fill="none">
+                        <path d="M11 3L19 11L11 19L3 11Z" stroke="white" stroke-width="2" fill="none" stroke-linejoin="round"/>
+                        <circle cx="11" cy="11" r="3" fill="#FFC21A"/>
+                    </svg>
+                </div>
+                <span class="footer-brand-n">BIC Community Preschool &amp; Kindergarten</span>
+            </div>
+            <p>Nurturing curious minds through play-based learning, community connection, and joyful early childhood education since 1987.</p>
+            <div class="footer-newsletter">
+                <p>Stay in touch with school updates!</p>
+                <div class="email-row">
+                    <label for="footerEmail" class="sr-only">Email Address</label>
+                    <input type="email" id="footerEmail" placeholder="your@email.com" autocomplete="email"/>
+                    <button type="button">Sign Up</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul role="list">
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="#programs">Programs</a></li>
+                <li><a href="#classrooms">Classrooms</a></li>
+                <li><a href="#locator">Enroll Now</a></li>
+                <li><a href="#schedule">Schedule a Tour</a></li>
+                <li><a href="#faq">FAQs</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Families</h4>
+            <ul role="list">
+                <li><a href="#family-portal">Family Portal</a></li>
+                <li><a href="#resources">Parent Resources</a></li>
+                <li><a href="#events">Events &amp; Webinars</a></li>
+                <li><a href="#tuition">Tuition &amp; Benefits</a></li>
+                <li><a href="#health">Health &amp; Safety</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>School Info</h4>
+            <ul role="list">
+                <li><a href="#careers">Teaching Careers</a></li>
+                <li><a href="#news">News &amp; Updates</a></li>
+                <li><a href="#locations">Locations</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+                <li><a href="#sitemap">Sitemap</a></li>
+            </ul>
+            <h4 style="margin-top:20px;">Connect With Us</h4>
+            <div class="footer-social">
+                <a href="#facebook" class="social-btn" aria-label="Facebook">f</a>
+                <a href="#instagram" class="social-btn" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="currentColor" stroke-width="2"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2"/></svg></a>
+                <a href="#youtube" class="social-btn" aria-label="YouTube">▶</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 BIC Community Preschool and Kindergarten. All rights reserved.</p>
+        <div class="footer-legal">
+            <a href="#privacy">Privacy Policy</a>
+            <a href="#terms">Terms &amp; Conditions</a>
+            <a href="#cookies">Cookie Management</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Sticky nav shadow
+    window.addEventListener('scroll', () => {
+        document.querySelector('.site-nav').style.boxShadow =
+            window.scrollY > 20 ? '0 4px 24px rgba(36,32,31,.13)' : '0 2px 12px rgba(36,32,31,.08)';
+    });
+
+    // ── Programs dropdown ──
+    const programsItem = document.getElementById('programsNavItem');
+    const programsBtn  = programsItem.querySelector('button');
+    function closeDropdown() {
+        programsItem.classList.remove('open');
+        programsBtn.setAttribute('aria-expanded', 'false');
+    }
+    programsBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        const isOpen = programsItem.classList.toggle('open');
+        programsBtn.setAttribute('aria-expanded', String(isOpen));
+    });
+    // Close on outside click
+    document.addEventListener('click', closeDropdown);
+    // Close on Escape
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDropdown(); });
+
+    // ── Mobile hamburger ──
+    const toggle  = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    toggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const open = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', String(!open));
+        navLinks.classList.toggle('mobile-open', !open);
+    });
+    // Close mobile nav on outside click
+    document.addEventListener('click', () => {
+        navLinks.classList.remove('mobile-open');
+        toggle.setAttribute('aria-expanded', 'false');
+    });
+    navLinks.addEventListener('click', e => e.stopPropagation());
+
+    // Testimonial rotator
+    const testimonials = [
+        { text: '"The teachers at BIC Community Preschool genuinely know my daughter — her quirks, her passions, her fears. She skips to school every morning. That tells me everything I need to know."', byline: 'BIC Family, Enrolled since 2022' },
+        { text: '"Our son used to be shy and reluctant to try new things. After just one semester at BIC, he\'s confidently leading activities and making friends. The transformation has been incredible."', byline: 'BIC Family, Enrolled since 2023' },
+        { text: '"The curriculum here isn\'t just smart — it\'s caring. Every activity has intention behind it, and you can feel how much the teachers love what they do. We\'re so grateful we found BIC."', byline: 'BIC Family, Enrolled since 2021' }
+    ];
+    const tText = document.getElementById('testimonialText');
+    const tByline = document.getElementById('testimonialByline');
+    tText.style.transition = 'opacity .2s ease';
+    document.querySelectorAll('.t-dot').forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+            document.querySelectorAll('.t-dot').forEach(d => { d.classList.remove('active'); d.setAttribute('aria-selected','false'); });
+            dot.classList.add('active'); dot.setAttribute('aria-selected','true');
+            tText.style.opacity = '0';
+            setTimeout(() => { tText.textContent = testimonials[i].text; tByline.textContent = testimonials[i].byline; tText.style.opacity = '1'; }, 200);
+        });
+    });
+
+    // Search
+    document.getElementById('enrollSearchForm').addEventListener('submit', e => {
+        e.preventDefault();
+        const val = document.getElementById('enrollInput').value.trim();
+        if (val) alert('Searching for schools near: ' + val);
+    });
+</script>
+</body>
+</html>
