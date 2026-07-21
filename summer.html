@@ -18,6 +18,7 @@
             --dark:   #24201F;
             --gray:   #666665;
             --white:      #FFFFFF;
+            --page-bg:    #f5e9d3;
             --off-white:  #F8F7F5;
             --border-col: rgba(36,32,31,.1);
             --font-display: 'Fredoka', sans-serif;
@@ -31,10 +32,14 @@
             --max-width:   1200px;
         }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body { font-family: var(--font-body); color: var(--dark); background: var(--white); overflow-x: hidden; }
+        html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+        section, [id] { scroll-margin-top: 72px; }
+        body { font-family: var(--font-body); color: var(--dark); background: var(--page-bg); overflow-x: hidden; }
         a { text-decoration: none; color: inherit; }
-        img { max-width: 100%; display: block; }
+        img { max-width: 100%; display: block; border-radius: var(--radius-lg); }
+        video { border-radius: var(--radius-lg); }
+        .nav-logo-img { border-radius: 0; }
+        .footer-logo-mark img { border-radius: 0; }
         ul { list-style: none; }
         button { cursor: pointer; border: none; background: none; font: inherit; }
         .sr-only { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
@@ -106,15 +111,15 @@
         .nav-item > button:hover {
             color: var(--red);
         }
-        .nav-item.open > a,
-        .nav-item.open > button {
-            background: var(--red); color: var(--white);
+        .nav-item:hover > a,
+        .nav-item:hover > button {
+            color: var(--red);
         }
         .nav-caret {
             width: 10px; height: 10px; flex-shrink: 0;
             transition: transform .2s;
         }
-        .nav-item.open .nav-caret { transform: rotate(180deg); }
+        .nav-item:hover .nav-caret { transform: rotate(180deg); }
 
         .nav-dropdown {
             display: none;
@@ -126,8 +131,17 @@
             box-shadow: var(--shadow-pop);
             min-width: 210px;
             padding: 8px 0;
-            z-index: 200;
+            z-index: 1001;
         }
+        .nav-dropdown::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 0;
+            right: 0;
+            height: 12px;
+        }
+        .nav-item:hover .nav-dropdown { display: block; }
         .nav-item.open .nav-dropdown { display: block; }
         .nav-dropdown a {
             display: block; padding: 9px 18px;
@@ -221,7 +235,7 @@
             max-width: 700px; margin: 0 auto;
         }
 
-        .program-section { padding: 88px 24px; background: var(--white); }
+        .program-section { padding: 88px 24px; background: var(--page-bg); }
         .program-section-alt { padding: 88px 24px; background: var(--off-white); }
 
         .section-content {
@@ -319,10 +333,71 @@
         .footer-col ul { display: flex; flex-direction: column; gap: 9px; }
         .footer-col ul a { font-size: .85rem; transition: color .15s; }
         .footer-col ul a:hover { color: var(--white); }
+        .footer-social { display: flex; gap: 8px; margin-top: 20px; }
+        .social-btn { width: 36px; height: 36px; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; font-size: .9rem; transition: background .15s; }
+        .social-btn:hover { background: var(--red); border-color: var(--red); color: var(--white); }
         .footer-bottom { max-width: var(--max-width); margin: 0 auto; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
         .footer-bottom p { font-size: .8rem; color: rgba(255,255,255,.35); }
-        @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
-        @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; } }
+        /* ── SUMMER PHOTOS GALLERY ── */
+        .summer-gallery-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 32px;
+            margin-bottom: 48px;
+            align-items: center;
+        }
+        .summer-gallery-row {
+            display: flex;
+            gap: 16px;
+            width: 100%;
+            justify-content: center;
+        }
+        .row-top {
+            max-width: 992px;
+        }
+        .row-bottom {
+            max-width: 992px;
+        }
+        .row-bottom .summer-photo-item {
+            aspect-ratio: 1.5 / 1;
+            max-width: none;
+        }
+        .summer-photo-item {
+            flex: 1;
+            aspect-ratio: 1/1;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 3px solid #000000;
+            box-shadow: var(--shadow-card);
+            background: var(--off-white);
+            transition: transform .2s;
+            max-width: 320px;
+        }
+        .summer-photo-item:hover {
+            transform: scale(1.03);
+        }
+        .summer-photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 0;
+        }
+        @media (max-width: 768px) {
+            .summer-gallery-row {
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+            }
+            .row-bottom {
+                max-width: 100%;
+            }
+            .summer-photo-item {
+                width: 100%;
+                max-width: 380px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -331,7 +406,7 @@
 <nav class="site-nav" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
         <a class="nav-brand" href="index.html" aria-label="BIC Community Preschool home">
-            <img class="nav-logo-img" src="BIC logo.png" alt="BIC Community Preschool logo" />
+            <img class="nav-logo-img" src="public/images/logo.png" alt="BIC Community Preschool logo" />
             <div class="nav-brand-name">
                 <span class="l1">BIC Community</span>
                 <span class="l2">Preschool &amp; Kindergarten</span>
@@ -361,12 +436,12 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="https://www.procaresoftware.com" target="_blank" rel="noopener noreferrer">ProCare</a>
+                <a href="https://schools.procareconnect.com/login" target="_blank" rel="noopener noreferrer">ProCare</a>
             </li>
         </ul>
 
         <div class="nav-actions">
-            <a href="index.html#schedule" class="btn btn-red" style="padding:10px 48px;font-size:1rem;">Schedule a Tour</a>
+            <a href="tel:9099814333" class="btn btn-red" style="padding:10px 48px;font-size:1rem;display:inline-flex;align-items:center;gap:8px;">Schedule a Tour <img src="public/images/icons/whitephone.png" alt="" style="width:23px;height:23px;" /></a>
             <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" id="navToggle">
                 <span></span><span></span><span></span>
             </button>
@@ -374,161 +449,247 @@
     </div>
 </nav>
 
-<!-- ═══ ENROLLMENT BANNER ═══ -->
-<div class="enrollment-banner">
-    <div class="container text-center">
-        <span class="enrollment-text">Now enrolling!</span>
-    </div>
-</div>
 
-<!-- ═══ PAGE HEADER ═══ -->
-<header class="page-header">
-    <div class="container">
-        <span class="section-eyebrow ey-yellow">Ages 2-6 Years</span>
-        <h1>Summer Program</h1>
-        <p>Fun-filled summer camps and activities that keep children engaged, learning, and making memories all summer long.</p>
-    </div>
-</header>
-
-<!-- ═══ OVERVIEW ═══ -->
-<section class="program-section" id="overview">
+<!-- ═══ BANNER ═══ -->
+<section class="program-section-alt" id="banner">
     <div class="section-content">
-        <div class="container text-center" style="margin-bottom: 48px;">
-            <span class="section-eyebrow ey-red">Summer Fun</span>
-            <h2 class="section-title">A Summer to Remember</h2>
-            <p>Our summer program combines learning, adventure, and fun for an unforgettable summer experience.</p>
+        <div style="max-width: var(--max-width); margin: 0 auto 48px; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-pop);">
+            <img src="public/images/banners/summer-day-camp-banner.png" alt="Summer Camp at BIC Community Preschool" style="width:100%;display:block;object-fit:cover;object-position:center;">
         </div>
-        <div class="content-grid">
-            <div class="content-text">
-                <h3>Adventure Awaits</h3>
-                <p>BIC Community Preschool's summer program offers a perfect blend of structured activities and free exploration. Each week features a different theme, from nature exploration and science experiments to water play and creative arts. Children stay engaged and excited about learning throughout the summer months.</p>
-                <p>Our summer program maintains the same high standards of care and education as our school-year programs, with experienced teachers who create a safe, nurturing environment. Children build friendships, develop new skills, and create lasting memories.</p>
-                <p>Flexible scheduling options allow families to choose full weeks, individual days, or half-day programs to fit their summer plans. Whether you need full-time care or just want to add some fun activities to your child's summer, we have options for you.</p>
+
+        <!-- Camp info card -->
+        <div style="background:var(--white);border-radius:var(--radius-lg);padding:48px 40px;box-shadow:var(--shadow-card);max-width:var(--max-width);margin:0 auto 48px;">
+            <h3 style="font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--dark);margin-bottom:20px;text-align:center;">Summer Camp at B.I.C. Community Preschool</h3>
+            <p style="color:var(--gray);line-height:1.75;margin-bottom:16px;text-align:center;font-size:1.1rem;">A Summer Full of Learning, Friendship &amp; Fun!</p>
+            <p style="color:var(--gray);line-height:1.75;margin-bottom:16px;">Give your child a summer filled with exciting adventures, hands-on learning, and unforgettable memories! Our Summer Camp is designed for children 12 months through Kindergarten and provides a safe, nurturing environment where children can explore, create, play, and grow.</p>
+            <p style="color:var(--gray);line-height:1.75;margin-bottom:24px;">Each week features engaging, age-appropriate activities that encourage creativity, curiosity, and confidence while helping children continue learning throughout the summer.</p>
+
+            <h4 style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:var(--dark);margin-bottom:16px;">Our Summer Camp Includes:</h4>
+            <ul style="list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:12px 32px;margin-bottom:24px;">
+                <li style="display:flex;align-items:center;gap:12px;color:var(--gray);line-height:1.5;">
+                    <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0;"></span>
+                    Weekly themed adventures
+                </li>
+                <li style="display:flex;align-items:center;gap:12px;color:var(--gray);line-height:1.5;">
+                    <span style="width:8px;height:8px;border-radius:50%;background:var(--yellow);flex-shrink:0;"></span>
+                    Arts &amp; crafts
+                </li>
+                <li style="display:flex;align-items:center;gap:12px;color:var(--gray);line-height:1.5;">
+                    <span style="width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0;"></span>
+                    Water play days
+                </li>
+                <li style="display:flex;align-items:center;gap:12px;color:var(--gray);line-height:1.5;">
+                    <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0;"></span>
+                    Outdoor games and playground fun
+                </li>
+                <li style="display:flex;align-items:center;gap:12px;color:var(--gray);line-height:1.5;">
+                    <span style="width:8px;height:8px;border-radius:50%;background:var(--yellow);flex-shrink:0;"></span>
+                    Music and movement
+                </li>
+                <li style="display:flex;align-items:center;gap:12px;color:var(--gray);line-height:1.5;">
+                    <span style="width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0;"></span>
+                    Science and sensory exploration
+                </li>
+                <li style="display:flex;align-items:center;gap:12px;color:var(--gray);line-height:1.5;">
+                    <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0;"></span>
+                    Story time and literacy activities
+                </li>
+                <li style="display:flex;align-items:center;gap:12px;color:var(--gray);line-height:1.5;">
+                    <span style="width:8px;height:8px;border-radius:50%;background:var(--yellow);flex-shrink:0;"></span>
+                    STEM discovery projects
+                </li>
+                <li style="display:flex;align-items:center;gap:12px;color:var(--gray);line-height:1.5;">
+                    <span style="width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0;"></span>
+                    Dramatic play and imaginative learning
+                </li>
+                <li style="display:flex;align-items:center;gap:12px;color:var(--gray);line-height:1.5;">
+                    <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0;"></span>
+                    Fine and gross motor development
+                </li>
+                <li style="display:flex;align-items:center;gap:12px;color:var(--gray);line-height:1.5;grid-column:span 2;">
+                    <span style="width:8px;height:8px;border-radius:50%;background:var(--yellow);flex-shrink:0;"></span>
+                    Kindergarten readiness activities for our older campers
+                </li>
+            </ul>
+
+            <h4 style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:var(--dark);margin-bottom:16px;">Programs Available</h4>
+            <div style="margin-bottom:20px;">
+                <h5 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--red);margin-bottom:8px;">Infant &amp; Toddler Camp (12–24 Months)</h5>
+                <p style="color:var(--gray);line-height:1.75;">Our youngest campers enjoy a loving, nurturing environment with sensory play, music, movement, outdoor exploration, and activities designed to support early development while maintaining familiar daily routines.</p>
             </div>
-            <div class="content-media" style="background: var(--blue);">
-                <div style="color: rgba(255,255,255,.7); font-size: .88rem; font-style: italic;">Summer program photo coming soon</div>
+            <div style="margin-bottom:20px;">
+                <h5 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--yellow);margin-bottom:8px;">Preschool Camp (2–5 Years)</h5>
+                <p style="color:var(--gray);line-height:1.75;">Children participate in exciting weekly themes filled with hands-on learning, creative projects, outdoor adventures, and social experiences that keep young minds active and engaged all summer long.</p>
+            </div>
+            <div style="margin-bottom:24px;">
+                <h5 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--blue);margin-bottom:8px;">Kindergarten Readiness Camp</h5>
+                <p style="color:var(--gray);line-height:1.75;">Perfect for children entering Kindergarten, this program combines fun summer activities with early literacy, math, science, problem-solving, and social-emotional learning to help children feel confident and prepared for the school year ahead.</p>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1.05fr 1fr;gap:36px;align-items:center;margin-bottom:32px;">
+                <div style="display:flex;align-items:center;justify-content:center;">
+                    <img src="public/images/Playground.png" alt="BIC Preschool Playground" style="width:100%;height:auto;max-height:350px;object-fit:contain;display:block;border-radius:0;box-shadow:none;background:transparent;">
+                </div>
+                <div>
+                    <h4 style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:var(--dark);margin-bottom:16px;">Why Families Choose Our Summer Camp</h4>
+                    <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;">
+                        <li style="display:flex;align-items:center;gap:12px;color:var(--gray);line-height:1.5;">
+                            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0;"></span>
+                            Safe, caring, and licensed preschool environment
+                        </li>
+                        <li style="display:flex;align-items:center;gap:12px;color:var(--gray);line-height:1.5;">
+                            <span style="width:8px;height:8px;border-radius:50%;background:var(--yellow);flex-shrink:0;"></span>
+                            Experienced and nurturing teachers
+                        </li>
+                        <li style="display:flex;align-items:center;gap:12px;color:var(--gray);line-height:1.5;">
+                            <span style="width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0;"></span>
+                            Small class sizes
+                        </li>
+                        <li style="display:flex;align-items:center;gap:12px;color:var(--gray);line-height:1.5;">
+                            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0;"></span>
+                            Age-appropriate curriculum and activities
+                        </li>
+                        <li style="display:flex;align-items:center;gap:12px;color:var(--gray);line-height:1.5;">
+                            <span style="width:8px;height:8px;border-radius:50%;background:var(--yellow);flex-shrink:0;"></span>
+                            Opportunities to build friendships and confidence
+                        </li>
+                        <li style="display:flex;align-items:center;gap:12px;color:var(--gray);line-height:1.5;">
+                            <span style="width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0;"></span>
+                            A balance of structured learning and creative play
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <p style="color:var(--gray);line-height:1.75;margin-bottom:16px;text-align:center;font-weight:600;">Join us for a summer filled with laughter, learning, exploration, and fun! Spaces are limited, so enroll early to reserve your child's spot.</p>
+            <div style="text-align:center;margin-top:24px;">
+                <h4 style="font-family:var(--font-display);font-size:1.3rem;font-weight:700;color:var(--dark);margin-bottom:8px;">Now Enrolling!</h4>
+                <p style="font-size: 1.1rem; font-weight: 700; margin-top: 4px; margin-bottom: 20px; color: var(--dark);">Ages: 12 Months through Kindergarten</p>
+                <a href="https://www.ubic.church/general-4" target="_blank" rel="noopener noreferrer" class="btn btn-red" style="padding: 12px 36px;">Learn More</a>
+            </div>
+        </div>
+
+        <!-- ═══ SUMMER CAMP GALLERY ═══ -->
+        <div style="margin-top: 56px;">
+            <h4 style="font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--dark);margin-bottom:8px;text-align:center;">Summer Camp Gallery</h4>
+            <p style="color:var(--gray);text-align:center;margin-bottom:32px;">A glimpse into the fun, play, and learning our campers experience every day.</p>
+            
+            <div class="summer-gallery-container">
+                <!-- Row 1: Photos 1, 3, 5 -->
+                <div class="summer-gallery-row row-top">
+                    <div class="summer-photo-item">
+                        <img src="Summer%20Photos/6610663b-8e02-43b6-8659-6e75bf7b4c16.jpeg" alt="Summer camp activity 1" />
+                    </div>
+                    <div class="summer-photo-item">
+                        <img src="Summer%20Photos/ed030121-3a63-4ad8-9644-ee95256cbea0.jpeg" alt="Summer camp activity 3" />
+                    </div>
+                    <div class="summer-photo-item">
+                        <img src="Summer%20Photos/3bf3db6d-a72a-477f-9b68-6cac7e8f99ea.png" alt="Summer camp activity 5" />
+                    </div>
+                </div>
+                <!-- Row 2: Photos 2, 4 -->
+                <div class="summer-gallery-row row-bottom">
+                    <div class="summer-photo-item">
+                        <img src="Summer%20Photos/6742d2f3-e598-4851-9ba8-26747b3d9ae7.jpeg" alt="Summer camp activity 2" />
+                    </div>
+                    <div class="summer-photo-item">
+                        <img src="Summer%20Photos/c915323a-1e26-497d-8e79-97ba3f02a51e.jpeg" alt="Summer camp activity 4" />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ═══ FEATURES ═══ -->
-<section class="program-section-alt" id="features">
-    <div class="section-content">
-        <div class="container text-center" style="margin-bottom: 48px;">
-            <span class="section-eyebrow ey-blue">What We Offer</span>
-            <h2 class="section-title">Summer Activities</h2>
-            <p>Exciting activities and themes throughout the summer.</p>
-        </div>
-        <div class="feature-grid">
-            <div class="feature-card">
-                <div class="feature-icon fi-red">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-                </div>
-                <h4>Water Play</h4>
-                <p>Splash pads, water tables, and outdoor water activities that keep kids cool and active.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon fi-yellow">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7L12 12L22 7L12 2Z"/><path d="M2 17L12 22L22 17"/><path d="M2 12L12 17L22 12"/></svg>
-                </div>
-                <h4>Weekly Themes</h4>
-                <p>Each week features a new theme like space, dinosaurs, oceans, or jungle exploration.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon fi-blue">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7V10C2 16 12 22 12 22C12 22 22 16 22 10V7L12 2Z"/><path d="M8 11H16"/><path d="M12 7V15"/></svg>
-                </div>
-                <h4>Outdoor Adventures</h4>
-                <p>Nature walks, scavenger hunts, and playground time that encourage exploration and physical activity.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon fi-yellow">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-                </div>
-                <h4>Music & Movement</h4>
-                <p>Dance parties, instrument exploration, and movement activities that build coordination and rhythm.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon fi-blue">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5C4 18.837 4.26339 18.2011 4.73223 17.7322C5.20107 17.2634 5.83696 17 6.5 17H20"/><path d="M6.5 2H20V22H6.5C5.83696 22 5.20107 21.7366 4.73223 21.2678C4.26339 20.7989 4 20.163 4 19.5V4.5C4 3.83696 4.26339 3.20107 4.73223 2.73223C5.20107 2.26339 5.83696 2 6.5 2Z"/></svg>
-                </div>
-                <h4>Creative Arts</h4>
-                <p>Summer-themed crafts, painting, and art projects that encourage creativity and self-expression.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon fi-red">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14S9.5 16 12 16S16 14 16 14"/><path d="M9 9H9.01M15 9H15.01"/></svg>
-                </div>
-                <h4>Field Trips</h4>
-                <p>Age-appropriate excursions to local parks, libraries, and community attractions.</p>
-            </div>
-        </div>
-    </div>
-</section>
 
-<!-- ═══ SCHEDULE ═══ -->
-<section class="program-section" id="schedule">
-    <div class="section-content">
-        <div class="container text-center" style="margin-bottom: 48px;">
-            <span class="section-eyebrow ey-yellow">Summer Schedule</span>
-            <h2 class="section-title">Schedule & Options</h2>
-            <p>Flexible summer scheduling to meet your family's needs.</p>
-        </div>
-        <div class="schedule-box">
-            <h3>Flexible Summer Options</h3>
-            <p>Our summer program runs from June through August with flexible enrollment options. Choose full weeks, individual days, or half-day programs. Extended hours (7:00 AM - 6:00 PM) available to accommodate working families' summer schedules.</p>
-            <a href="parent-info.html" class="btn btn-white">View Enrollment Details</a>
-        </div>
-    </div>
-</section>
-
-<!-- ═══ FOOTER ═══ -->
-<footer class="site-footer">
+<!-- ═══ FOOTER — dark bg ═══ -->
+<footer class="site-footer" id="footer">
     <div class="footer-top">
         <div class="footer-brand">
             <div class="footer-logo-row">
-                <div class="footer-logo-mark">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                        <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
-                        <path d="M2 17L12 22L22 17"/>
-                        <path d="M2 12L12 17L22 12"/>
-                    </svg>
-                </div>
-                <span class="footer-brand-n">BIC Community Preschool</span>
+                <img src="public/images/logo.png" alt="BIC Community Preschool & Kindergarten" style="height:110px;width:auto;border-radius:0;" />
             </div>
             <p>Nurturing curious minds through play-based learning, community connection, and joyful early childhood education.</p>
         </div>
+
         <div class="footer-col">
             <h4>Quick Links</h4>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="parent-info.html">Parent Info</a></li>
-                <li><a href="index.html#schedule">Schedule a Tour</a></li>
+            <ul role="list">
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="index.html#programs">Programs</a></li>
+                <li><a href="parent-info.html#enrollment">Enroll Now</a></li>
             </ul>
         </div>
+
         <div class="footer-col">
-            <h4>Programs</h4>
-            <ul>
-                <li><a href="toddler.html">Toddler</a></li>
-                <li><a href="preschool.html">Preschool</a></li>
-                <li><a href="kindergarten.html">Kindergarten</a></li>
-                <li><a href="summer.html">Summer</a></li>
+            <h4>Families</h4>
+            <ul role="list">
+                <li><a href="https://schools.procareconnect.com/login" target="_blank" rel="noopener noreferrer">ProCare Portal</a></li>
+                <li><a href="parent-info.html#resources">Parent Resources</a></li>
             </ul>
         </div>
+
         <div class="footer-col">
-            <h4>Contact</h4>
-            <ul>
-                <li><a href="tel:+15551234567">(555) 123-4567</a></li>
-                <li><a href="mailto:info@biccommunitypreschool.org">info@biccommunitypreschool.org</a></li>
+            <h4>School Info</h4>
+            <ul role="list">
+                <li><a href="about.html#careers">Teaching Careers</a></li>
+                <li><a href="mailto:kera@ubic.church">Contact Us</a></li>
             </ul>
+            <h4 style="margin-top:20px;">Connect With Us</h4>
+            <div class="footer-social">
+                <a href="#facebook" class="social-btn" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                <a href="#instagram" class="social-btn" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="currentColor" stroke-width="2"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2"/></svg></a>
+                <a href="tel:9099814333" class="social-btn" aria-label="Phone (909) 981-4333"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></a>
+            </div>
         </div>
     </div>
+
     <div class="footer-bottom">
-        <p>&copy; 2024 BIC Community Preschool. All rights reserved.</p>
+        <p>© 2026 BIC Community Preschool and Kindergarten. All rights reserved. | Facility License Number: 364846843</p>
+        </div>
     </div>
 </footer>
+
+<script>
+    // Sticky nav shadow
+    window.addEventListener('scroll', () => {
+        document.querySelector('.site-nav').style.boxShadow =
+            window.scrollY > 20 ? '0 4px 24px rgba(36,32,31,.13)' : '0 2px 12px rgba(36,32,31,.08)';
+    });
+
+    // ── Programs dropdown ──
+    const programsItem = document.getElementById('programsNavItem');
+    const programsBtn  = programsItem.querySelector('button');
+    function closeDropdown() {
+        programsItem.classList.remove('open');
+        programsBtn.setAttribute('aria-expanded', 'false');
+    }
+    programsBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        const isOpen = programsItem.classList.toggle('open');
+        programsBtn.setAttribute('aria-expanded', String(isOpen));
+    });
+    // Close on outside click
+    document.addEventListener('click', closeDropdown);
+    // Close on Escape
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDropdown(); });
+
+    // ── Mobile hamburger ──
+    const toggle  = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    toggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const open = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', String(!open));
+        navLinks.classList.toggle('mobile-open', !open);
+    });
+    // Close mobile nav on outside click
+    document.addEventListener('click', () => {
+        navLinks.classList.remove('mobile-open');
+        toggle.setAttribute('aria-expanded', 'false');
+    });
+    navLinks.addEventListener('click', e => e.stopPropagation());
+</script>
 
 </body>
 </html>

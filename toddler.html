@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Toddler Program | BIC Community Preschool and Kindergarten</title>
-    <meta name="description" content="Toddler program at BIC Community Preschool - nurturing care and early learning for children ages 18-36 months."/>
+    <meta name="description" content="Toddler program at BIC Community Preschool - nurturing care and early learning for children ages 12-24 months."/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="canonical" href="https://www.biccommunitypreschool.org/toddler"/>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -18,6 +18,7 @@
             --dark:   #24201F;
             --gray:   #666665;
             --white:      #FFFFFF;
+            --page-bg:    #f5e9d3;
             --off-white:  #F8F7F5;
             --border-col: rgba(36,32,31,.1);
             --font-display: 'Fredoka', sans-serif;
@@ -31,10 +32,14 @@
             --max-width:   1200px;
         }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body { font-family: var(--font-body); color: var(--dark); background: var(--white); overflow-x: hidden; }
+        html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+        section, [id] { scroll-margin-top: 72px; }
+        body { font-family: var(--font-body); color: var(--dark); background: var(--page-bg); overflow-x: hidden; }
         a { text-decoration: none; color: inherit; }
-        img { max-width: 100%; display: block; }
+        img { max-width: 100%; display: block; border-radius: var(--radius-lg); }
+        video { border-radius: var(--radius-lg); }
+        .nav-logo-img { border-radius: 0; }
+        .footer-logo-mark img { border-radius: 0; }
         ul { list-style: none; }
         button { cursor: pointer; border: none; background: none; font: inherit; }
         .sr-only { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
@@ -106,15 +111,15 @@
         .nav-item > button:hover {
             color: var(--red);
         }
-        .nav-item.open > a,
-        .nav-item.open > button {
-            background: var(--red); color: var(--white);
+        .nav-item:hover > a,
+        .nav-item:hover > button {
+            color: var(--red);
         }
         .nav-caret {
             width: 10px; height: 10px; flex-shrink: 0;
             transition: transform .2s;
         }
-        .nav-item.open .nav-caret { transform: rotate(180deg); }
+        .nav-item:hover .nav-caret { transform: rotate(180deg); }
 
         .nav-dropdown {
             display: none;
@@ -126,8 +131,17 @@
             box-shadow: var(--shadow-pop);
             min-width: 210px;
             padding: 8px 0;
-            z-index: 200;
+            z-index: 1001;
         }
+        .nav-dropdown::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 0;
+            right: 0;
+            height: 12px;
+        }
+        .nav-item:hover .nav-dropdown { display: block; }
         .nav-item.open .nav-dropdown { display: block; }
         .nav-dropdown a {
             display: block; padding: 9px 18px;
@@ -206,22 +220,29 @@
         }
 
         .page-header {
-            background: var(--off-white);
+            background: var(--red);
             padding: 120px 24px 80px;
             text-align: center;
         }
         .page-header h1 {
             font-family: var(--font-display);
             font-size: clamp(2.5rem, 5vw, 3.5rem);
-            font-weight: 700; color: var(--dark);
+            font-weight: 700; color: var(--white);
             margin-bottom: 16px;
         }
+        .page-header .section-eyebrow {
+            background: var(--white);
+            color: var(--red);
+            font-size: 0.9rem;
+            font-weight: 900;
+            letter-spacing: .04em;
+        }
         .page-header p {
-            font-size: 1.1rem; color: var(--gray);
+            font-size: 1.1rem; color: rgba(255,255,255,.85);
             max-width: 700px; margin: 0 auto;
         }
 
-        .program-section { padding: 88px 24px; background: var(--white); }
+        .program-section { padding: 88px 24px; background: var(--page-bg); }
         .program-section-alt { padding: 88px 24px; background: var(--off-white); }
 
         .section-content {
@@ -229,7 +250,7 @@
         }
 
         .content-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 28px;
             align-items: center;
         }
 
@@ -284,20 +305,49 @@
             font-size: .9rem; color: var(--gray); line-height: 1.6;
         }
 
-        .schedule-box {
-            background: var(--blue);
+
+        /* ── SCATTERED PHOTOS ── */
+        .photo-strip {
+            width: 100%; overflow: hidden;
             border-radius: var(--radius-lg);
-            padding: 48px;
-            text-align: center;
-            color: var(--white);
+            box-shadow: var(--shadow-pop);
+            background: rgba(36,32,31,.08);
+            display: flex; align-items: center; justify-content: center;
         }
-        .schedule-box h3 {
-            font-family: var(--font-display); font-weight: 700;
-            font-size: 1.8rem; margin-bottom: 16px;
+        .photo-strip img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg); display: block; }
+        .photo-strip-placeholder { color: rgba(36,32,31,.3); font-size: .78rem; font-style: italic; text-align: center; padding: 20px; }
+
+        /* Full-width cinematic strip */
+        .photo-break {
+            padding: 0 24px;
+            margin: 0 0 0px;
         }
-        .schedule-box p {
-            font-size: 1.05rem; margin-bottom: 24px;
-            opacity: .9;
+        .photo-break .photo-strip { height: 380px; border-radius: var(--radius-lg); }
+
+        /* Side-by-side pair */
+        .photo-pair {
+            max-width: var(--max-width); margin: 0 auto 48px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+        }
+        .photo-pair .photo-strip { height: 280px; }
+
+        /* Centered portrait */
+        .photo-portrait {
+            max-width: 560px; margin: 48px auto 0;
+        }
+        .photo-portrait .photo-strip { height: 400px; }
+
+        /* Inline photo inside section (replaces content-media) */
+        .scattered-inline { border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4/3;
+            background: rgba(36,32,31,.08); display: flex; align-items: center; justify-content: center;
+            box-shadow: var(--shadow-pop); }
+        .scattered-inline img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg); }
+        .scattered-inline-placeholder { color: rgba(36,32,31,.3); font-size: .78rem; font-style: italic; text-align: center; padding: 20px; }
+
+        @media (max-width: 700px) {
+            .photo-pair { grid-template-columns: 1fr; }
+            .photo-break .photo-strip { height: 240px; }
+            .photo-portrait { max-width: 100%; }
         }
 
         @media (max-width: 860px) {
@@ -319,6 +369,9 @@
         .footer-col ul { display: flex; flex-direction: column; gap: 9px; }
         .footer-col ul a { font-size: .85rem; transition: color .15s; }
         .footer-col ul a:hover { color: var(--white); }
+        .footer-social { display: flex; gap: 8px; margin-top: 20px; }
+        .social-btn { width: 36px; height: 36px; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; font-size: .9rem; transition: background .15s; }
+        .social-btn:hover { background: var(--red); border-color: var(--red); color: var(--white); }
         .footer-bottom { max-width: var(--max-width); margin: 0 auto; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
         .footer-bottom p { font-size: .8rem; color: rgba(255,255,255,.35); }
         @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
@@ -331,7 +384,7 @@
 <nav class="site-nav" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
         <a class="nav-brand" href="index.html" aria-label="BIC Community Preschool home">
-            <img class="nav-logo-img" src="BIC logo.png" alt="BIC Community Preschool logo" />
+            <img class="nav-logo-img" src="public/images/logo.png" alt="BIC Community Preschool logo" />
             <div class="nav-brand-name">
                 <span class="l1">BIC Community</span>
                 <span class="l2">Preschool &amp; Kindergarten</span>
@@ -361,12 +414,12 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="https://www.procaresoftware.com" target="_blank" rel="noopener noreferrer">ProCare</a>
+                <a href="https://schools.procareconnect.com/login" target="_blank" rel="noopener noreferrer">ProCare</a>
             </li>
         </ul>
 
         <div class="nav-actions">
-            <a href="index.html#schedule" class="btn btn-red" style="padding:10px 48px;font-size:1rem;">Schedule a Tour</a>
+            <a href="tel:9099814333" class="btn btn-red" style="padding:10px 48px;font-size:1rem;display:inline-flex;align-items:center;gap:8px;">Schedule a Tour <img src="public/images/icons/whitephone.png" alt="" style="width:23px;height:23px;" /></a>
             <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" id="navToggle">
                 <span></span><span></span><span></span>
             </button>
@@ -374,161 +427,206 @@
     </div>
 </nav>
 
-<!-- ═══ ENROLLMENT BANNER ═══ -->
-<div class="enrollment-banner">
-    <div class="container text-center">
-        <span class="enrollment-text">Now enrolling!</span>
-    </div>
-</div>
 
 <!-- ═══ PAGE HEADER ═══ -->
 <header class="page-header">
     <div class="container">
-        <span class="section-eyebrow ey-yellow">Ages 18-36 Months</span>
+        <span class="section-eyebrow ey-yellow">Ages 12–24 Months</span>
         <h1>Toddler Program</h1>
-        <p>A nurturing environment where little ones explore, discover, and build the foundations for lifelong learning.</p>
+        <p>Our Toddler Program is designed for children who are eager to explore, discover, and become more independent. This exciting stage of development is filled with curiosity, and our teachers provide a structured yet playful environment where toddlers can safely learn through hands-on experiences.</p>
     </div>
 </header>
 
 <!-- ═══ OVERVIEW ═══ -->
-<section class="program-section" id="overview">
+<section class="program-section" id="overview" style="padding-left:12px;padding-right:12px;">
     <div class="section-content">
         <div class="container text-center" style="margin-bottom: 48px;">
             <span class="section-eyebrow ey-red">Our Approach</span>
             <h2 class="section-title">Nurturing Curiosity</h2>
-            <p>Our toddler program is designed to support your child's rapid development during these crucial early years.</p>
         </div>
         <div class="content-grid">
             <div class="content-text">
-                <h3>Building Blocks for Growth</h3>
-                <p>Toddlers are natural explorers, constantly learning about the world around them. Our program provides a safe, stimulating environment where they can satisfy their curiosity while developing essential skills.</p>
-                <p>Through sensory activities, music and movement, art exploration, and guided play, toddlers develop language, motor skills, social awareness, and emotional regulation. Our experienced teachers create daily routines that balance structure with flexibility, allowing each child to thrive at their own pace.</p>
-                <p>We maintain low teacher-to-child ratios to ensure every toddler receives individual attention and care. Our nurturing approach helps children build secure attachments and develop confidence as they begin to interact with peers.</p>
+                <p>Our Toddler Program nurtures children eager to explore, discover, and grow. Our teachers create a structured, playful environment where toddlers learn through hands-on experiences.</p>
+                <p>Children participate in activities that encourage language development, early problem-solving, creativity, movement, and social interaction. As they gain confidence, toddlers begin developing self-help skills and routines that prepare them for preschool. Along with parents, teachers will assist with toilet training.</p>
             </div>
-            <div class="content-media" style="background: var(--blue);">
-                <div style="color: rgba(255,255,255,.7); font-size: .88rem; font-style: italic;">Toddler classroom photo coming soon</div>
+            <div class="scattered-inline">
+                <img src="Toddler Program/color.jpg" alt="Children coloring" style="width:100%;height:100%;object-fit:cover;" />
+            </div>
+        </div>
+
+        <!-- Photos 3 & 4: side-by-side at the bottom of this section -->
+        <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 16px; margin-top: 32px; align-items: flex-end;">
+            <div class="photo-strip" style="height:290px;">
+                <img src="Toddler Program/snowman.jpg" alt="Toddler with snowman" style="width:100%;height:100%;object-fit:cover;" />
+            </div>
+            <div class="photo-strip" style="height:260px;">
+                <img src="Toddler Program/line.jpg" alt="Toddlers in line" style="width:100%;height:100%;object-fit:cover;" />
             </div>
         </div>
     </div>
 </section>
 
+
+
+
 <!-- ═══ FEATURES ═══ -->
 <section class="program-section-alt" id="features">
     <div class="section-content">
         <div class="container text-center" style="margin-bottom: 48px;">
-            <span class="section-eyebrow ey-blue">What We Offer</span>
+            <span class="section-eyebrow ey-red">What We Offer</span>
             <h2 class="section-title">Program Highlights</h2>
             <p>Key features of our toddler program.</p>
         </div>
         <div class="feature-grid">
             <div class="feature-card">
                 <div class="feature-icon fi-red">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7L12 12L22 7L12 2Z"/><path d="M2 17L12 22L22 17"/><path d="M2 12L12 17L22 12"/></svg>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
                 </div>
-                <h4>Sensory Play</h4>
-                <p>Hands-on activities with textures, water, sand, and materials that stimulate exploration and learning.</p>
+                <h4>Hands-on Learning Through Play</h4>
+                <p>Interactive activities that engage children's natural curiosity and love of discovery.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon fi-yellow">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                <div class="feature-icon fi-red">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                 </div>
-                <h4>Music & Movement</h4>
-                <p>Singing, dancing, and rhythm activities that build coordination, language, and self-expression.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon fi-blue">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61C20.3292 4.099 19.7228 3.69365 19.0554 3.41708C18.3879 3.14052 17.6725 2.99817 16.95 2.99817C16.2275 2.99817 15.5121 3.14052 14.8446 3.41708C14.1772 3.69365 13.5708 4.099 13.06 4.61L12 5.67L10.94 4.61C9.9083 3.57831 8.50903 2.99871 7.05 2.99871C5.59096 2.99871 4.19169 3.57831 3.16 4.61C2.12831 5.64169 1.54871 7.04096 1.54871 8.5C1.54871 9.95904 2.12831 11.3583 3.16 12.39L4.22 13.45L12 21.23L19.78 13.45L20.84 12.39C21.3509 11.8792 21.7563 11.2728 22.0329 10.6054C22.3095 9.93789 22.4518 9.22248 22.4518 8.5C22.4518 7.77752 22.3095 7.0621 22.0329 6.39464C21.7563 5.72718 21.3509 5.12075 20.84 4.61Z"/></svg>
-                </div>
-                <h4>Social Development</h4>
-                <p>Guided interactions that help toddlers learn to share, communicate, and build friendships.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon fi-yellow">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5C4 18.837 4.26339 18.2011 4.73223 17.7322C5.20107 17.2634 5.83696 17 6.5 17H20"/><path d="M6.5 2H20V22H6.5C5.83696 22 5.20107 21.7366 4.73223 21.2678C4.26339 20.7989 4 20.163 4 19.5V4.5C4 3.83696 4.26339 3.20107 4.73223 2.73223C5.20107 2.26339 5.83696 2 6.5 2Z"/></svg>
-                </div>
-                <h4>Language Building</h4>
+                <h4>Language & Vocabulary Development</h4>
                 <p>Story time, conversations, and vocabulary activities that support early language development.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon fi-blue">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14S9.5 16 12 16S16 14 16 14"/><path d="M9 9H9.01M15 9H15.01"/></svg>
+                <div class="feature-icon fi-red">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
                 </div>
-                <h4>Motor Skills</h4>
+                <h4>Music, Movement & Creative Art</h4>
+                <p>Singing, dancing, rhythm activities, and art exploration that build coordination and self-expression.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon fi-red">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61C20.3292 4.099 19.7228 3.69365 19.0554 3.41708C18.3879 3.14052 17.6725 2.99817 16.95 2.99817C16.2275 2.99817 15.5121 3.14052 14.8446 3.41708C14.1772 3.69365 13.5708 4.099 13.06 4.61L12 5.67L10.94 4.61C9.9083 3.57831 8.50903 2.99871 7.05 2.99871C5.59096 2.99871 4.19169 3.57831 3.16 4.61C2.12831 5.64169 1.54871 7.04096 1.54871 8.5C1.54871 9.95904 2.12831 11.3583 3.16 12.39L4.22 13.45L12 21.23L19.78 13.45L20.84 12.39C21.3509 11.8792 21.7563 11.2728 22.0329 10.6054C22.3095 9.93789 22.4518 9.22248 22.4518 8.5C22.4518 7.77752 22.3095 7.0621 22.0329 6.39464C21.7563 5.72718 21.3509 5.12075 20.84 4.61Z"/></svg>
+                </div>
+                <h4>Social & Emotional Growth</h4>
+                <p>Guided interactions that help toddlers learn to share, communicate, and build friendships.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon fi-red">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v5"></path><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v6"></path><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"></path><path d="M8 14a5 5 0 0 0 10 0v-3"></path><path d="M6 18c0 2 2 3 5 3h3a7 7 0 0 0 7-7h-1.5"></path></svg>
+                </div>
+                <h4>Fine & Gross Motor Development</h4>
                 <p>Activities that develop both fine motor skills (grasping, stacking) and gross motor skills (walking, climbing).</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon fi-red">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7V10C2 16 12 22 12 22C12 22 22 16 22 10V7L12 2Z"/><path d="M12 8V16M8 12H16"/></svg>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                 </div>
-                <h4>Safe Environment</h4>
-                <p>Child-proofed spaces, secure facilities, and constant supervision to ensure your toddler's safety.</p>
+                <h4>Independence & Self-Help Skills</h4>
+                <p>Encouragement of independence and self-help skills to prepare children for preschool.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ═══ SCHEDULE ═══ -->
-<section class="program-section" id="schedule">
-    <div class="section-content">
-        <div class="container text-center" style="margin-bottom: 48px;">
-            <span class="section-eyebrow ey-yellow">Daily Routine</span>
-            <h2 class="section-title">Schedule & Options</h2>
-            <p>Flexible scheduling to meet your family's needs.</p>
+<!-- Photos 5, 2, 6: equal size in a row -->
+<div style="padding: 1px 24px 88px; background: var(--off-white);">
+    <div style="max-width: var(--max-width); margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+        <div class="photo-strip" style="height: 480px;">
+            <img src="Toddler Program/play.jpg" alt="Toddlers playing" style="width:100%;height:100%;object-fit:cover;" />
         </div>
-        <div class="schedule-box">
-            <h3>Full-Day & Half-Day Options</h3>
-            <p>We offer both full-day (7:00 AM - 6:00 PM) and half-day programs with flexible attendance schedules. Choose 2, 3, 4, or 5 days per week based on your family's needs.</p>
-            <a href="parent-info.html" class="btn btn-white">View Enrollment Details</a>
+        <div class="photo-strip" style="height: 480px;">
+            <img src="Toddler Program/hug.jpg" alt="Children hugging" style="width:100%;height:100%;object-fit:cover;" />
+        </div>
+        <div class="photo-strip" style="height: 480px;">
+            <img src="Toddler Program/tunnel.jpg" alt="Toddlers playing in tunnel" style="width:100%;height:100%;object-fit:cover;" />
         </div>
     </div>
-</section>
+</div>
 
 <!-- ═══ FOOTER ═══ -->
 <footer class="site-footer">
     <div class="footer-top">
         <div class="footer-brand">
             <div class="footer-logo-row">
-                <div class="footer-logo-mark">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                        <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
-                        <path d="M2 17L12 22L22 17"/>
-                        <path d="M2 12L12 17L22 12"/>
-                    </svg>
-                </div>
-                <span class="footer-brand-n">BIC Community Preschool</span>
+                <img src="public/images/logo.png" alt="BIC Community Preschool & Kindergarten" style="height:110px;width:auto;border-radius:0;" />
             </div>
             <p>Nurturing curious minds through play-based learning, community connection, and joyful early childhood education.</p>
         </div>
         <div class="footer-col">
             <h4>Quick Links</h4>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="parent-info.html">Parent Info</a></li>
-                <li><a href="index.html#schedule">Schedule a Tour</a></li>
+            <ul role="list">
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="index.html#programs">Programs</a></li>
+                <li><a href="parent-info.html#enrollment">Enroll Now</a></li>
             </ul>
         </div>
+
         <div class="footer-col">
-            <h4>Programs</h4>
-            <ul>
-                <li><a href="toddler.html">Toddler</a></li>
-                <li><a href="preschool.html">Preschool</a></li>
-                <li><a href="kindergarten.html">Kindergarten</a></li>
-                <li><a href="summer.html">Summer</a></li>
+            <h4>Families</h4>
+            <ul role="list">
+                <li><a href="https://schools.procareconnect.com/login" target="_blank" rel="noopener noreferrer">ProCare Portal</a></li>
+                <li><a href="parent-info.html#resources">Parent Resources</a></li>
             </ul>
         </div>
+
         <div class="footer-col">
-            <h4>Contact</h4>
-            <ul>
-                <li><a href="tel:+15551234567">(555) 123-4567</a></li>
-                <li><a href="mailto:info@biccommunitypreschool.org">info@biccommunitypreschool.org</a></li>
+            <h4>School Info</h4>
+            <ul role="list">
+                <li><a href="about.html#careers">Teaching Careers</a></li>
+                <li><a href="mailto:kera@ubic.church">Contact Us</a></li>
             </ul>
+            <h4 style="margin-top:20px;">Connect With Us</h4>
+            <div class="footer-social">
+                <a href="#facebook" class="social-btn" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                <a href="#instagram" class="social-btn" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="currentColor" stroke-width="2"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2"/></svg></a>
+                <a href="tel:9099814333" class="social-btn" aria-label="Phone (909) 981-4333"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></a>
+            </div>
         </div>
     </div>
+
     <div class="footer-bottom">
-        <p>&copy; 2024 BIC Community Preschool. All rights reserved.</p>
+        <p>© 2026 BIC Community Preschool and Kindergarten. All rights reserved. | Facility License Number: 364846843</p>
+        </div>
     </div>
 </footer>
+
+<script>
+    // Sticky nav shadow
+    window.addEventListener('scroll', () => {
+        document.querySelector('.site-nav').style.boxShadow =
+            window.scrollY > 20 ? '0 4px 24px rgba(36,32,31,.13)' : '0 2px 12px rgba(36,32,31,.08)';
+    });
+
+    // ── Programs dropdown ──
+    const programsItem = document.getElementById('programsNavItem');
+    const programsBtn  = programsItem.querySelector('button');
+    function closeDropdown() {
+        programsItem.classList.remove('open');
+        programsBtn.setAttribute('aria-expanded', 'false');
+    }
+    programsBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        const isOpen = programsItem.classList.toggle('open');
+        programsBtn.setAttribute('aria-expanded', String(isOpen));
+    });
+    // Close on outside click
+    document.addEventListener('click', closeDropdown);
+    // Close on Escape
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDropdown(); });
+
+    // ── Mobile hamburger ──
+    const toggle  = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    toggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const open = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', String(!open));
+        navLinks.classList.toggle('mobile-open', !open);
+    });
+    // Close mobile nav on outside click
+    document.addEventListener('click', () => {
+        navLinks.classList.remove('mobile-open');
+        toggle.setAttribute('aria-expanded', 'false');
+    });
+    navLinks.addEventListener('click', e => e.stopPropagation());
+</script>
 
 </body>
 </html>

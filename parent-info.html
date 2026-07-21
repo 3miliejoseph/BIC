@@ -18,6 +18,7 @@
             --dark:   #24201F;
             --gray:   #666665;
             --white:      #FFFFFF;
+            --page-bg:    #f5e9d3;
             --off-white:  #F8F7F5;
             --border-col: rgba(36,32,31,.1);
             --font-display: 'Fredoka', sans-serif;
@@ -31,10 +32,14 @@
             --max-width:   1200px;
         }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body { font-family: var(--font-body); color: var(--dark); background: var(--white); overflow-x: hidden; }
+        html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+        section, [id] { scroll-margin-top: 72px; }
+        body { font-family: var(--font-body); color: var(--dark); background: var(--page-bg); overflow-x: hidden; }
         a { text-decoration: none; color: inherit; }
-        img { max-width: 100%; display: block; }
+        img { max-width: 100%; display: block; border-radius: var(--radius-lg); }
+        video { border-radius: var(--radius-lg); }
+        .nav-logo-img { border-radius: 0; }
+        .footer-logo-mark img { border-radius: 0; }
         ul { list-style: none; }
         button { cursor: pointer; border: none; background: none; font: inherit; }
         .sr-only { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
@@ -106,15 +111,15 @@
         .nav-item > button:hover {
             color: var(--red);
         }
-        .nav-item.open > a,
-        .nav-item.open > button {
-            background: var(--red); color: var(--white);
+        .nav-item:hover > a,
+        .nav-item:hover > button {
+            color: var(--red);
         }
         .nav-caret {
             width: 10px; height: 10px; flex-shrink: 0;
             transition: transform .2s;
         }
-        .nav-item.open .nav-caret { transform: rotate(180deg); }
+        .nav-item:hover .nav-caret { transform: rotate(180deg); }
 
         .nav-dropdown {
             display: none;
@@ -126,8 +131,17 @@
             box-shadow: var(--shadow-pop);
             min-width: 210px;
             padding: 8px 0;
-            z-index: 200;
+            z-index: 1001;
         }
+        .nav-dropdown::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 0;
+            right: 0;
+            height: 12px;
+        }
+        .nav-item:hover .nav-dropdown { display: block; }
         .nav-item.open .nav-dropdown { display: block; }
         .nav-dropdown a {
             display: block; padding: 9px 18px;
@@ -136,6 +150,7 @@
             white-space: nowrap;
         }
         .nav-dropdown a:hover { color: var(--red); }
+        .nav-dropdown a.nav-selected { color: var(--red) !important; }
         .nav-dropdown li { position: relative; }
         .nav-dropdown-divider {
             height: 1px; background: var(--border-col); margin: 6px 12px;
@@ -221,23 +236,26 @@
             max-width: 700px; margin: 0 auto;
         }
 
-        .info-section { padding: 88px 24px; background: var(--white); }
+        .info-section { padding: 88px 24px; background: var(--page-bg); }
         .info-section-alt { padding: 88px 24px; background: var(--off-white); }
+        .info-section-red { padding: 88px 24px; background: var(--red); color: var(--white); }
+        .info-section-red .section-title { color: var(--white); }
+        .info-section-red .container > p { color: rgba(255,255,255,.92); }
 
         .section-content {
             max-width: var(--max-width); margin: 0 auto;
         }
 
         .info-grid {
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
             margin-top: 40px;
         }
         .info-card {
             background: var(--white); border-radius: var(--radius-lg);
             padding: 32px; border: 1px solid var(--border-col);
-            transition: transform .2s, box-shadow .2s;
+            transition: box-shadow .2s;
         }
-        .info-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+        .info-card:hover { box-shadow: var(--shadow-card); }
         .info-card h3 {
             font-family: var(--font-display); font-weight: 700;
             font-size: 1.3rem; color: var(--dark); margin-bottom: 12px;
@@ -255,9 +273,9 @@
             padding: 20px; background: var(--white);
             border-radius: var(--radius-md);
             border: 1px solid var(--border-col);
-            transition: transform .2s, box-shadow .2s;
+            transition: box-shadow .2s;
         }
-        .resource-item:hover { transform: translateX(4px); box-shadow: var(--shadow-card); }
+        .resource-item:hover { box-shadow: var(--shadow-card); }
         .resource-icon {
             width: 48px; height: 48px; border-radius: 50%;
             background: var(--yellow);
@@ -290,6 +308,9 @@
         .footer-col ul { display: flex; flex-direction: column; gap: 9px; }
         .footer-col ul a { font-size: .85rem; transition: color .15s; }
         .footer-col ul a:hover { color: var(--white); }
+        .footer-social { display: flex; gap: 8px; margin-top: 20px; }
+        .social-btn { width: 36px; height: 36px; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; font-size: .9rem; transition: background .15s; }
+        .social-btn:hover { background: var(--red); border-color: var(--red); color: var(--white); }
         .footer-bottom { max-width: var(--max-width); margin: 0 auto; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
         .footer-bottom p { font-size: .8rem; color: rgba(255,255,255,.35); }
         @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
@@ -302,7 +323,7 @@
 <nav class="site-nav" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
         <a class="nav-brand" href="index.html" aria-label="BIC Community Preschool home">
-            <img class="nav-logo-img" src="BIC logo.png" alt="BIC Community Preschool logo" />
+            <img class="nav-logo-img" src="public/images/logo.png" alt="BIC Community Preschool logo" />
             <div class="nav-brand-name">
                 <span class="l1">BIC Community</span>
                 <span class="l2">Preschool &amp; Kindergarten</span>
@@ -324,7 +345,7 @@
                     </svg>
                 </button>
                 <ul class="nav-dropdown" id="programsDropdown" role="menu">
-                    <li role="none"><a href="parent-info.html" role="menuitem">Parent Info</a></li>
+                    <li role="none"><a href="parent-info.html" role="menuitem" class="nav-selected">Parent Info</a></li>
                     <li role="none"><a href="toddler.html" role="menuitem">Toddler</a></li>
                     <li role="none"><a href="preschool.html" role="menuitem">Preschool</a></li>
                     <li role="none"><a href="kindergarten.html" role="menuitem">Kindergarten</a></li>
@@ -332,12 +353,12 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="https://www.procaresoftware.com" target="_blank" rel="noopener noreferrer">ProCare</a>
+                <a href="https://schools.procareconnect.com/login" target="_blank" rel="noopener noreferrer">ProCare</a>
             </li>
         </ul>
 
         <div class="nav-actions">
-            <a href="index.html#schedule" class="btn btn-red" style="padding:10px 48px;font-size:1rem;">Schedule a Tour</a>
+            <a href="tel:9099814333" class="btn btn-red" style="padding:10px 48px;font-size:1rem;display:inline-flex;align-items:center;gap:8px;">Schedule a Tour <img src="public/images/icons/whitephone.png" alt="" style="width:23px;height:23px;" /></a>
             <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" id="navToggle">
                 <span></span><span></span><span></span>
             </button>
@@ -345,17 +366,11 @@
     </div>
 </nav>
 
-<!-- ═══ ENROLLMENT BANNER ═══ -->
-<div class="enrollment-banner">
-    <div class="container text-center">
-        <span class="enrollment-text">Now enrolling!</span>
-    </div>
-</div>
 
 <!-- ═══ PAGE HEADER ═══ -->
 <header class="page-header">
     <div class="container">
-        <span class="section-eyebrow ey-yellow">For Families</span>
+        <span class="section-eyebrow ey-blue">For Families</span>
         <h1>Parent Information</h1>
         <p>Everything you need to know about enrolling and being part of the BIC Community Preschool family.</p>
     </div>
@@ -370,57 +385,40 @@
             <p>Joining our family is simple. Here's how to get started.</p>
         </div>
         <div class="info-grid">
-            <div class="info-card">
-                <h3>1. Schedule a Tour</h3>
-                <p>Visit our school to see our classrooms, meet our teachers, and experience our learning environment firsthand. Tours are available by appointment.</p>
+            <div class="info-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h3>1. Schedule a Tour</h3>
+                    <p>Visit our school to see our classrooms, meet our teachers, and experience our learning environment firsthand. Tours are available by appointment.</p>
+                </div>
+                <div style="margin-top: 20px;">
+                    <a href="tel:9099814333" class="btn btn-red" style="padding: 10px 20px; font-size: .9rem; display: inline-flex; align-items: center; gap: 8px;">Call to Schedule <img src="public/images/icons/whitephone.png" alt="" style="width:18px;height:18px;" /></a>
+                </div>
             </div>
-            <div class="info-card">
-                <h3>2. Complete Application</h3>
-                <p>Fill out our enrollment application form with your child's information, including emergency contacts, medical information, and developmental history.</p>
+            <div class="info-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h3>2. Complete Application</h3>
+                    <p>Fill out our enrollment application form with your child's information, including emergency contacts, medical information, and developmental history.</p>
+                </div>
+                <div style="margin-top: 20px;">
+                    <a href="public/Application%20Form.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-yellow" style="padding: 10px 20px; font-size: .9rem; display: inline-flex; align-items: center; gap: 8px;">Application Form <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z"/><path d="M14 2V8H20"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg></a>
+                </div>
             </div>
-            <div class="info-card">
-                <h3>3. Submit Documents</h3>
-                <p>Provide required documents including birth certificate, immunization records, and proof of residency. Our team will guide you through the process.</p>
-            </div>
-            <div class="info-card">
-                <h3>4. Orientation</h3>
-                <p>Attend our family orientation to learn about our policies, daily routines, and how to partner with us for your child's success.</p>
+            <div class="info-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h3>3. Submit Documents</h3>
+                    <p>Provide required documents including birth certificate, immunization records, and proof of residency. Our team will guide you through the process.</p>
+                </div>
+                <div style="margin-top: 20px;">
+                    <span class="btn btn-blue" style="padding: 10px 20px; font-size: .9rem; display: inline-flex; align-items: center; gap: 8px; cursor: default;">Welcome to BIC!</span>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ═══ POLICIES ═══ -->
-<section class="info-section-alt" id="policies">
-    <div class="section-content">
-        <div class="container text-center" style="margin-bottom: 48px;">
-            <span class="section-eyebrow ey-blue">Guidelines</span>
-            <h2 class="section-title">School Policies</h2>
-            <p>Our policies ensure a safe, nurturing environment for all children.</p>
-        </div>
-        <div class="info-grid">
-            <div class="info-card">
-                <h3>Health & Safety</h3>
-                <p>We maintain strict health and safety protocols including regular cleaning, secure entry systems, and health screening procedures to protect all children.</p>
-            </div>
-            <div class="info-card">
-                <h3>Attendance</h3>
-                <p>Regular attendance helps children build routines and relationships. Please notify us if your child will be absent due to illness or family circumstances.</p>
-            </div>
-            <div class="info-card">
-                <h3>Communication</h3>
-                <p>We use multiple channels to keep you informed including daily reports, monthly newsletters, parent-teacher conferences, and our parent portal.</p>
-            </div>
-            <div class="info-card">
-                <h3>Tuition & Payments</h3>
-                <p>Tuition is due monthly with flexible payment options available. We offer sibling discounts and financial assistance for qualifying families.</p>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- ═══ RESOURCES ═══ -->
-<section class="info-section" id="resources">
+<section class="info-section-red" id="resources">
     <div class="section-content">
         <div class="container text-center" style="margin-bottom: 48px;">
             <span class="section-eyebrow ey-yellow">Helpful Tools</span>
@@ -428,7 +426,7 @@
             <p>Helpful documents and links to support your family.</p>
         </div>
         <div class="resource-list">
-            <div class="resource-item">
+            <a href="public/Parent%20Handbook.pdf" target="_blank" rel="noopener noreferrer" class="resource-item" style="text-decoration: none;">
                 <div class="resource-icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--dark)" stroke-width="2"><path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z"/><path d="M14 2V8H20"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
                 </div>
@@ -436,8 +434,8 @@
                     <h4>Parent Handbook</h4>
                     <p>Complete guide to our policies, procedures, and expectations</p>
                 </div>
-            </div>
-            <div class="resource-item">
+            </a>
+            <a href="public/School%20Calendar.pdf" target="_blank" rel="noopener noreferrer" class="resource-item" style="text-decoration: none;">
                 <div class="resource-icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--dark)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                 </div>
@@ -445,8 +443,8 @@
                     <h4>School Calendar</h4>
                     <p>Important dates, holidays, and events for the current school year</p>
                 </div>
-            </div>
-            <div class="resource-item">
+            </a>
+            <a href="https://schools.procareconnect.com/login" target="_blank" rel="noopener noreferrer" class="resource-item" style="text-decoration: none;">
                 <div class="resource-icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--dark)" stroke-width="2"><path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z"/></svg>
                 </div>
@@ -454,16 +452,16 @@
                     <h4>ProCare Parent Portal</h4>
                     <p>Access your child's records, payments, and communication online</p>
                 </div>
-            </div>
-            <div class="resource-item">
+            </a>
+            <a href="public/Fall%20Tuition%20Rate%20Sheet.pdf" target="_blank" rel="noopener noreferrer" class="resource-item" style="text-decoration: none;">
                 <div class="resource-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--dark)" stroke-width="2"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/><path d="M12 16V12"/><path d="M12 8H12.01"/></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--dark)" stroke-width="2"><path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z"/><path d="M14 2V8H20"/><path d="M12 18V12"/><path d="M9 15h6"/></svg>
                 </div>
                 <div class="resource-text">
-                    <h4>FAQs</h4>
-                    <p>Answers to commonly asked questions from parents</p>
+                    <h4>Fall Tuition Rate Sheet</h4>
+                    <p>Comprehensive overview of tuition rates and schedule options for the upcoming school year</p>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 </section>
@@ -473,47 +471,88 @@
     <div class="footer-top">
         <div class="footer-brand">
             <div class="footer-logo-row">
-                <div class="footer-logo-mark">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                        <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
-                        <path d="M2 17L12 22L22 17"/>
-                        <path d="M2 12L12 17L22 12"/>
-                    </svg>
-                </div>
-                <span class="footer-brand-n">BIC Community Preschool</span>
+                <img src="public/images/logo.png" alt="BIC Community Preschool & Kindergarten" style="height:110px;width:auto;border-radius:0;" />
             </div>
             <p>Nurturing curious minds through play-based learning, community connection, and joyful early childhood education.</p>
         </div>
         <div class="footer-col">
             <h4>Quick Links</h4>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="parent-info.html">Parent Info</a></li>
-                <li><a href="index.html#schedule">Schedule a Tour</a></li>
+            <ul role="list">
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="index.html#programs">Programs</a></li>
+                <li><a href="parent-info.html#enrollment">Enroll Now</a></li>
             </ul>
         </div>
+
         <div class="footer-col">
-            <h4>Programs</h4>
-            <ul>
-                <li><a href="toddler.html">Toddler</a></li>
-                <li><a href="preschool.html">Preschool</a></li>
-                <li><a href="kindergarten.html">Kindergarten</a></li>
-                <li><a href="summer.html">Summer</a></li>
+            <h4>Families</h4>
+            <ul role="list">
+                <li><a href="https://schools.procareconnect.com/login" target="_blank" rel="noopener noreferrer">ProCare Portal</a></li>
+                <li><a href="parent-info.html#resources">Parent Resources</a></li>
             </ul>
         </div>
+
         <div class="footer-col">
-            <h4>Contact</h4>
-            <ul>
-                <li><a href="tel:+15551234567">(555) 123-4567</a></li>
-                <li><a href="mailto:info@biccommunitypreschool.org">info@biccommunitypreschool.org</a></li>
+            <h4>School Info</h4>
+            <ul role="list">
+                <li><a href="about.html#careers">Teaching Careers</a></li>
+                <li><a href="mailto:kera@ubic.church">Contact Us</a></li>
             </ul>
+            <h4 style="margin-top:20px;">Connect With Us</h4>
+            <div class="footer-social">
+                <a href="#facebook" class="social-btn" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                <a href="#instagram" class="social-btn" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="currentColor" stroke-width="2"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2"/></svg></a>
+                <a href="tel:9099814333" class="social-btn" aria-label="Phone (909) 981-4333"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></a>
+            </div>
         </div>
     </div>
+
     <div class="footer-bottom">
-        <p>&copy; 2024 BIC Community Preschool. All rights reserved.</p>
+        <p>© 2026 BIC Community Preschool and Kindergarten. All rights reserved. | Facility License Number: 364846843</p>
+        </div>
     </div>
 </footer>
+
+<script>
+    // Sticky nav shadow
+    window.addEventListener('scroll', () => {
+        document.querySelector('.site-nav').style.boxShadow =
+            window.scrollY > 20 ? '0 4px 24px rgba(36,32,31,.13)' : '0 2px 12px rgba(36,32,31,.08)';
+    });
+
+    // ── Programs dropdown ──
+    const programsItem = document.getElementById('programsNavItem');
+    const programsBtn  = programsItem.querySelector('button');
+    function closeDropdown() {
+        programsItem.classList.remove('open');
+        programsBtn.setAttribute('aria-expanded', 'false');
+    }
+    programsBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        const isOpen = programsItem.classList.toggle('open');
+        programsBtn.setAttribute('aria-expanded', String(isOpen));
+    });
+    // Close on outside click
+    document.addEventListener('click', closeDropdown);
+    // Close on Escape
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDropdown(); });
+
+    // ── Mobile hamburger ──
+    const toggle  = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    toggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const open = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', String(!open));
+        navLinks.classList.toggle('mobile-open', !open);
+    });
+    // Close mobile nav on outside click
+    document.addEventListener('click', () => {
+        navLinks.classList.remove('mobile-open');
+        toggle.setAttribute('aria-expanded', 'false');
+    });
+    navLinks.addEventListener('click', e => e.stopPropagation());
+</script>
 
 </body>
 </html>

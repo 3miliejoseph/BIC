@@ -18,6 +18,7 @@
             --dark:   #24201F;
             --gray:   #666665;
             --white:      #FFFFFF;
+            --page-bg:    #f5e9d3;
             --off-white:  #F8F7F5;
             --border-col: rgba(36,32,31,.1);
             --font-display: 'Fredoka', sans-serif;
@@ -31,10 +32,14 @@
             --max-width:   1200px;
         }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body { font-family: var(--font-body); color: var(--dark); background: var(--white); overflow-x: hidden; }
+        html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+        section, [id] { scroll-margin-top: 72px; }
+        body { font-family: var(--font-body); color: var(--dark); background: var(--page-bg); overflow-x: hidden; }
         a { text-decoration: none; color: inherit; }
-        img { max-width: 100%; display: block; }
+        img { max-width: 100%; display: block; border-radius: var(--radius-lg); }
+        video { border-radius: var(--radius-lg); }
+        .nav-logo-img { border-radius: 0; }
+        .footer-logo-mark img { border-radius: 0; }
         ul { list-style: none; }
         button { cursor: pointer; border: none; background: none; font: inherit; }
         .sr-only { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
@@ -108,7 +113,7 @@
         }
         .nav-item.open > a,
         .nav-item.open > button {
-            background: var(--red); color: var(--white);
+            color: var(--red);
         }
         .nav-caret {
             width: 10px; height: 10px; flex-shrink: 0;
@@ -128,7 +133,13 @@
             padding: 8px 0;
             z-index: 200;
         }
+        .nav-item:hover .nav-dropdown,
         .nav-item.open .nav-dropdown { display: block; }
+        /* Invisible bridge so hover doesn't break when moving mouse into dropdown */
+        .nav-dropdown::before {
+            content: ''; position: absolute; top: -10px; left: 0;
+            width: 100%; height: 10px;
+        }
         .nav-dropdown a {
             display: block; padding: 9px 18px;
             font-size: .86rem; font-weight: 700; color: var(--gray);
@@ -206,22 +217,29 @@
         }
 
         .page-header {
-            background: var(--off-white);
+            background: var(--blue);
             padding: 120px 24px 80px;
             text-align: center;
         }
         .page-header h1 {
             font-family: var(--font-display);
             font-size: clamp(2.5rem, 5vw, 3.5rem);
-            font-weight: 700; color: var(--dark);
+            font-weight: 700; color: var(--white);
             margin-bottom: 16px;
         }
         .page-header p {
-            font-size: 1.1rem; color: var(--gray);
+            font-size: 1.1rem; color: rgba(255,255,255,.85);
             max-width: 700px; margin: 0 auto;
         }
+        .page-header .section-eyebrow {
+            background: var(--white);
+            color: var(--blue);
+            font-size: 0.9rem;
+            font-weight: 900;
+            letter-spacing: .04em;
+        }
 
-        .program-section { padding: 88px 24px; background: var(--white); }
+        .program-section { padding: 88px 24px; background: var(--page-bg); }
         .program-section-alt { padding: 88px 24px; background: var(--off-white); }
 
         .section-content {
@@ -255,6 +273,72 @@
         .content-media::before {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px;
             background: var(--yellow);
+        }
+
+        .photo-strip {
+            width: 100%;
+            overflow: hidden;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-pop);
+            background: rgba(36,32,31,.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .photo-strip img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            display: block;
+        }
+        .photo-strip-placeholder {
+            color: rgba(36,32,31,.3);
+            font-size: .78rem;
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+        }
+        .scattered-inline {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            background: rgba(36,32,31,.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-pop);
+        }
+        .scattered-inline img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+        }
+        .scattered-inline-placeholder {
+            color: rgba(36,32,31,.3);
+            font-size: .78rem;
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+        }
+        .photo-row-three {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 8px;
+        }
+        .photo-row-two {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+        @media (max-width: 860px) {
+            .photo-row-three,
+            .photo-row-two {
+                grid-template-columns: 1fr;
+            }
         }
 
         .feature-grid {
@@ -319,6 +403,9 @@
         .footer-col ul { display: flex; flex-direction: column; gap: 9px; }
         .footer-col ul a { font-size: .85rem; transition: color .15s; }
         .footer-col ul a:hover { color: var(--white); }
+        .footer-social { display: flex; gap: 8px; margin-top: 20px; }
+        .social-btn { width: 36px; height: 36px; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; font-size: .9rem; transition: background .15s; }
+        .social-btn:hover { background: var(--red); border-color: var(--red); color: var(--white); }
         .footer-bottom { max-width: var(--max-width); margin: 0 auto; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
         .footer-bottom p { font-size: .8rem; color: rgba(255,255,255,.35); }
         @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
@@ -331,7 +418,7 @@
 <nav class="site-nav" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
         <a class="nav-brand" href="index.html" aria-label="BIC Community Preschool home">
-            <img class="nav-logo-img" src="BIC logo.png" alt="BIC Community Preschool logo" />
+            <img class="nav-logo-img" src="public/images/logo.png" alt="BIC Community Preschool logo" />
             <div class="nav-brand-name">
                 <span class="l1">BIC Community</span>
                 <span class="l2">Preschool &amp; Kindergarten</span>
@@ -361,12 +448,12 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="https://www.procaresoftware.com" target="_blank" rel="noopener noreferrer">ProCare</a>
+                <a href="https://schools.procareconnect.com/login" target="_blank" rel="noopener noreferrer">ProCare</a>
             </li>
         </ul>
 
         <div class="nav-actions">
-            <a href="index.html#schedule" class="btn btn-red" style="padding:10px 48px;font-size:1rem;">Schedule a Tour</a>
+            <a href="tel:9099814333" class="btn btn-red" style="padding:10px 48px;font-size:1rem;display:inline-flex;align-items:center;gap:8px;">Schedule a Tour <img src="public/images/icons/whitephone.png" alt="" style="width:23px;height:23px;" /></a>
             <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" id="navToggle">
                 <span></span><span></span><span></span>
             </button>
@@ -374,19 +461,13 @@
     </div>
 </nav>
 
-<!-- ═══ ENROLLMENT BANNER ═══ -->
-<div class="enrollment-banner">
-    <div class="container text-center">
-        <span class="enrollment-text">Now enrolling!</span>
-    </div>
-</div>
 
 <!-- ═══ PAGE HEADER ═══ -->
 <header class="page-header">
     <div class="container">
         <span class="section-eyebrow ey-yellow">Ages 5-6 Years</span>
         <h1>Kindergarten Program</h1>
-        <p>A full-day kindergarten program with small class sizes, individualized attention, and a strong academic foundation.</p>
+        <p>Our Kindergarten Program provides a strong academic foundation while nurturing each child's confidence, character, and love of learning.</p>
     </div>
 </header>
 
@@ -394,19 +475,37 @@
 <section class="program-section" id="overview">
     <div class="section-content">
         <div class="container text-center" style="margin-bottom: 48px;">
-            <span class="section-eyebrow ey-red">Our Approach</span>
-            <h2 class="section-title">Excellence in Education</h2>
-            <p>Our kindergarten program provides a comprehensive curriculum that prepares children for first grade and beyond.</p>
+            <span class="section-eyebrow ey-blue">Our Approach</span>
+            <h2 class="section-title">Kindergarten Program</h2>
+            <p>Our Kindergarten Program provides a strong academic foundation while nurturing each child's confidence, character, and love of learning.</p>
         </div>
         <div class="content-grid">
             <div class="content-text">
                 <h3>A Strong Foundation</h3>
-                <p>BIC Community Kindergarten offers a full-day program that combines academic excellence with the nurturing environment families trust. Our small class sizes allow teachers to provide individualized attention and tailor instruction to each child's learning style and pace.</p>
-                <p>Our curriculum meets and exceeds state standards while maintaining our play-based, child-centered philosophy. Children develop strong reading, writing, and math skills through engaging activities, hands-on projects, and collaborative learning experiences.</p>
-                <p>Beyond academics, we focus on character development, social skills, and spiritual growth. Our kindergarten students leave our program confident, well-prepared, and excited about their educational journey.</p>
+                <p>Brethren in Christ offers small classroom sizes where teachers are able to provide children with individualized and personal attention that they need. We combine engaging instruction with hands-on activities that promote growth in reading, writing, mathematics, science, social studies, and creative enrichment.</p>
+                <p>Students develop critical thinking, collaboration, leadership, and independence in a caring classroom environment where they are encouraged to reach their full potential.</p>
             </div>
-            <div class="content-media" style="background: var(--blue);">
-                <div style="color: rgba(255,255,255,.7); font-size: .88rem; font-style: italic;">Kindergarten classroom photo coming soon</div>
+            <div style="width: 100%; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-card);">
+                <img src="Kindergarten Photos/churchgrad.jpeg" alt="Kindergarten classroom activity" style="width: 100%; height: auto; display: block;" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ PHOTO PLACEHOLDERS ═══ -->
+<section class="program-section" id="photos">
+    <div class="section-content">
+        <div class="container">
+            <div class="photo-row-three">
+                <div class="photo-strip" style="height: 360px;">
+                    <img src="Kindergarten Photos/grandparents.jpeg" alt="Grandparents visiting kindergarten" style="width:100%;height:100%;object-fit:cover;" />
+                </div>
+                <div class="photo-strip" style="height: 360px;">
+                    <img src="Kindergarten Photos/worship.jpeg" alt="Worship activity" style="width:100%;height:100%;object-fit:cover;object-position: 35% center;" />
+                </div>
+                <div class="photo-strip" style="height: 360px;">
+                    <img src="Kindergarten Photos/classroom.jpg" alt="Kindergarten classroom activity" style="width:100%;height:100%;object-fit:cover;" />
+                </div>
             </div>
         </div>
     </div>
@@ -422,63 +521,62 @@
         </div>
         <div class="feature-grid">
             <div class="feature-card">
-                <div class="feature-icon fi-red">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5C4 18.837 4.26339 18.2011 4.73223 17.7322C5.20107 17.2634 5.83696 17 6.5 17H20"/><path d="M6.5 2H20V22H6.5C5.83696 22 5.20107 21.7366 4.73223 21.2678C4.26339 20.7989 4 20.163 4 19.5V4.5C4 3.83696 4.26339 3.20107 4.73223 2.73223C5.20107 2.26339 5.83696 2 6.5 2Z"/></svg>
+                <div class="feature-icon fi-blue">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5C4 18.837 4.26339 18.2011 4.73223 17.7322C5.20107 17.2634 5.83696 17 6.5 17H20"/><path d="M6.5 2H20V22H6.5C5.83696 22 5.20107 21.7366 4.73223 21.2678C4.26339 20.7989 4 20.163 4 19.5V4.5C4 3.83696 4.26339 3.20107 4.73223 2.73223C5.20107 2.26339 5.83696 2 6.5 2Z"/></svg>
                 </div>
-                <h4>Reading & Writing</h4>
-                <p>Comprehensive literacy program including phonics, sight words, reading comprehension, and creative writing.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon fi-yellow">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
-                </div>
-                <h4>Mathematics</h4>
-                <p>Advanced math concepts including addition, subtraction, measurement, geometry, and problem-solving strategies.</p>
+                <h4>Comprehensive Academic Curriculum</h4>
+                <p>Reading, writing, and mathematics alongside science and social studies for a well-rounded education.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon fi-blue">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14S9.5 16 12 16S16 14 16 14"/><path d="M9 9H9.01M15 9H15.01"/></svg>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v5"></path><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v6"></path><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"></path><path d="M8 14a5 5 0 0 0 10 0v-3"></path><path d="M6 18c0 2 2 3 5 3h3a7 7 0 0 0 7-7h-1.5"></path></svg>
                 </div>
-                <h4>Science & Social Studies</h4>
-                <p>Hands-on science experiments and social studies units that explore the world and community.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon fi-yellow">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21V19C17 16.7909 15.2091 15 13 15H5C2.79086 15 1 16.7909 1 19V21"/><path d="M9 7C9 9.20914 7.20914 11 5 11C2.79086 11 1 9.20914 1 7C1 4.79086 2.79086 3 5 3C7.20914 3 9 4.79086 9 7Z"/><path d="M23 21V19C22.9993 17.1814 21.7797 15.5025 19.89 14.5"/><path d="M16 3.13C17.9386 3.51442 19.3827 5.12794 19.3827 7.13C19.3827 9.13206 17.9386 10.7456 16 11.13"/></svg>
-                </div>
-                <h4>Small Class Sizes</h4>
-                <p>Low student-to-teacher ratio ensuring personalized attention and support for every child.</p>
+                <h4>Hands-On Learning</h4>
+                <p>Engaging, hands-on learning experiences that bring the curriculum to life through exploration and discovery.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon fi-blue">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7V10C2 16 12 22 12 22C12 22 22 16 22 10V7L12 2Z"/><path d="M12 8V16M8 12H16"/></svg>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                </div>
+                <h4>Art, Music &amp; PE</h4>
+                <p>Creative enrichment through art, music, and physical education supports the whole child's growth.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon fi-blue">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                 </div>
                 <h4>Character Development</h4>
-                <p>Focus on values, responsibility, kindness, and leadership skills through daily activities and lessons.</p>
+                <p>Intentional focus on building confidence, kindness, and leadership for lifelong learning.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon fi-red">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10V6C22 4.89543 21.1046 4 20 4H4C2.89543 4 2 4.89543 2 6V10"/><path d="M22 10V20C22 21.1046 21.1046 22 20 22H4C2.89543 22 2 21.1046 2 20V10"/><path d="M12 15V22"/><path d="M8 15H16"/></svg>
+                <div class="feature-icon fi-blue">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.582-7 8-7s8 3 8 7"/></svg>
                 </div>
-                <h4>Full-Day Program</h4>
-                <p>Extended hours (7:00 AM - 6:00 PM) with before and after care included for working families.</p>
+                <h4>Personalized Attention</h4>
+                <p>Small class sizes with a degreed teacher ensuring every child receives individualized support.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon fi-blue">
+                    <svg width="32" height="32" viewBox="0 0 576 512" fill="currentColor"><path d="M400 0L176 0c-26.5 0-48.1 21.8-47.1 48.2c.2 5.3 .4 10.6 .7 15.8L24 64C10.7 64 0 74.7 0 88c0 92.6 33.5 157 78.5 200.7c44.3 43.1 98.3 64.8 138.1 75.8c23.4 6.5 39.4 26 39.4 45.6c0 20.9-17 37.9-37.9 37.9L192 448c-17.7 0-32 14.3-32 32s14.3 32 32 32l192 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-26.1 0C337 448 320 431 320 410.1c0-19.6 15.9-39.2 39.4-45.6c39.9-11 93.9-32.7 138.2-75.8C542.5 245 576 180.6 576 88c0-13.3-10.7-24-24-24L446.4 64c.3-5.2 .5-10.4 .7-15.8C448.1 21.8 426.5 0 400 0zM48.9 112l84.4 0c9.1 90.1 29.2 150.3 51.9 190.6c-24.9-11-50.8-26.5-73.2-48.3c-32-31.1-58-76-63-142.3zM464.1 254.3c-22.4 21.8-48.3 37.3-73.2 48.3c22.7-40.3 42.8-100.5 51.9-190.6l84.4 0c-5.1 66.3-31.1 111.2-63 142.3z"/></svg>
+                </div>
+                <h4>Award-Winning Abeka Curriculum</h4>
+                <p>Preparation for lifelong learning through the proven, nationally recognized Abeka curriculum.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ═══ SCHEDULE ═══ -->
-<section class="program-section" id="schedule">
+<section class="program-section" id="photos-bottom">
     <div class="section-content">
-        <div class="container text-center" style="margin-bottom: 48px;">
-            <span class="section-eyebrow ey-yellow">Daily Routine</span>
-            <h2 class="section-title">Schedule & Options</h2>
-            <p>Full-day kindergarten with extended care options.</p>
-        </div>
-        <div class="schedule-box">
-            <h3>Full-Day Kindergarten</h3>
-            <p>Our kindergarten program operates from 7:00 AM to 6:00 PM, with core academic instruction from 8:30 AM to 3:00 PM. Before and after care includes enrichment activities, homework help, and recreational time.</p>
-            <a href="parent-info.html" class="btn btn-white">View Enrollment Details</a>
+        <div class="container">
+            <div class="photo-row-two">
+                <div class="photo-strip" style="height: 360px;">
+                    <img src="Kindergarten Photos/workbook.jpg" alt="Workbook activity" style="width:100%;height:100%;object-fit:cover;" />
+                </div>
+                <div class="photo-strip" style="height: 360px;">
+                    <img src="Kindergarten Photos/grad.jpeg" alt="Kindergarten graduation" style="width:100%;height:100%;object-fit:cover;" />
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -488,47 +586,85 @@
     <div class="footer-top">
         <div class="footer-brand">
             <div class="footer-logo-row">
-                <div class="footer-logo-mark">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                        <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
-                        <path d="M2 17L12 22L22 17"/>
-                        <path d="M2 12L12 17L22 12"/>
-                    </svg>
-                </div>
-                <span class="footer-brand-n">BIC Community Preschool</span>
+                <img src="public/images/logo.png" alt="BIC Community Preschool & Kindergarten" style="height:110px;width:auto;border-radius:0;" />
             </div>
             <p>Nurturing curious minds through play-based learning, community connection, and joyful early childhood education.</p>
         </div>
         <div class="footer-col">
             <h4>Quick Links</h4>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="parent-info.html">Parent Info</a></li>
-                <li><a href="index.html#schedule">Schedule a Tour</a></li>
+            <ul role="list">
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="index.html#programs">Programs</a></li>
+                <li><a href="parent-info.html#enrollment">Enroll Now</a></li>
             </ul>
         </div>
+
         <div class="footer-col">
-            <h4>Programs</h4>
-            <ul>
-                <li><a href="toddler.html">Toddler</a></li>
-                <li><a href="preschool.html">Preschool</a></li>
-                <li><a href="kindergarten.html">Kindergarten</a></li>
-                <li><a href="summer.html">Summer</a></li>
+            <h4>Families</h4>
+            <ul role="list">
+                <li><a href="https://schools.procareconnect.com/login" target="_blank" rel="noopener noreferrer">ProCare Portal</a></li>
+                <li><a href="parent-info.html#resources">Parent Resources</a></li>
             </ul>
         </div>
+
         <div class="footer-col">
-            <h4>Contact</h4>
-            <ul>
-                <li><a href="tel:+15551234567">(555) 123-4567</a></li>
-                <li><a href="mailto:info@biccommunitypreschool.org">info@biccommunitypreschool.org</a></li>
+            <h4>School Info</h4>
+            <ul role="list">
+                <li><a href="about.html#careers">Teaching Careers</a></li>
+                <li><a href="mailto:kera@ubic.church">Contact Us</a></li>
             </ul>
+            <h4 style="margin-top:20px;">Connect With Us</h4>
+            <div class="footer-social">
+                <a href="#facebook" class="social-btn" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                <a href="#instagram" class="social-btn" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="currentColor" stroke-width="2"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2"/></svg></a>
+                <a href="tel:9099814333" class="social-btn" aria-label="Phone (909) 981-4333"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></a>
+            </div>
         </div>
     </div>
+
     <div class="footer-bottom">
-        <p>&copy; 2024 BIC Community Preschool. All rights reserved.</p>
+        <p>© 2026 BIC Community Preschool and Kindergarten. All rights reserved. | Facility License Number: 364846843</p>
+        </div>
     </div>
 </footer>
+
+<script>
+    // ── Scroll shadow ──
+    window.addEventListener('scroll', () => {
+        document.querySelector('.site-nav').style.boxShadow =
+            window.scrollY > 20 ? '0 4px 24px rgba(36,32,31,.13)' : '0 2px 12px rgba(36,32,31,.08)';
+    });
+
+    // ── Programs dropdown ──
+    const programsItem = document.getElementById('programsNavItem');
+    const programsBtn  = programsItem.querySelector('button');
+    function closeDropdown() {
+        programsItem.classList.remove('open');
+        programsBtn.setAttribute('aria-expanded', 'false');
+    }
+    programsBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        const isOpen = programsItem.classList.toggle('open');
+        programsBtn.setAttribute('aria-expanded', String(isOpen));
+    });
+    document.addEventListener('click', closeDropdown);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDropdown(); });
+
+    // ── Mobile hamburger ──
+    const toggle   = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    toggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const open = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', String(!open));
+        navLinks.classList.toggle('mobile-open', !open);
+    });
+    document.addEventListener('click', () => {
+        navLinks.classList.remove('mobile-open');
+        toggle.setAttribute('aria-expanded', 'false');
+    });
+    navLinks.addEventListener('click', e => e.stopPropagation());
+</script>
 
 </body>
 </html>
