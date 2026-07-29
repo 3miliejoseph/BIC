@@ -266,54 +266,90 @@
         .hero-desc { font-size: 1.05rem; line-height: 1.72; color: var(--gray); margin-bottom: 32px; animation: fadeUp .5s .2s ease both; }
         .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; animation: fadeUp .5s .28s ease both; }
 
-        /* Right side content — white text on blue */
-        .hero-photo-frame {
-            width: 100%; max-width: 600px; aspect-ratio: 4/3.5;
-            border-radius: var(--radius-lg);
-            background: rgba(255,255,255,.15);
-            border: 3px solid #000000;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center; gap: 12px;
-            position: relative; z-index: 1;
+        /* ── HERO SPLIT SLIDESHOW ── */
+        .hero-split-slideshow {
+            position: absolute;
+            top: -120px;
+            right: 0;
+            bottom: 0;
+            width: 50%;
+            z-index: 1;
+            overflow: hidden;
+            border-radius: 0 !important;
+            background: #e9f5ff;
         }
-        .hero-photo-frame svg { opacity: .35; }
-        .hero-photo-frame p { color: rgba(255,255,255,.6); font-size: .88rem; font-style: italic; }
+        /* Fade mask to blend image left edge with text column background */
+        .hero-split-slideshow::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 15%;
+            background: linear-gradient(to right, 
+                #e9f5ff 0%, 
+                rgba(233, 245, 255, 0.8) 25%, 
+                rgba(233, 245, 255, 0.3) 60%, 
+                rgba(233, 245, 255, 0) 100%
+            );
+            z-index: 5;
+            pointer-events: none;
+        }
+        .split-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            border-radius: 0 !important;
+            max-width: none !important;
+        }
+        .split-slide-1 { animation: crossfade-s1 16s infinite ease-in-out; }
+        .split-slide-2 { animation: crossfade-s2 16s infinite ease-in-out; object-position: 15% 5%; }
+        .split-slide-3 { animation: crossfade-s3 16s infinite ease-in-out; }
+        .split-slide-4 { animation: crossfade-s4 16s infinite ease-in-out; }
 
-        /* Slideshow Controls */
-        .slide-arrow {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            background: none; border: none; color: #000000;
-            cursor: pointer; display: flex; align-items: center; justify-content: center;
-            z-index: 10; padding: 6px;
-            opacity: 0.85; transition: opacity .2s, transform .2s;
+        @keyframes crossfade-s1 {
+            0%, 20%, 95%, 100% { opacity: 1; z-index: 2; }
+            25%, 90% { opacity: 0; z-index: 1; }
         }
-        .slide-arrow:hover {
-            opacity: 1;
-            transform: translateY(-50%) scale(1.25);
+        @keyframes crossfade-s2 {
+            0%, 20%, 50%, 100% { opacity: 0; z-index: 1; }
+            25%, 45% { opacity: 1; z-index: 2; }
         }
-        .prev-slide { left: -44px; }
-        .next-slide { right: -44px; }
-
-        @media (max-width: 768px) {
-            .prev-slide { left: 8px; }
-            .next-slide { right: 8px; }
+        @keyframes crossfade-s3 {
+            0%, 45%, 75%, 100% { opacity: 0; z-index: 1; }
+            50%, 70% { opacity: 1; z-index: 2; }
+        }
+        @keyframes crossfade-s4 {
+            0%, 70%, 100% { opacity: 0; z-index: 1; }
+            75%, 95% { opacity: 1; z-index: 2; }
         }
 
-        .slide-dots {
-            position: absolute; bottom: -32px; left: 50%;
-            transform: translateX(-50%); display: flex; gap: 8px;
-            z-index: 10; padding: 6px 12px;
-            background: rgba(0, 0, 0, 0.3); border-radius: 20px;
-            backdrop-filter: blur(4px);
+        @media (max-width: 992px) {
+            .hero-split-slideshow {
+                position: relative;
+                top: 0 !important;
+                width: calc(100% + 48px);
+                margin-left: -24px;
+                margin-right: -24px;
+                height: 380px;
+                margin-top: 32px;
+                border-radius: 0 !important;
+                box-shadow: none;
+                overflow: hidden;
+            }
+            .hero-split-slideshow::before {
+                display: none;
+            }
         }
-        .dot {
-            width: 10px; height: 10px; border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5); border: none;
-            cursor: pointer; padding: 0; transition: background .3s, transform .3s, width .3s;
-        }
-        .dot:hover { background: rgba(255, 255, 255, 0.85); }
-        .dot.active {
-            background: var(--yellow); width: 22px; border-radius: 10px;
+        @media (max-width: 576px) {
+            .hero-split-slideshow {
+                height: 280px;
+            }
         }
 
         .hero-stats {
@@ -486,7 +522,7 @@
         .enrich-body {
             max-width: var(--max-width); margin: 0 auto 72px;
             display: grid;
-            grid-template-columns: 1fr 340px 1fr;
+            grid-template-columns: 1fr 420px 1fr;
             gap: 32px;
             align-items: start;
         }
@@ -551,7 +587,7 @@
             border-radius: var(--radius-lg); overflow: hidden;
             box-shadow: var(--shadow-pop);
             background: var(--off-white);
-            min-height: 280px;
+            min-height: 380px;
             display: flex; align-items: center; justify-content: center;
             transform: rotate(-1.2deg);
             transition: transform .3s;
@@ -563,7 +599,7 @@
             border-radius: var(--radius-lg); overflow: hidden;
             box-shadow: var(--shadow-pop);
             background: var(--off-white);
-            min-height: 280px;
+            min-height: 380px;
             display: flex; align-items: center; justify-content: center;
             transform: rotate(1.5deg);
             transition: transform .3s;
@@ -909,30 +945,145 @@
         .reveal-delay-1 { transition-delay:.1s; }
         .reveal-delay-2 { transition-delay:.2s; }
         .reveal-delay-3 { transition-delay:.3s; }
+
+        /* ── NEW HERO & NAV DESIGN OVERRIDES ── */
+        .site-nav-new {
+            background: #ffffff !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+            position: relative !important;
+            z-index: 1000 !important;
+        }
+        .nav-inner-new {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 10px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 175px !important;
+        }
+        .nav-brand img {
+            height: 160px !important;
+            width: auto !important;
+            position: relative !important;
+            z-index: 1001 !important;
+            transform: translateY(12px) !important;
+        }
+        .nav-brand-name {
+            display: none !important; /* Hide brand name text since it's already in the logo */
+        }
+        .nav-item > a,
+        .nav-item > button {
+            color: #1e293b !important;
+            font-size: 1rem !important;
+            font-weight: 700 !important;
+            text-transform: uppercase;
+            padding: 10px 16px !important;
+            border-radius: 0 !important;
+            background: none !important;
+            transition: color 0.2s;
+        }
+        .nav-item.active > a {
+            border-bottom: 3px solid #f7a400 !important;
+            padding-bottom: 4px !important;
+        }
+        .nav-item > a:hover,
+        .nav-item > button:hover {
+            color: #f7a400 !important;
+        }
+        .nav-actions a {
+            display: none !important; /* Hide Schedule a Tour link to match mockup */
+        }
+        .nav-toggle {
+            display: none;
+        }
+        
+        /* Responsive adjustments for new hero and icons */
+        @media (max-width: 960px) {
+            .nav-inner-new {
+                height: 120px !important;
+            }
+            .nav-brand img {
+                height: 110px !important;
+                transform: translateY(7px) !important;
+            }
+            .nav-toggle {
+                display: flex !important; /* Show mobile toggle on mobile */
+            }
+            .hero-section-grid {
+                grid-template-columns: 1fr !important;
+                gap: 32px !important;
+                text-align: center;
+            }
+            .hero-section-grid div:first-child {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .icons-section-grid {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 24px !important;
+            }
+        }
+        @media (max-width: 600px) {
+            .icons-section-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
     </style>
 </head>
 <body>
 
+<!-- SVG Clip Paths for Organic Cloud-Shaped Collage Photos -->
+<svg width="0" height="0" style="position: absolute; width: 0; height: 0;" aria-hidden="true">
+  <defs>
+    <!-- Wide Fluffy Cloud -->
+    <clipPath id="cloud-clip-1" clipPathUnits="objectBoundingBox">
+      <circle cx="0.22" cy="0.62" r="0.18" />
+      <circle cx="0.38" cy="0.45" r="0.25" />
+      <circle cx="0.62" cy="0.42" r="0.26" />
+      <circle cx="0.80" cy="0.62" r="0.17" />
+      <circle cx="0.35" cy="0.72" r="0.18" />
+      <circle cx="0.65" cy="0.72" r="0.18" />
+      <circle cx="0.50" cy="0.58" r="0.22" />
+    </clipPath>
+    <!-- Rounder Fluffy Cloud -->
+    <clipPath id="cloud-clip-2" clipPathUnits="objectBoundingBox">
+      <circle cx="0.25" cy="0.58" r="0.20" />
+      <circle cx="0.50" cy="0.40" r="0.28" />
+      <circle cx="0.75" cy="0.58" r="0.20" />
+      <circle cx="0.38" cy="0.68" r="0.22" />
+      <circle cx="0.62" cy="0.68" r="0.22" />
+    </clipPath>
+    <!-- Small Fluffy Cloud -->
+    <clipPath id="cloud-clip-3" clipPathUnits="objectBoundingBox">
+      <circle cx="0.22" cy="0.60" r="0.17" />
+      <circle cx="0.42" cy="0.43" r="0.24" />
+      <circle cx="0.68" cy="0.46" r="0.22" />
+      <circle cx="0.80" cy="0.62" r="0.15" />
+      <circle cx="0.33" cy="0.70" r="0.18" />
+      <circle cx="0.62" cy="0.70" r="0.18" />
+    </clipPath>
+  </defs>
+</svg>
+
 <!-- ═══ NAV ═══ -->
-<nav class="site-nav" role="navigation" aria-label="Main navigation">
-    <div class="nav-inner">
+<nav class="site-nav site-nav-new" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner nav-inner-new">
 
         <!-- Logo left -->
         <a class="nav-brand" href="index.html" aria-label="BIC Community Preschool home">
-            <img class="nav-logo-img" src="public/images/logo.png" alt="BIC Community Preschool logo" />
-            <div class="nav-brand-name">
-                <span class="l1">BIC Community</span>
-                <span class="l2">Preschool &amp; Kindergarten</span>
-            </div>
+            <img src="public/images/logo.png" alt="BIC Community Preschool logo" />
         </a>
 
         <!-- Center links -->
         <ul class="nav-links" id="navLinks" role="list">
-            <li class="nav-item">
-                <a href="index.html" style="color: var(--red);">Home</a>
+            <li class="nav-item active">
+                <a href="index.html">Home</a>
             </li>
             <li class="nav-item">
-                <a href="about.html">About</a>
+                <a href="about.html">About Us</a>
             </li>
             <!-- Programs with dropdown -->
             <li class="nav-item" id="programsNavItem">
@@ -943,7 +1094,6 @@
                     </svg>
                 </button>
                 <ul class="nav-dropdown" id="programsDropdown" role="menu">
-                    <li role="none"><a href="parent-info.html" role="menuitem">Parent Info</a></li>
                     <li role="none"><a href="toddler.html" role="menuitem">Toddler</a></li>
                     <li role="none"><a href="preschool.html" role="menuitem">Preschool</a></li>
                     <li role="none"><a href="kindergarten.html" role="menuitem">Kindergarten</a></li>
@@ -951,13 +1101,15 @@
                 </ul>
             </li>
             <li class="nav-item">
+                <a href="parent-info.html">Parents</a>
+            </li>
+            <li class="nav-item">
                 <a href="https://schools.procareconnect.com/login" target="_blank" rel="noopener noreferrer">ProCare</a>
             </li>
         </ul>
 
-        <!-- Right: Schedule a Tour button + mobile hamburger -->
+        <!-- Right: mobile hamburger toggle -->
         <div class="nav-actions">
-            <a href="tel:9099814333" class="btn btn-red" style="padding:10px 48px;font-size:1rem;display:inline-flex;align-items:center;gap:8px;">Schedule a Tour <img src="public/images/icons/whitephone.png" alt="" style="width:23px;height:23px;" /></a>
             <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" id="navToggle">
                 <span></span><span></span><span></span>
             </button>
@@ -966,51 +1118,140 @@
     </div>
 </nav>
 
-<!-- ═══ ENROLLMENT BANNER ═══ -->
-<div class="enrollment-banner">
-    <div class="container text-center">
-        <span class="enrollment-text">Now enrolling!</span>
-    </div>
+<!-- ═══ CURVED NAV BOTTOM SEPARATOR WITH FLOWING TEXT BANNER ═══ -->
+<div style="background: transparent; overflow: hidden; line-height: 0; margin-top: -1px; margin-bottom: -3px; position: relative; z-index: 9;">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none" style="display: block; width: 100%; height: 120px; overflow: visible;">
+        <defs>
+            <!-- A path for the text to ride on (exactly matching the ribbon path, extending off-screen) -->
+            <path id="textCurve" d="M-30,25 C300,95 900,35 1470,25" />
+            <linearGradient id="blue-fade-right" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#e9f5ff" stop-opacity="1" />
+                <stop offset="50%" stop-color="#e9f5ff" stop-opacity="1" />
+                <stop offset="50%" stop-color="#e9f5ff" stop-opacity="0" />
+                <stop offset="100%" stop-color="#e9f5ff" stop-opacity="0" />
+            </linearGradient>
+        </defs>
+        
+        <!-- White background fill above the curve (connecting to the nav) -->
+        <path d="M-30,25 C300,95 900,35 1470,25 L1470,0 L-30,0 Z" fill="#ffffff"></path>
+        
+        <!-- Blue background fill below the curve (fading to transparent on right) -->
+        <path d="M-30,25 C300,95 900,35 1470,25 L1470,125 L-30,125 Z" fill="url(#blue-fade-right)"></path>
+        
+        <!-- Thick red curve ribbon line (extending off-screen) -->
+        <path d="M-30,25 C300,95 900,35 1470,25" fill="none" stroke="#F22226" stroke-width="44" stroke-linecap="round"></path>
+        
+        <!-- Flowing text banner along the curve (scrolling) -->
+        <text xml:space="preserve" dominant-baseline="central" style="font-family: var(--font-display); font-size: 18px; font-weight: 800; fill: #ffffff; letter-spacing: 2px;">
+            <textPath href="#textCurve" startOffset="0%">
+                ★ Now enrolling ages Infant to 5 years old! ★               ★ Now enrolling ages Infant to 5 years old! ★               ★ Now enrolling ages Infant to 5 years old! ★               ★ Now enrolling ages Infant to 5 years old! ★               ★ Now enrolling ages Infant to 5 years old! ★               ★ Now enrolling ages Infant to 5 years old! ★               ★ Now enrolling ages Infant to 5 years old! ★               ★ Now enrolling ages Infant to 5 years old! ★               ★ Now enrolling ages Infant to 5 years old! ★               ★ Now enrolling ages Infant to 5 years old! ★               
+                <animate attributeName="startOffset" from="0%" to="-100%" dur="45s" repeatCount="indefinite" />
+            </textPath>
+        </text>
+    </svg>
 </div>
 
 <!-- ═══ HERO ═══ -->
-<section class="hero" id="home" aria-labelledby="heroTitle">
-    <!-- Left: white bg, dark text -->
-    <div class="hero-left">
-        <h1 class="hero-title" id="heroTitle">
-            BIC Community<br>Preschool &amp; Kindergarten
-        </h1>
-        <p class="hero-desc">
-            BIC Community Preschool and Kindergarten nurtures each child's unique potential through play-based learning, caring teachers, and a warm, inclusive community spirit.
-        </p>
-        <div class="hero-actions">
-            <a href="#programs" class="btn btn-blue">Explore Programs</a>
-        </div>
+<section style="background: #e9f5ff; position: relative; padding: 80px 24px 180px 24px; min-height: auto;" id="home">
+    
+    <!-- Floating Clouds Background -->
+    <!-- Cloud 1 -->
+    <svg viewBox="0 0 100 100" style="position: absolute; top: 38%; left: -60px; width: 350px; height: auto; opacity: 0.85; pointer-events: none; fill: #ffffff; z-index: 1;">
+        <path d="M 17,50 a 15,15 0 0,1 28,-5 a 20,20 0 0,1 35,-2 a 15,15 0 0,1 15,17 a 12,12 0 0,1 -8,11 L 17,71 a 12,12 0 0,1 0,-21 z" />
+    </svg>
+
+    <!-- Right: Homepage Split Slideshow -->
+    <div class="hero-split-slideshow">
+        <img class="split-slide split-slide-1" src="Home%20Photos/bubbles.jpg" alt="Children playing with bubbles" />
+        <img class="split-slide split-slide-2" src="Home%20Photos/playground.jpeg" alt="Preschool playground play" />
+        <img class="split-slide split-slide-3" src="Home%20Photos/caterpillar.jpg" alt="Kids looking at a caterpillar" />
+        <img class="split-slide split-slide-4" src="Home%20Photos/class.jpg" alt="Children in classroom" />
     </div>
 
-    <!-- Right: blue bg, white elements -->
-    <div class="hero-right" aria-hidden="true">
-        <div class="hero-photo-frame">
-            <button class="slide-arrow prev-slide" aria-label="Previous slide">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-            </button>
-            <div class="slideshow-container" style="width:100%;height:100%;position:relative;overflow:hidden;border-radius:var(--radius-lg);">
-                <img class="slide" src="Home%20Photos/bubbles.jpg" alt="Children playing with bubbles" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;opacity:0.9;" />
-                <img class="slide" src="Home%20Photos/playground.jpeg" alt="Preschool playground play" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;opacity:0;" />
-                <img class="slide" src="Home%20Photos/caterpillar.jpg" alt="Kids looking at a caterpillar" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;opacity:0;" />
+    <div class="container hero-section-grid" style="max-width: 1350px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; position: relative; z-index: 2;">
+        
+        <!-- Left: Text contents -->
+        <div>
+            <h1 style="font-family: var(--font-display); font-size: clamp(2.6rem, 5.5vw, 4.2rem); font-weight: 800; color: #14274e; line-height: 1.15; margin-bottom: 16px;"><span style="white-space: nowrap;">Learning Today,</span><br><span style="white-space: nowrap;">Leading Tomorrow</span></h1>
+            <p style="font-size: 1.15rem; line-height: 1.7; color: #4f5a6e; margin-bottom: 24px; max-width: 480px;">BIC Community Preschool and Kindergarten nurtures each child's unique potential through play-based learning, caring teachers, and a warm, inclusive community spirit.</p>
+            
+            <!-- School Address -->
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 32px; color: #4f5a6e; font-size: 1.05rem; font-weight: 600;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; color: #e05252; flex-shrink: 0;" aria-hidden="true">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <a href="https://maps.google.com/?q=845+W+Arrow+Hwy,+Upland,+CA+91786" target="_blank" rel="noopener noreferrer" style="color: #14274e; text-decoration: none; border-bottom: 1px dashed rgba(20,39,78,0.4); transition: color 0.2s, border-color 0.2s;" onmouseover="this.style.color='#e05252'; this.style.borderColor='#e05252'" onmouseout="this.style.color='#14274e'; this.style.borderColor='rgba(20,39,78,0.4)'">
+                    845 W Arrow Hwy, Upland, CA 91786
+                </a>
             </div>
-            <button class="slide-arrow next-slide" aria-label="Next slide">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </button>
-            <div class="slide-dots">
-                <button class="dot active" aria-label="Go to slide 1"></button>
-                <button class="dot" aria-label="Go to slide 2"></button>
-                <button class="dot" aria-label="Go to slide 3"></button>
+            
+            <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                <a href="#programs" class="btn btn-blue" style="border-radius: 50px; padding: 12px 32px; font-weight: 700;">Our Programs</a>
+                <a href="parent-info.html#enrollment" class="btn btn-red" style="border-radius: 50px; padding: 12px 32px; font-weight: 700;">Enroll Today</a>
             </div>
         </div>
 
-        <div class="hero-stats">
+        <!-- Right: Spacer for absolute-positioned slideshow on desktop (rendered as split slideshow on mobile) -->
+        <div class="hero-right-spacer" style="width: 100%;"></div>
+    </div>
+
+    <!-- ═══ CURVED HERO BOTTOM SEPARATOR ═══ -->
+    <div style="position: absolute; bottom: -1px; left: 0; right: 0; overflow: hidden; line-height: 0; z-index: 3;">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" style="display: block; width: 100%; height: 120px; fill: #ffffff; overflow: visible;">
+            <path d="M-30,30 C360,0 1080,120 1470,110 L1470,120 L-30,120 Z"></path>
+        </svg>
+    </div>
+</section>
+
+<!-- ═══ CORE VALUE ICONS ROW ═══ -->
+<section style="background: #ffffff; padding: 50px 24px 60px; position: relative; z-index: 4;">
+    <div class="container icons-section-grid" style="max-width: var(--max-width); margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;">
+        
+        <!-- Icon 1: Faith -->
+        <div style="display: flex; align-items: flex-start; gap: 16px;">
+            <div style="width: 56px; height: 56px; border-radius: 50%; background: #f7a400; color: #ffffff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 10px rgba(247,164,0,0.3);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="8" y1="10" x2="16" y2="10"></line></svg>
+            </div>
+            <div>
+                <h4 style="font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: #14274e; margin-bottom: 4px;">Faith-Filled Environment</h4>
+                <p style="font-size: 0.88rem; color: var(--gray); line-height: 1.4;">We teach God's love and values every day.</p>
+            </div>
         </div>
+
+        <!-- Icon 2: Sprout -->
+        <div style="display: flex; align-items: flex-start; gap: 16px;">
+            <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--blue); color: #ffffff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 10px rgba(29,112,184,0.3);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10" /><path d="M10 20c5.5-2.5 8-6.4 8-12a4 4 0 0 0-8 0c0 5.6 2.5 9.5 8 12" /><path d="M14 12a15 15 0 0 0-4-5" /></svg>
+            </div>
+            <div>
+                <h4 style="font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: #14274e; margin-bottom: 4px;">Nurturing Education</h4>
+                <p style="font-size: 0.88rem; color: var(--gray); line-height: 1.4;">Age-appropriate learning that promotes growth.</p>
+            </div>
+        </div>
+
+        <!-- Icon 3: Heart -->
+        <div style="display: flex; align-items: flex-start; gap: 16px;">
+            <div style="width: 56px; height: 56px; border-radius: 50%; background: #e05252; color: #ffffff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 10px rgba(224,82,82,0.3);">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12,21.35 L10.55,20.03 C5.4,15.36 2,12.28 2,8.5 C2,5.42 4.42,3 7.5,3 C9.24,3 10.91,3.81 12,5.09 C13.09,3.81 14.76,3 16.5,3 C19.58,3 22,5.42 22,8.5 C22,12.28 18.6,15.36 13.45,20.04 L12,21.35 Z"></path></svg>
+            </div>
+            <div>
+                <h4 style="font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: #14274e; margin-bottom: 4px;">Caring Teachers</h4>
+                <p style="font-size: 0.88rem; color: var(--gray); line-height: 1.4;">Compassionate teachers who truly care.</p>
+            </div>
+        </div>
+
+        <!-- Icon 4: Community -->
+        <div style="display: flex; align-items: flex-start; gap: 16px;">
+            <div style="width: 56px; height: 56px; border-radius: 50%; background: #4caf50; color: #ffffff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 10px rgba(76,175,80,0.3);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
+            <div>
+                <h4 style="font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: #14274e; margin-bottom: 4px;">Strong Family Community</h4>
+                <p style="font-size: 0.88rem; color: var(--gray); line-height: 1.4;">Partnering with families every step of the way.</p>
+            </div>
+        </div>
+
     </div>
 </section>
 
@@ -1313,61 +1554,7 @@
             window.scrollY > 20 ? '0 4px 24px rgba(36,32,31,.13)' : '0 2px 12px rgba(36,32,31,.08)';
     });
 
-    // ── Slideshow ──
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
-    const prevBtn = document.querySelector('.prev-slide');
-    const nextBtn = document.querySelector('.next-slide');
-    let currentSlide = 0;
-    let slideInterval;
 
-    function showSlide(index) {
-        currentSlide = index;
-        slides.forEach((slide, i) => {
-            slide.style.opacity = i === currentSlide ? '0.9' : '0';
-            slide.style.transition = 'opacity 0.8s ease-in-out';
-        });
-        dots.forEach((dot, i) => {
-            dot.classList.toggle('active', i === currentSlide);
-        });
-    }
-
-    function nextSlide() {
-        showSlide((currentSlide + 1) % slides.length);
-    }
-
-    function prevSlide() {
-        showSlide((currentSlide - 1 + slides.length) % slides.length);
-    }
-
-    function startTimer() {
-        clearInterval(slideInterval);
-        slideInterval = setInterval(nextSlide, 4000);
-    }
-
-    if (slides.length > 0) {
-        showSlide(0);
-        startTimer();
-
-        if (nextBtn) {
-            nextBtn.addEventListener('click', () => {
-                nextSlide();
-                startTimer();
-            });
-        }
-        if (prevBtn) {
-            prevBtn.addEventListener('click', () => {
-                prevSlide();
-                startTimer();
-            });
-        }
-        dots.forEach((dot, i) => {
-            dot.addEventListener('click', () => {
-                showSlide(i);
-                startTimer();
-            });
-        });
-    }
 
     // ── Programs dropdown ──
     const programsItem = document.getElementById('programsNavItem');
