@@ -46,7 +46,7 @@
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+        html { scroll-behavior: smooth; scroll-padding-top: 72px; overflow-x: hidden; }
         section, [id] { scroll-margin-top: 72px; }
         body { font-family: var(--font-body); color: var(--dark); background: var(--page-bg); overflow-x: hidden; }
         a { text-decoration: none; color: inherit; }
@@ -168,7 +168,9 @@
             right: 0;
             height: 12px;
         }
-        .nav-item:hover .nav-dropdown { display: block; }
+        @media (min-width: 961px) {
+            .nav-item:hover .nav-dropdown { display: block; }
+        }
         .nav-item.open .nav-dropdown { display: block; }
         .nav-dropdown a {
             display: block; padding: 9px 18px;
@@ -207,6 +209,9 @@
             border-top: 1px solid var(--border-col);
             box-shadow: 0 12px 32px rgba(36,32,31,.12);
             padding: 12px 0; z-index: 999;
+        }
+        nav.navbar:has(.nav-links.mobile-open) + div {
+            display: none !important;
         }
         .nav-links.mobile-open .nav-item { width: 100%; }
         .nav-links.mobile-open .nav-item > a,
@@ -329,15 +334,24 @@
             75%, 95% { opacity: 1; z-index: 2; }
         }
 
+        .desktop-banner-svg { display: block !important; }
+        .mobile-banner-svg { display: none !important; }
+
         @media (max-width: 992px) {
+            .desktop-banner-svg { display: none !important; }
+            .mobile-banner-svg { display: block !important; }
+            #home {
+                padding-top: 0 !important;
+            }
             .hero-split-slideshow {
                 position: relative;
                 top: 0 !important;
                 width: calc(100% + 48px);
                 margin-left: -24px;
                 margin-right: -24px;
-                height: 380px;
-                margin-top: 32px;
+                height: 410px;
+                margin-top: -75px !important;
+                margin-bottom: 32px !important;
                 border-radius: 0 !important;
                 box-shadow: none;
                 overflow: hidden;
@@ -345,10 +359,13 @@
             .hero-split-slideshow::before {
                 display: none;
             }
+            .hero-bg-cloud {
+                top: 70% !important;
+            }
         }
         @media (max-width: 576px) {
             .hero-split-slideshow {
-                height: 280px;
+                height: 310px;
             }
         }
 
@@ -701,7 +718,13 @@
         @media (max-width: 900px) {
             .why-bic-inner { grid-template-columns: 1fr; gap: 40px; }
             .why-bic-text .section-title { text-align: center; }
-            .why-bic-text .section-eyebrow { display: block; text-align: center; }
+            .why-bic-text .section-eyebrow {
+                display: table !important;
+                margin: 0 auto 12px !important;
+            }
+            .clipart-artist {
+                right: -30px !important;
+            }
         }
 
         /* ── PROGRAMS ── off-white bg ── */
@@ -969,6 +992,7 @@
             position: relative !important;
             z-index: 1001 !important;
             transform: translateY(12px) !important;
+            border-radius: 0 !important;
         }
         .nav-brand-name {
             display: none !important; /* Hide brand name text since it's already in the logo */
@@ -1017,6 +1041,25 @@
             .nav-brand img {
                 height: 110px !important;
                 transform: translateY(7px) !important;
+                border-radius: 0 !important;
+            }
+            @keyframes slideDownMobile {
+                from {
+                    transform: translateY(-15px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+            .nav-links.mobile-open {
+                top: 72px !important;
+                background: #ffffff !important;
+                padding-top: 12px !important;
+                border-top: 1px solid var(--border-col) !important;
+                z-index: 1005 !important;
+                animation: slideDownMobile 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             }
             .nav-toggle {
                 display: flex !important; /* Show mobile toggle on mobile */
@@ -1130,7 +1173,8 @@
 
 <!-- ═══ CURVED NAV BOTTOM SEPARATOR WITH FLOWING TEXT BANNER ═══ -->
 <div style="background: transparent; overflow: hidden; line-height: 0; margin-top: -1px; margin-bottom: -3px; position: relative; z-index: 9;">
-    <svg viewBox="0 0 1440 120" preserveAspectRatio="none" style="display: block; width: 100%; height: 120px; overflow: visible;">
+    <!-- Desktop Banner (shown on > 992px) -->
+    <svg class="desktop-banner-svg" viewBox="0 0 1440 120" preserveAspectRatio="none" style="display: block; width: 100%; height: 120px; overflow: hidden;">
         <defs>
             <!-- A path for the text to ride on (exactly matching the ribbon path, extending off-screen) -->
             <path id="textCurve" d="M-30,25 C300,95 900,35 1470,25" />
@@ -1159,6 +1203,36 @@
             </textPath>
         </text>
     </svg>
+
+    <!-- Mobile Banner (shown on <= 992px) -->
+    <svg class="mobile-banner-svg" viewBox="0 0 450 120" preserveAspectRatio="none" style="display: none; width: 100%; height: 114px; overflow: hidden;">
+        <defs>
+            <path id="textCurveMobile" d="M-8,25 C90,95 280,35 458,25" />
+            <linearGradient id="blue-fade-right-mobile" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#e9f5ff" stop-opacity="1" />
+                <stop offset="50%" stop-color="#e9f5ff" stop-opacity="1" />
+                <stop offset="50%" stop-color="#e9f5ff" stop-opacity="0" />
+                <stop offset="100%" stop-color="#e9f5ff" stop-opacity="0" />
+            </linearGradient>
+        </defs>
+        
+        <!-- White background fill above the curve (connecting to the nav) -->
+        <path d="M-8,25 C90,95 280,35 458,25 L458,0 L-8,0 Z" fill="#ffffff"></path>
+        
+        <!-- Blue background fill below the curve (fading to transparent on right) -->
+        <path d="M-8,25 C90,95 280,35 458,25 L458,125 L-8,125 Z" fill="transparent"></path>
+        
+        <!-- Thick red curve ribbon line (extending off-screen) -->
+        <path d="M-8,25 C90,95 280,35 458,25" fill="none" stroke="#F22226" stroke-width="42" stroke-linecap="round"></path>
+        
+        <!-- Flowing text banner along the curve (scrolling) -->
+        <text xml:space="preserve" dominant-baseline="central" style="font-family: var(--font-display); font-size: 18px; font-weight: 800; fill: #ffffff; letter-spacing: 2px;">
+            <textPath href="#textCurveMobile" startOffset="0%">
+                ★ Now enrolling ages Infant to 5 years old! ★               ★ Now enrolling ages Infant to 5 years old! ★               ★ Now enrolling ages Infant to 5 years old! ★               ★ Now enrolling ages Infant to 5 years old! ★               ★ Now enrolling ages Infant to 5 years old! ★               
+                <animate attributeName="startOffset" from="0%" to="-100%" dur="20s" repeatCount="indefinite" />
+            </textPath>
+        </text>
+    </svg>
 </div>
 
 <!-- ═══ HERO ═══ -->
@@ -1166,7 +1240,7 @@
     
     <!-- Floating Clouds Background -->
     <!-- Cloud 1 -->
-    <svg viewBox="0 0 100 100" style="position: absolute; top: 38%; left: -60px; width: 350px; height: auto; opacity: 0.85; pointer-events: none; fill: #ffffff; z-index: 1;">
+    <svg class="hero-bg-cloud" viewBox="0 0 100 100" style="position: absolute; top: 38%; left: -60px; width: 350px; height: auto; opacity: 0.85; pointer-events: none; fill: #ffffff; z-index: 1;">
         <path d="M 17,50 a 15,15 0 0,1 28,-5 a 20,20 0 0,1 35,-2 a 15,15 0 0,1 15,17 a 12,12 0 0,1 -8,11 L 17,71 a 12,12 0 0,1 0,-21 z" />
     </svg>
 
@@ -1208,7 +1282,7 @@
 
     <!-- ═══ CURVED HERO BOTTOM SEPARATOR ═══ -->
     <div style="position: absolute; bottom: -1px; left: 0; right: 0; overflow: hidden; line-height: 0; z-index: 3;">
-        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" style="display: block; width: 100%; height: 120px; fill: #ffffff; overflow: visible;">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" style="display: block; width: 100%; height: 120px; fill: #ffffff; overflow: hidden;">
             <path d="M-30,30 C360,0 1080,120 1470,110 L1470,120 L-30,120 Z"></path>
         </svg>
     </div>
@@ -1608,7 +1682,12 @@
         navLinks.classList.remove('mobile-open');
         toggle.setAttribute('aria-expanded', 'false');
     });
-    navLinks.addEventListener('click', e => e.stopPropagation());
+    navLinks.addEventListener('click', e => {
+        if (!programsItem.contains(e.target)) {
+            closeDropdown();
+        }
+        e.stopPropagation();
+    });
 
     // Testimonial rotator
     const testimonials = [
