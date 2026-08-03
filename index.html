@@ -210,8 +210,13 @@
             box-shadow: 0 12px 32px rgba(36,32,31,.12);
             padding: 12px 0; z-index: 999;
         }
-        nav.navbar:has(.nav-links.mobile-open) + div {
-            display: none !important;
+        .nav-links.mobile-open .nav-item.active > a {
+            border-bottom: none !important;
+            color: #f7a400 !important;
+        }
+        .nav-links.mobile-open .active-dropdown-item {
+            text-decoration: none !important;
+            color: #f7a400 !important;
         }
         .nav-links.mobile-open .nav-item { width: 100%; }
         .nav-links.mobile-open .nav-item > a,
@@ -339,7 +344,7 @@
 
         @media (max-width: 992px) {
             .desktop-banner-svg { display: none !important; }
-            .mobile-banner-svg { display: block !important; }
+            .mobile-banner-svg { display: block !important; height: 114px !important; }
             #home {
                 padding-top: 0 !important;
             }
@@ -364,8 +369,16 @@
             }
         }
         @media (max-width: 576px) {
+            .mobile-banner-svg {
+                height: 96px !important;
+            }
             .hero-split-slideshow {
                 height: 310px;
+                margin-top: -60px !important;
+            }
+            .nav-links.mobile-open {
+                background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20450%20120%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M-8%2C25%20C90%2C95%20280%2C35%20458%2C25%20L458%2C120%20L-8%2C120%20Z%27%20fill%3D%27%23ffffff%27%2F%3E%3Cpath%20d%3D%27M-8%2C25%20C90%2C95%20280%2C35%20458%2C25%27%20fill%3D%27none%27%20stroke%3D%27%23cbd5e1%27%20stroke-width%3D%272%27%2F%3E%3C%2Fsvg%3E") no-repeat center 120px / 100% 96px, linear-gradient(to bottom, transparent 216px, #ffffff 216px) !important;
+                padding-top: 205px !important;
             }
         }
 
@@ -1038,6 +1051,10 @@
             .nav-inner-new {
                 height: 120px !important;
             }
+            .nav-brand {
+                position: relative !important;
+                z-index: 1010 !important;
+            }
             .nav-brand img {
                 height: 110px !important;
                 transform: translateY(7px) !important;
@@ -1054,15 +1071,17 @@
                 }
             }
             .nav-links.mobile-open {
-                top: 72px !important;
-                background: #ffffff !important;
-                padding-top: 12px !important;
-                border-top: 1px solid var(--border-col) !important;
+                top: 0 !important;
+                background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20450%20120%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M-8%2C25%20C90%2C95%20280%2C35%20458%2C25%20L458%2C120%20L-8%2C120%20Z%27%20fill%3D%27%23ffffff%27%2F%3E%3Cpath%20d%3D%27M-8%2C25%20C90%2C95%20280%2C35%20458%2C25%27%20fill%3D%27none%27%20stroke%3D%27%23cbd5e1%27%20stroke-width%3D%272%27%2F%3E%3C%2Fsvg%3E") no-repeat center 120px / 100% 114px, linear-gradient(to bottom, transparent 234px, #ffffff 234px) !important;
+                padding-top: 214px !important;
+                border-top: none !important;
                 z-index: 1005 !important;
                 animation: slideDownMobile 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             }
             .nav-toggle {
                 display: flex !important; /* Show mobile toggle on mobile */
+                position: relative !important;
+                z-index: 1010 !important;
             }
             .hero-section-grid {
                 grid-template-columns: 1fr !important;
@@ -1073,6 +1092,17 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+            }
+            .hero-section-grid div:first-child p {
+                margin-left: auto !important;
+                margin-right: auto !important;
+                text-align: center !important;
+            }
+            .hero-section-grid div:first-child div {
+                justify-content: center !important;
+            }
+            .hero-section-grid h1 span {
+                white-space: normal !important;
             }
             .icons-section-grid {
                 grid-template-columns: 1fr 1fr !important;
@@ -1174,7 +1204,7 @@
 <!-- ═══ CURVED NAV BOTTOM SEPARATOR WITH FLOWING TEXT BANNER ═══ -->
 <div style="background: transparent; overflow: hidden; line-height: 0; margin-top: -1px; margin-bottom: -3px; position: relative; z-index: 9;">
     <!-- Desktop Banner (shown on > 992px) -->
-    <svg class="desktop-banner-svg" viewBox="0 0 1440 120" preserveAspectRatio="none" style="display: block; width: 100%; height: 120px; overflow: hidden;">
+    <svg class="desktop-banner-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1440 120" preserveAspectRatio="none" style="display: block; width: 100%; height: 120px; overflow: hidden;">
         <defs>
             <!-- A path for the text to ride on (exactly matching the ribbon path, extending off-screen) -->
             <path id="textCurve" d="M-30,25 C300,95 900,35 1470,25" />
@@ -1197,7 +1227,7 @@
         
         <!-- Flowing text banner along the curve (scrolling) -->
         <text xml:space="preserve" dominant-baseline="central" style="font-family: var(--font-display); font-size: 18px; font-weight: 800; fill: #ffffff; letter-spacing: 2px;">
-            <textPath href="#textCurve" startOffset="0%">
+            <textPath href="#textCurve" xlink:href="#textCurve" startOffset="0%">
                 ★ Now enrolling ages Infant to 5 years old! ★               ★ Now enrolling ages Infant to 5 years old! ★               ★ Now enrolling ages Infant to 5 years old! ★               ★ Now enrolling ages Infant to 5 years old! ★               ★ Now enrolling ages Infant to 5 years old! ★               ★ Now enrolling ages Infant to 5 years old! ★               ★ Now enrolling ages Infant to 5 years old! ★               ★ Now enrolling ages Infant to 5 years old! ★               ★ Now enrolling ages Infant to 5 years old! ★               ★ Now enrolling ages Infant to 5 years old! ★               
                 <animate attributeName="startOffset" from="0%" to="-100%" dur="45s" repeatCount="indefinite" />
             </textPath>
@@ -1205,7 +1235,7 @@
     </svg>
 
     <!-- Mobile Banner (shown on <= 992px) -->
-    <svg class="mobile-banner-svg" viewBox="0 0 450 120" preserveAspectRatio="none" style="display: none; width: 100%; height: 114px; overflow: hidden;">
+    <svg class="mobile-banner-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 450 120" preserveAspectRatio="none" style="display: none; width: 100%; height: 114px; overflow: hidden;">
         <defs>
             <path id="textCurveMobile" d="M-8,25 C90,95 280,35 458,25" />
             <linearGradient id="blue-fade-right-mobile" x1="0" y1="0" x2="1" y2="0">
@@ -1227,7 +1257,7 @@
         
         <!-- Flowing text banner along the curve (scrolling) -->
         <text xml:space="preserve" dominant-baseline="central" style="font-family: var(--font-display); font-size: 18px; font-weight: 800; fill: #ffffff; letter-spacing: 2px;">
-            <textPath href="#textCurveMobile" startOffset="0%">
+            <textPath href="#textCurveMobile" xlink:href="#textCurveMobile" startOffset="0%">
                 ★ Now enrolling ages Infant to 5 years old! ★               ★ Now enrolling ages Infant to 5 years old! ★               ★ Now enrolling ages Infant to 5 years old! ★               ★ Now enrolling ages Infant to 5 years old! ★               ★ Now enrolling ages Infant to 5 years old! ★               
                 <animate attributeName="startOffset" from="0%" to="-100%" dur="20s" repeatCount="indefinite" />
             </textPath>

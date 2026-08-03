@@ -214,8 +214,13 @@
             box-shadow: 0 12px 32px rgba(36,32,31,.12);
             padding: 12px 0; z-index: 999;
         }
-        nav.navbar:has(.nav-links.mobile-open) + div {
-            display: none !important;
+        .nav-links.mobile-open .nav-item.active > a {
+            border-bottom: none !important;
+            color: #f7a400 !important;
+        }
+        .nav-links.mobile-open .active-dropdown-item {
+            text-decoration: none !important;
+            color: #f7a400 !important;
         }
         .nav-links.mobile-open .nav-item { width: 100%; }
         .nav-links.mobile-open .nav-item > a,
@@ -559,6 +564,10 @@
             .nav-inner-new {
                 height: 120px !important;
             }
+            .nav-brand {
+                position: relative !important;
+                z-index: 1010 !important;
+            }
             .nav-brand img {
                 height: 110px !important;
                 transform: translateY(7px) !important;
@@ -575,15 +584,17 @@
                 }
             }
             .nav-links.mobile-open {
-                top: 72px !important;
-                background: #ffffff !important;
-                padding-top: 12px !important;
-                border-top: 1px solid var(--border-col) !important;
+                top: 0 !important;
+                background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%201440%20120%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M-30%2C25%20C300%2C95%20900%2C35%201470%2C25%20L1470%2C120%20L-30%2C120%20Z%27%20fill%3D%27%23ffffff%27%2F%3E%3Cpath%20d%3D%27M-30%2C25%20C300%2C95%20900%2C35%201470%2C25%27%20fill%3D%27none%27%20stroke%3D%27%23cbd5e1%27%20stroke-width%3D%272%27%2F%3E%3C%2Fsvg%3E") no-repeat center 120px / 100% 120px, linear-gradient(to bottom, transparent 240px, #ffffff 240px) !important;
+                padding-top: 220px !important;
+                border-top: none !important;
                 z-index: 1005 !important;
                 animation: slideDownMobile 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             }
             .nav-toggle {
                 display: flex !important; /* Show mobile toggle on mobile */
+                position: relative !important;
+                z-index: 1010 !important;
             }
         }
     </style>
